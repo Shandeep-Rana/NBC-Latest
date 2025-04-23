@@ -51,7 +51,7 @@ const Header = () => {
                   <li className="nav-item submenu">
                     <a className="nav-link" >Discover Us</a>
                     <ul>
-                      <li className="nav-item"><a className="nav-link" href="who-we-are.html">Who We Are</a></li>
+                      <li className="nav-item"><Link href='/whoweare' className="nav-link">Who We Are</Link></li>
                       <li className="nav-item"><Link href='/team' className="nav-link">Our Team</Link></li>
                       <li className="nav-item"><a className="nav-link" href="services.html">Services</a></li>
                     </ul>
@@ -66,7 +66,8 @@ const Header = () => {
               </div>
 
               <div className="contact-now-box">
-                <a className="cutm-con-link" href="contact.html">Contact Us</a>
+                <Link href='/contact' className="cutm-con-link" >Contact Us</Link>
+
               </div>
             </div>
 

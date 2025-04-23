@@ -3073,7 +3073,7 @@ header.main-header .header-sticky.active {
 .how-we-help-content .section-title h3,
 .how-we-help-content .section-title h2,
 .how-we-help-content .section-title p {
-	color: var(--white-color);
+	color: var(--white-color) !important;
 }
 
 .how-we-help-body {

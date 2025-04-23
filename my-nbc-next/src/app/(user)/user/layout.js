@@ -1,13 +1,8 @@
 import "./globals.css";
-import Header from "../common/Header";
-import Footer from "../common/Footer";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import CustomCursor from '../common/CustomCursor';
 import { Onest } from 'next/font/google';
 import 'animate.css/animate.min.css';
-import Wow from "@/common/Wow";
-import { Providers } from "./providers";
 
 const onest = Onest({
   subsets: ['latin'],
@@ -24,13 +19,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={onest.className}>
-        <Wow />
-        <CustomCursor />
-        <Header />
-        <Providers> 
           {children}
-        </Providers>
-        <Footer />
       </body>
     </html>
   );
