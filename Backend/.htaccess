@@ -1,0 +1,17 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    # Redirect www to non-www and force HTTPS
+    RewriteCond %{HTTP_HOST} ^www\.nangalbycycle\.com [NC]
+    RewriteRule ^(.*)$ https://nangalbycycle.com/$1 [L,R=301]
+    # Redirect HTTP to HTTPS for non-www
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP_HOST} ^nangalbycycle\.com [NC]
+    RewriteRule ^(.*)$ https://nangalbycycle.com/$1 [L,R=301]
+    # Existing rewrite rules
+    RewriteRule ^index\.html$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-l
+    RewriteRule . /index.html [L]
+</IfModule>

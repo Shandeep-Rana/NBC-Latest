@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Email Template</title>
+  </head>
+
+  <body
+    style="
+      font-family: 'Poppins', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    "
+  >
+    <table
+      width="100%"
+      cellpadding="0"
+      cellspacing="0"
+      border="0"
+      align="center"
+      style="background-color: #ffffff; max-width: 600px; margin: 0 auto"
+    >
+      <tbody>
+        <!-- logo nbc -->
+        <tr>
+          <td style="text-align: center; padding: 0px">
+            <div
+              style="background-color: #f15b43; height: 50px; margin: 0 auto"
+            >
+              <img
+                style="object-fit: contain"
+                src="https://nangalbycycle.com/static/media/unbound-logo.430ebca80a426a6c48a0.png"
+                alt="nbclogo"
+                width="80px"
+                height="50px"
+              />
+            </div>
+          </td>
+        </tr>
+        <!-- Image Section -->
+        <tr>
+          <td style="text-align: center; padding: 20px">
+            <div
+              style="
+                width: 230px;
+                height: 200px;
+                background-color: silver;
+                margin: 0 auto;
+              "
+            >
+              <img
+                src="<%= thumbnailUrl %>"
+                alt="Thumbnail"
+                width="230px"
+                height="200px"
+              />
+            </div>
+          </td>
+        </tr>   
+
+        <!-- Header Section -->
+        <tr>
+          <td
+            style="padding: 20px; background-color: #f15b43; text-align: center"
+          >
+            <h6 style="color: #ffffff; font-size: 18px; margin: 0">
+              <%=blogTitle%>
+            </h6>
+          </td>
+        </tr>
+
+        <!-- Content Section -->
+        <tr>
+          <td style="padding: 20px">
+            <p
+              style="
+                font-size: 16px;
+                line-height: 1.6;
+                color: #333333;
+                margin: 0 0 20px;
+              "
+            >
+            <%= content %>
+            </p>
+
+            <!-- Read the Post Button -->
+            <a
+              href="<%= url %>"
+              style="
+                background-color: #f15b43;
+                color: #ffffff;
+                text-decoration: none;
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 5px;
+              "
+              >Read The Blog</a
+            >
+          </td>
+        </tr>
+
+        <!-- Footer Section -->
+        <tr>
+          <td
+            style="
+              padding: 20px;
+              background-color: #f15b43;
+              text-align: center;
+              color: white;
+            "
+          >
+            <!-- Social Media Icons -->
+            <div style="margin: 20px 0">
+              <a href="https://www.facebook.com/nangalbycycle" style="margin: 0 10px; text-decoration: none">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/733/733547.png"
+                  alt="Facebook"
+                  width="24"
+                  style="vertical-align: middle"
+                />
+              </a>
+              <a href="https://x.com/nangalbycycle" style="margin: 0 10px; text-decoration: none">
+                <img
+                  src="https://api-postcards.designmodo.com/images/temp/4a86a4268ee8ab0dc83c61cd174169d7.png"
+                  alt="Twitter"
+                  width="24"
+                  style="vertical-align: middle"
+                />
+              </a>
+              <a href="https://www.youtube.com/@Nangalbycycle" style="margin: 0 10px; text-decoration: none">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/174/174883.png"
+                  alt="Youtube"
+                  width="24"
+                  style="vertical-align: middle"
+                />
+              </a>
+              <a href="https://www.instagram.com/nangalbycycle" style="margin: 0 10px; text-decoration: none">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
+                  alt="Instagram"
+                  width="24"
+                  style="vertical-align: middle"
+                />
+              </a>
+            </div>
+
+            <p style="font-size: 12px; color: #ffffff; margin: 0">
+              <a href="https://nangalbycycle.com/" style="color: #f9f9f9; text-decoration: none"
+                >NangalByCycle.com</a
+              >
+              | Visit Our Website
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
