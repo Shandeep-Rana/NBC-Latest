@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Link } from "next/link"; 
+import Link  from "next/link"; 
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import { confirmAlert } from "react-confirm-alert";
@@ -11,7 +11,6 @@ import Loader from "@/common/Loader";
 
 const AllEventList = () => {
   const dispatch = useDispatch();
-//   const router = useRouter();
 
   const [state, setState] = useState({
     search: "",

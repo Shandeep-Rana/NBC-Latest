@@ -5,21 +5,21 @@ import { usePathname } from 'next/navigation';
 import { TbLogs } from 'react-icons/tb';
 
 const navItems = [
-    { href: '/admin/donorslist', icon: 'fa-solid fa-list', label: 'Donor List' },
-    { href: '/admin/allbloodrequest', icon: 'fa-solid fa-droplet', label: 'Blood Requirement List' },
+    { href: '/admin/donorlist', icon: 'fa-solid fa-list', label: 'Donor List' },
+    { href: '/admin/bloodrequirementlist', icon: 'fa-solid fa-droplet', label: 'Blood Requirement List' },
     { href: '/admin/volunteerlist', icon: 'fa-solid fa-address-card', label: 'Volunteer list' },
-    { href: '/admin/memberlist', icon: 'fas fa-graduation-cap', label: 'Skilled Persons' },
-    { href: '/admin/heroes', icon: 'fa-sharp fa-solid fa-star-half-stroke', label: 'Nangal Heroes' },
+    { href: '/admin/memberlist', icon: 'fas fa-graduation-cap', label: 'NBC Members' },
+    { href: '/admin/nangalheroslist', icon: 'fa-sharp fa-solid fa-star-half-stroke', label: 'Nangal Heroes' },
     { href: '/admin/eventlist', icon: 'fa-solid fa-list', label: 'Events List' },
-    { href: '/admin/request-event', icon: 'fa-solid fas fa-tasks', label: 'Pending Events Request' },
-    { href: '/admin/allParticipantslist', icon: 'fa-solid fas fa-users', label: 'Event Participants' },
+    { href: '/admin/eventlist/requestedeventlist', icon: 'fa-solid fas fa-tasks', label: 'Pending Events Request' },
+    { href: '/admin/eventparticipants', icon: 'fa-solid fas fa-users', label: 'Event Participants' },
     { href: '/admin/bloglist', icon: 'fa-solid fa-pen', label: 'Blogs' },
-    { href: '/admin/news', icon: 'fa-solid fa-newspaper', label: 'News' },
-    { href: '/admin/gallery', icon: 'fa-solid fa-image', label: 'Gallery' },
-    { href: '/admin/contact-requests', icon: 'fa-solid fa-exchange-alt', label: 'Contact Requests' },
-    { href: '/admin/faqs', icon: 'fa-solid fa-question-circle', label: 'Faq' },
+    { href: '/admin/newslist', icon: 'fa-solid fa-newspaper', label: 'News' },
+    { href: '/admin/gallerylist', icon: 'fa-solid fa-image', label: 'Gallery' },
+    { href: '/admin/contactlist', icon: 'fa-solid fa-exchange-alt', label: 'Contact Requests' },
+    { href: '/admin/faqlist', icon: 'fa-solid fa-question-circle', label: 'Faq' },
     { href: '/admin/audit-logs', reactIcon: <TbLogs />, label: 'Audit Logs' },
-    { href: '/admin/allfeedbackslist', icon: 'fa-solid fa-comments', label: 'FeedBacks' }
+    { href: '/admin/feedbacklist', icon: 'fa-solid fa-comments', label: 'FeedBacks' }
 ];
 
 export default function AdminSideBar() {

@@ -1,4 +1,4 @@
-// import { jwtDecode as jwt_decode } from 'jwt-decode';
+import { jwtDecode as jwt_decode } from 'jwt-decode';
 
 export const BloodGroupOptions = [
   { value: "", label: "Blood Group Type" },
@@ -136,9 +136,6 @@ export const rewriteUrl = (url) => {
 
   return url.split('').map(char => charMap[char] || char).join('');
 };
-
-import { jwtDecode as jwt_decode } from 'jwt-decode';
-;
 
 export const ROLES = {
   Admin: "admin",
