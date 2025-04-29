@@ -5,7 +5,9 @@ import './globals.css';
 import { Providers } from '../../providers';
 import AdminHeader from '@/common/AdminHeader';
 import AdminSideBar from '@/common/AdminSideBar';
-// import MobileSideBar from '@/common/MobileSideBar'; // Adjust path if needed
+import "react-phone-input-2/lib/style.css";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function AdminLayout({ children }) {
   const [isShow, setShow] = useState(false);

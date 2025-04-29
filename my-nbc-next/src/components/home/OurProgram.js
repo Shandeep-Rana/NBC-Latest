@@ -35,8 +35,8 @@ const OurProgram = () => {
                             </div>
                             <div className="program-body">
                                 <div className="program-content">
-                                    <h3><a href="program-single.html">Women's empowerment</a></h3>
-                                    <p>Providing resources, education, and advocacy for women's rights.</p>
+                                    <h3>Women&apos;s empowerment</h3>
+                                    <p> Providing resources, education, and advocacy for women&apos;s rights.</p>
                                 </div>
                                 <div className="program-button">
                                     <a href="program-single.html" className="readmore-btn">read more</a>
@@ -61,7 +61,7 @@ const OurProgram = () => {
                             <div className="program-body">
                                 <div className="program-content">
                                     <h3><a href="program-single.html">Housing assistance</a></h3>
-                                    <p>Providing resources, education, and advocacy for women's rights.</p>
+                                    <p>Providing resources, education, and advocacy for women&apos;s rights.</p>
                                 </div>
                                 <div className="program-button">
                                     <a href="program-single.html" className="readmore-btn">read more</a>
@@ -86,7 +86,7 @@ const OurProgram = () => {
                             <div className="program-body">
                                 <div className="program-content">
                                     <h3><a href="program-single.html">Development and Job Training</a></h3>
-                                    <p>Providing resources, education, and advocacy for women's rights.</p>
+                                    <p>Providing resources, education, and advocacy for women&apos;s rights.</p>
                                 </div>
                                 <div className="program-button">
                                     <a href="program-single.html" className="readmore-btn">read more</a>

@@ -74,7 +74,7 @@ function AllDonorList() {
       render: (text, record) => (
         <div className="d-flex justify-content-around">
           <Link
-            href={`/admin/update-donor/${record.donorId}`}
+            href={`/admin/blooddonor/updatedonor/${record.donorId}`}
             className="dropdown-item px-2 text-warning"
             onClick={() => handleUpdateClick(record.donorId)}
           >
@@ -134,7 +134,7 @@ function AllDonorList() {
           <h1 className="h2">Donor List</h1>
         </div>
         <div className="col-auto">
-          <Link href="/admin/add-donor" className="button-round border_radius">
+          <Link href="/admin/blooddonor/adddonor" className="button-round border_radius">
             <i className="fa fa-plus" aria-hidden="true"></i> Add Donor
           </Link>
         </div>

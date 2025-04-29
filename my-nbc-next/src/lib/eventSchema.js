@@ -2,7 +2,7 @@
 
 import * as yup from "yup";
 
-// Donor Schema
+// event Schema
 export const eventSchema = yup.object({
     title: yup.string().required("Event title is required").trim(),
     organiserName: yup.string().required("Name is required").trim(),
@@ -38,4 +38,30 @@ export const eventSchema = yup.object({
                 return ["image/jpeg", "image/jpg", "image/png"].includes(value.type);
             })
     )
+});
+
+export const eventparticipantSchema = yup.object({
+    name: yup.string().required("Name is required").trim(),
+    email: yup
+        .string()
+        .required("Email is required")
+        .matches(emailrgx, "Invalid Email")
+        .trim(),
+    contact: yup.string().required("Phone Number is required").max(12).min(10),
+    event: yup.object().required("Event is required"),
+    upload: yup
+        .mixed()
+        .test(
+            "Profile photo is required",
+            function (value) {
+                if (selectedEvent?.requireUpload === 1 && !value) {
+                    return false;
+                }
+                return true;
+            }
+        )
+        .test("fileType", "Invalid file type", (value) => {
+            if (!value) return true;
+            return ["image/jpeg", "image/png", "image/jpg", "application/pdf"].includes(value?.type);
+        }),
 });

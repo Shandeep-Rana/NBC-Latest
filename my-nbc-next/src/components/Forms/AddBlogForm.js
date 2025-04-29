@@ -1,8 +1,13 @@
+"use client";
+
 import { blogSchema } from '@/lib/blogSchema';
 import { addBlog } from '@/Slice/blogs';
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react'
-import { Controller } from 'react-hook-form';
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { useState } from 'react'
+import DatePicker from 'react-datepicker';
+import { Controller, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
 const AddBlogForm = () => {
@@ -24,7 +29,6 @@ const AddBlogForm = () => {
         return moment(date).format("YYYY-MM-DD");
     };
 
-    // const navigate = useNavigate();
 
     const onSubmit = (data) => {
         const formData = new FormData();
@@ -156,10 +160,13 @@ const AddBlogForm = () => {
                                     />
                                     {previewUrl && (
                                         <div className="preview-image-container">
-                                            <img
+                                            <Image
                                                 className="preview-image"
                                                 src={previewUrl}
                                                 alt="Preview"
+                                                width={500} // you must provide width
+                                                height={300} // you must provide height
+                                                objectFit="cover" // optional, depending on your style
                                             />
                                         </div>
                                     )}
@@ -197,10 +204,13 @@ const AddBlogForm = () => {
                                     />
                                     {ThumbnailUrl && (
                                         <div className="preview-image-container">
-                                            <img
+                                            <Image
                                                 className="preview-image"
                                                 src={ThumbnailUrl}
                                                 alt="Preview"
+                                                layout="responsive" // You can adjust the layout as needed
+                                                width={500} // Specify the width for optimization
+                                                height={300} // Specify the height for optimization
                                             />
                                         </div>
                                     )}
@@ -213,7 +223,7 @@ const AddBlogForm = () => {
                             </p>
                         )}
                     </div>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <label className="text-left">Blog Content <span style={{ color: '#F15B43' }}>*</span></label>
                         <Controller
                             name="content"
@@ -257,9 +267,9 @@ const AddBlogForm = () => {
                                 {errors?.content?.message}
                             </p>
                         )}
-                    </div>
+                    </div> */}
                     <div className="submit-area col-lg-12 col-12">
-                        <Link to={"/admin/all-blogs"} className="button-round button-back">
+                        <Link href="/admin/all-blogs" className="button-round button-back">
                             Back to List
                         </Link>
                         <button type="submit" className="button-round">

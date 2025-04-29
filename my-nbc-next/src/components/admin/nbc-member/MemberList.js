@@ -106,7 +106,7 @@ const MemberList = () => {
             title: "Action",
             render: (text, record) => (
                 <div className="d-flex justify-content-around" data-popper-placement="bottom-end">
-                    <Link href={`/admin/update-SkilledPerson/${record.skilledPersonId}`} passHref>
+                    <Link href={`/admin/nbcmember/updatemember/${record.skilledPersonId}`}>
                         <button className="dropdown-item px-2 text-warning" onClick={() => { handleUpdateClick(record.skilledPersonId); }}>
                             <i className="fa fa-pencil m-r-5" />
                         </button>
@@ -134,10 +134,10 @@ const MemberList = () => {
             <div className="container-fluid mt-2">
                 <div className="row justify-content-between align-items-center all_donor_header mb-2">
                     <div className="col-auto">
-                        <h1 className="h2">Skilled Persons</h1>
+                        <h1 className="h2">NBC Members</h1>
                     </div>
                     <div className="col-auto">
-                        <Link href="/admin/add-SkilledPerson" passHref>
+                        <Link href="/admin/nbcmember/addmember" passHref>
                             <button className="button-round border_radius" type="button">
                                 <i className="fa fa-plus" aria-hidden="true"></i> Add NBC member
                             </button>

@@ -5,15 +5,15 @@ import { usePathname } from 'next/navigation';
 import { TbLogs } from 'react-icons/tb';
 
 const navItems = [
-    { href: '/admin/donorlist', icon: 'fa-solid fa-list', label: 'Donor List' },
+    { href: '/admin/blooddonor/donorlist', icon: 'fa-solid fa-list', label: 'Donor List' },
     { href: '/admin/bloodrequirementlist', icon: 'fa-solid fa-droplet', label: 'Blood Requirement List' },
-    { href: '/admin/volunteerlist', icon: 'fa-solid fa-address-card', label: 'Volunteer list' },
-    { href: '/admin/memberlist', icon: 'fas fa-graduation-cap', label: 'NBC Members' },
-    { href: '/admin/nangalheroslist', icon: 'fa-sharp fa-solid fa-star-half-stroke', label: 'Nangal Heroes' },
-    { href: '/admin/eventlist', icon: 'fa-solid fa-list', label: 'Events List' },
-    { href: '/admin/eventlist/requestedeventlist', icon: 'fa-solid fas fa-tasks', label: 'Pending Events Request' },
+    { href: '/admin/volunteer/volunteerlist', icon: 'fa-solid fa-address-card', label: 'Volunteer list' },
+    { href: '/admin/nbcmember/memberlist', icon: 'fas fa-graduation-cap', label: 'NBC Members' },
+    { href: '/admin/nangalheros/nangalheroslist', icon: 'fa-sharp fa-solid fa-star-half-stroke', label: 'Nangal Heroes' },
+    { href: '/admin/event/eventlist', icon: 'fa-solid fa-list', label: 'Events List' },
+    { href: '/admin/event/eventlist/requestedeventlist', icon: 'fa-solid fas fa-tasks', label: 'Pending Events Request' },
     { href: '/admin/eventparticipants', icon: 'fa-solid fas fa-users', label: 'Event Participants' },
-    { href: '/admin/bloglist', icon: 'fa-solid fa-pen', label: 'Blogs' },
+    { href: '/admin/blog/bloglist', icon: 'fa-solid fa-pen', label: 'Blogs' },
     { href: '/admin/newslist', icon: 'fa-solid fa-newspaper', label: 'News' },
     { href: '/admin/gallerylist', icon: 'fa-solid fa-image', label: 'Gallery' },
     { href: '/admin/contactlist', icon: 'fa-solid fa-exchange-alt', label: 'Contact Requests' },

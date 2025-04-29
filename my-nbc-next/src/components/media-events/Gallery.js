@@ -1,6 +1,7 @@
 'use client'
 import { getAllImages } from '@/Slice/gallery';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -25,7 +26,7 @@ const Gallery = () => {
                 <nav className="wow fadeInUp">
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item">
-                      <a href="/">home</a>
+                      <Link href="/">home</Link>
                     </li>
                     <li className="breadcrumb-item active" aria-current="page">
                       Nangal Gallery
@@ -56,24 +57,24 @@ const Gallery = () => {
               <div className="our-gallery-nav wow fadeInUp" data-wow-delay="0.2s">
                 <ul>
                   <li>
-                    <a href="#" className="active-btn" data-filter="*">
+                    <Link href="#" className="active-btn" data-filter="*">
                       all
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" data-filter=".health">
+                    <Link href="#" data-filter=".health">
                       health
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" data-filter=".education">
+                    <Link href="#" data-filter=".education">
                       education
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" data-filter=".food">
+                    <Link href="#" data-filter=".food">
                       food
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>

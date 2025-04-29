@@ -13,7 +13,7 @@ const OurFeatures = () => {
                             <h3 className="wow fadeInUp">our feature</h3>
                             <h2 className="text-anime-style-2" data-cursor="-opaque">Highlights our impactful work</h2>
                             <p className="wow fadeInUp" data-wow-delay="0.2s">
-                                Discover the positive change we've created through our programs, partnerships, and dedicated efforts.
+                                Discover the positive change we&apos;ve created through our programs, partnerships, and dedicated efforts.
                                 From healthcare and education to environmental sustainability.
                             </p>
                         </div>

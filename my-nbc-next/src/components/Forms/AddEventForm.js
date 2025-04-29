@@ -6,8 +6,10 @@ import { addEvent } from '@/Slice/events';
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form';
+import { IoClose } from 'react-icons/io5';
 import PhoneInput from 'react-phone-input-2';
 import { useDispatch, useSelector } from 'react-redux';
+import ReactSelect from "react-select";
 
 const AddEventForm = () => {
     const {

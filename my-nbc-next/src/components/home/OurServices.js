@@ -38,7 +38,7 @@ const OurFeatures = () => {
                                 Here's how we’re making a difference
                             </h2>
                             <p className="wow fadeInUp" data-wow-delay="0.2s">
-                                At Nangal By Cycle, we’re not just about rides, we’re about
+                                At Nangal By Cycle, we&rsquo;re not just about rides, we&rsquo;re about
                                 rewriting the story of tourism in Punjab, one pedal at a time.
                             </p>
                         </div>

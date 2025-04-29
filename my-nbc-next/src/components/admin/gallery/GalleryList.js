@@ -11,6 +11,7 @@ import { RiDeleteBin2Fill } from "react-icons/ri";
 import { approveImage, deleteImage, disApproveImage, getPaginatedImages } from "@/Slice/gallery";
 import { getUserInfoFromToken, ROLES } from "@/constants";
 import Loader from "@/common/Loader";
+import Image from 'next/image'; // Import Next.js Image component
 
 const GalleryList = () => {
   const user = getUserInfoFromToken();
@@ -102,7 +103,13 @@ const GalleryList = () => {
       title: "Image",
       render: (text, record) => (
         <a href={record.image_url} target="_blank" rel="noreferrer">
-          <img src={record.image_url} alt={record.title} style={{ width: "70px", height: "45px" }} />
+          <Image
+            src={record.image_url}
+            alt={record.title}
+            width={70}
+            height={45}
+            layout="intrinsic" // Ensures aspect ratio is maintained
+          />
         </a>
       ),
     },

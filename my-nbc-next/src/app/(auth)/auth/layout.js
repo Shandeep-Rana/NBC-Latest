@@ -9,6 +9,7 @@ import CustomCursor from "@/common/CustomCursor";
 import { Providers } from "@/app/providers";
 import Footer from "@/common/Footer";
 import "react-phone-input-2/lib/style.css";
+import 'react-datepicker/dist/react-datepicker.css';
 
 const onest = Onest({
   subsets: ['latin'],

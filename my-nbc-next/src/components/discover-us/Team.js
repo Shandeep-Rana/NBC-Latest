@@ -1,6 +1,7 @@
 "use client";
 
 import { teamMembers } from "@/constants";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -24,7 +25,7 @@ const Team = () => {
                 <nav className="wow fadeInUp">
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item">
-                      <a href="/">home</a>
+                      <Link href="/">home</Link>
                     </li>
                     <li className="breadcrumb-item active" aria-current="page">
                       team
@@ -47,21 +48,21 @@ const Team = () => {
                   data-wow-delay={member.delay || "0s"}
                 >
                   <div className="team-image">
-                    <a href="#"
+                    <Link href="#"
                       onClick={() => handleMemberClick(member.id)}
                       data-cursor-text="View"
                     >
                       <figure className="image-anime">
                         <img src={member.image} alt={member.name} />
                       </figure>
-                    </a>
+                    </Link>
                   </div>
                   <div className="team-content">
                     <h3
                       style={{ cursor: "pointer" }}
                       onClick={() => handleMemberClick(member.id)}
                     >
-                      <a href="#">{member.name}</a>
+                      <Link href="#">{member.name}</Link>
                     </h3>
                     <p>{member.role}</p>
                   </div>

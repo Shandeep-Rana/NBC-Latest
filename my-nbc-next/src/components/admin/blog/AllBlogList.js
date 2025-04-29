@@ -14,10 +14,11 @@ import Link from "next/link";
 import { getUserInfoFromToken, ROLES } from "@/constants";
 import { approveBlog, deleteBlog, disApproveBlog, getPaginatedBlogs, publishBlog } from "@/Slice/blogs";
 import Loader from "@/common/Loader";
+import { useRouter } from "next/navigation";
 
 const AllBlogList = () => {
     const dispatch = useDispatch();
-    // const router = useRouter();
+    const router = useRouter();
     const userInfo = getUserInfoFromToken();
     const { blogsList, blogsCount, isLoading } = useSelector((state) => state.blog);
     const [state, setState] = useState({
@@ -32,9 +33,9 @@ const AllBlogList = () => {
 
     const formatDate = (date) => moment(date).format("YYYY-MM-DD");
 
-    // const handleUpdateClick = (id) => {
-    //     router.push(userInfo.roleName.includes(ROLES.Admin) ? `/admin/update-blog/${id}` : `/user/update-blog/${id}`);
-    // };
+    const handleUpdateClick = (id) => {
+        router.push(userInfo.roleName.includes(ROLES.Admin) ? `/admin/blog/updateblog/${id}` : `/user/update-blog/${id}`);
+    };
 
     const handleDelete = (id) => {
         dispatch(deleteBlog(id, userInfo.userId));
@@ -168,16 +169,16 @@ const AllBlogList = () => {
                             </div>
                         </Link>
                     }
-                    {/* {(userInfo.roleName.includes(ROLES.Admin) || (!userInfo.roleName.includes(ROLES.Admin) && record.is_delete_requested !== 1)) && (
-                        // <Link href="#" passHref>
-                        //     <a className="dropdown-item px-2 text-warning">
-                        //         <i
-                        //             className={`fa fa-pencil`}
-                        //             onClick={() => handleUpdateClick(record.blog_id)}
-                        //         ></i>
-                        //     </a>
-                        // </Link>
-                    )} */}
+                    {(userInfo.roleName.includes(ROLES.Admin) || (!userInfo.roleName.includes(ROLES.Admin) && record.is_delete_requested !== 1)) && (
+                        <Link href="#" passHref>
+                            <div className="dropdown-item px-2 text-warning">
+                                <i
+                                    className={`fa fa-pencil`}
+                                    onClick={() => handleUpdateClick(record.blog_id)}
+                                ></i>
+                            </div>
+                        </Link>
+                    )}
                     {
                         userInfo.roleName.includes(ROLES.Admin) && record.is_delete_requested !== 0 && (
                             <Link href="#" passHref>
@@ -212,7 +213,7 @@ const AllBlogList = () => {
                     <h1 className="h2">Blogs</h1>
                 </div>
                 <div className="col-auto">
-                    <Link href={userInfo.roleName.includes(ROLES.Admin) ? "/admin/add-blog" : "/user/add-blog"} passHref>
+                    <Link href={userInfo.roleName.includes(ROLES.Admin) ? "/admin/blog/addblog" : "/user/add-blog"} passHref>
                         <div className={`button-round border_radius`} type="button">
                             <i className={`fa fa-plus`} aria-hidden="true"></i> Add Blog
                         </div>

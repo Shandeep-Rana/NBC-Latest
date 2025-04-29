@@ -12,8 +12,9 @@ const BlogSection = () => {
                             <h3 className="wow fadeInUp">latest post</h3>
                             <h2 className="text-anime-style-2" data-cursor="-opaque">Stories of impact and hope</h2>
                             <p className="wow fadeInUp" data-wow-delay="0.2s">
-                                Explore inspiring stories and updates about our initiatives, successes, and the lives we've touched. See how your support is creating real, lasting change in communities worldwide.
+                                Explore inspiring stories and updates about our initiatives, successes, and the lives we&apos;ve touched. See how your support is creating real, lasting change in communities worldwide.
                             </p>
+
                         </div>
                     </div>
                 </div>
@@ -73,33 +74,33 @@ const BlogSection = () => {
                                     </figure>
                                 </a>
                             </div>
-                           
+
                             <div className="blog-item-btn">
                                 <a href="blog-single.html" className="readmore-btn">read more</a>
                             </div>
-                           
+
                         </div>
-                       
+
                     </div>
 
                     <div className="col-lg-4 col-md-6">
-                      
+
                         <div className="post-item wow fadeInUp" data-wow-delay="0.4s">
-                           
+
                             <div className="post-item-header">
-                                
+
                                 <div className="post-item-meta">
                                     <ul>
                                         <li>04 feb, 2025</li>
                                     </ul>
                                 </div>
-                               
+
                                 <div className="post-item-content">
                                     <h2><a href="blog-single.html">Partnering for Collaborative Impact Stories</a></h2>
                                 </div>
-                               
+
                             </div>
-                          
+
                             <div className="post-featured-image">
                                 <a href="blog-single.html" data-cursor-text="View">
                                     <figure className="image-anime">
@@ -112,13 +113,13 @@ const BlogSection = () => {
                                     </figure>
                                 </a>
                             </div>
-                          
+
                             <div className="blog-item-btn">
                                 <a href="blog-single.html" className="readmore-btn">read more</a>
                             </div>
-                           
+
                         </div>
-                       
+
                     </div>
                 </div>
             </div>

@@ -166,7 +166,7 @@ const Login = () => {
                                         <div className="mt-3">
                                             <Link href="/auth/forgotpassword">Forgotten password?</Link>
                                             <p className="mt-2">
-                                                Don't have an account?{" "}
+                                                Don&apos;t have an account?{" "}
                                                 <Link href="/auth/register">Register here</Link>
                                             </p>
                                         </div>

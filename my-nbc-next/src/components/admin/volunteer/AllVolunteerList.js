@@ -100,7 +100,7 @@ const AllVolunteerList = () => {
             render: (text, record) => (
                 <div className="d-flex justify-content-around" data-popper-placement="bottom-end">
                     <Link
-                        href={`/admin/update-volunteer/${record.volunteerId}`} // Using Next.js Link for routing
+                        href={`/admin/volunteer/updatevolunteer/${record.volunteerId}`} // Using Next.js Link for routing
                         className="dropdown-item px-2 text-warning"
                     >
                         <i className={`fa fa-pencil`}></i>
@@ -130,7 +130,7 @@ const AllVolunteerList = () => {
                         <h1 className='h2'>Volunteer List</h1>
                     </div>
                     <div className="col-auto">
-                        <Link href="/admin/add-volunteer" className={`button-round border_radius`} type="button">
+                        <Link href="/admin/volunteer/addvolunteer" className={`button-round border_radius`} type="button">
                             <i className={`fa fa-plus`} aria-hidden="true"></i> Add Volunteer
                         </Link>
                     </div>

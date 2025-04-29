@@ -45,8 +45,10 @@ const EventRegisterModal = ({ onClose, eventId }) => {
 
                 <b>
                     <p>
-                        "It looks like you’re not logged in! Not a member yet? Sign up now
-                        to join the event and be part of the experience!".
+                        <strong>
+                            It looks like you&rsquo;re not logged in! Not a member yet? Sign up now
+                            to join the event and be part of the experience&rdquo;!
+                        </strong>
                     </p>
                 </b>
                 <button
