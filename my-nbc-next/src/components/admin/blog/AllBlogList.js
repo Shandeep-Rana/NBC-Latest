@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import { useRouter } from "next/router";
 import moment from "moment";
 import { confirmAlert } from "react-confirm-alert";
 import { Table } from "antd";
@@ -14,12 +13,20 @@ import Link from "next/link";
 import { getUserInfoFromToken, ROLES } from "@/constants";
 import { approveBlog, deleteBlog, disApproveBlog, getPaginatedBlogs, publishBlog } from "@/Slice/blogs";
 import Loader from "@/common/Loader";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 const AllBlogList = () => {
     const dispatch = useDispatch();
-    const router = useRouter();
-    const userInfo = getUserInfoFromToken();
+    // const router = useRouter();
+
+    const [userInfo, setUserInfo] = useState({ userId: null, roleName: [], email: null, expirationTime: null });
+
+    useEffect(() => {
+        const info = getUserInfoFromToken();
+        setUserInfo(info);
+    }, []);
+    
+
     const { blogsList, blogsCount, isLoading } = useSelector((state) => state.blog);
     const [state, setState] = useState({
         search: "",
@@ -33,9 +40,9 @@ const AllBlogList = () => {
 
     const formatDate = (date) => moment(date).format("YYYY-MM-DD");
 
-    const handleUpdateClick = (id) => {
-        router.push(userInfo.roleName.includes(ROLES.Admin) ? `/admin/blog/updateblog/${id}` : `/user/update-blog/${id}`);
-    };
+    // const handleUpdateClick = (id) => {
+    //     router.push(userInfo.roleName.includes(ROLES.Admin) ? `/admin/blog/updateblog/${id}` : `/user/update-blog/${id}`);
+    // };
 
     const handleDelete = (id) => {
         dispatch(deleteBlog(id, userInfo.userId));
@@ -146,14 +153,14 @@ const AllBlogList = () => {
             title: "Action",
             render: (text, record) => (
                 <div className="d-flex justify-content-around" data-popper-placement="bottom-end">
-                    {userInfo.roleName.includes(ROLES.Admin) && record.is_approved !== 1 && (
+                    {userInfo.roleName?.includes(ROLES.Admin) && record.is_approved !== 1 && (
                         <Link href="#" passHref>
                             <div title="Approve" className="dropdown-item px-2 text-success" onClick={() => handleApproveClick(record.blog_id)}>
                                 <GiCheckMark />
                             </div>
                         </Link>
                     )}
-                    {userInfo.roleName.includes(ROLES.Admin) && record.is_approved === 1 && (
+                    {userInfo.roleName?.includes(ROLES.Admin) && record.is_approved === 1 && (
                         <Link href="#" passHref>
                             <div title="DisApprove" className="dropdown-item px-2 text-success" onClick={() => handleDisApproveCLick(record.blog_id)}>
                                 <FcCancel />
@@ -161,7 +168,7 @@ const AllBlogList = () => {
                         </Link>
                     )}
                     {
-                        userInfo.roleName.includes(ROLES.Admin) && formatDate(record.publish_date) > formatDate(new Date()) &&
+                        userInfo.roleName?.includes(ROLES.Admin) && formatDate(record.publish_date) > formatDate(new Date()) &&
                         record.is_published !== 1 && record.is_approved === 1 &&
                         <Link href="#" passHref>
                             <div title="Quick Publish" className="dropdown-item px-2" onClick={() => handlePublishClick(record.blog_id)}>
@@ -169,18 +176,22 @@ const AllBlogList = () => {
                             </div>
                         </Link>
                     }
-                    {(userInfo.roleName.includes(ROLES.Admin) || (!userInfo.roleName.includes(ROLES.Admin) && record.is_delete_requested !== 1)) && (
-                        <Link href="#" passHref>
+                    {(userInfo.roleName?.includes(ROLES.Admin) || (!userInfo.roleName?.includes(ROLES.Admin) && record.is_delete_requested !== 1)) && (
+                        <Link
+                            href={
+                                userInfo.roleName?.includes(ROLES.Admin)
+                                    ? `/admin/blog/updateblog/${record.blog_id}`
+                                    : `/user/update-blog/${record.blog_id}`
+                            }
+                            passHref
+                        >
                             <div className="dropdown-item px-2 text-warning">
-                                <i
-                                    className={`fa fa-pencil`}
-                                    onClick={() => handleUpdateClick(record.blog_id)}
-                                ></i>
+                                <i className={`fa fa-pencil`}></i>
                             </div>
                         </Link>
                     )}
                     {
-                        userInfo.roleName.includes(ROLES.Admin) && record.is_delete_requested !== 0 && (
+                        userInfo.roleName?.includes(ROLES.Admin) && record.is_delete_requested !== 0 && (
                             <Link href="#" passHref>
                                 <div title="Delete Requested" className="dropdown-item px-2 text-danger" onClick={() => handleDeleteClick(record.blog_id)}>
                                     <RiDeleteBin2Fill />

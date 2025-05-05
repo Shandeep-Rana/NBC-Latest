@@ -77,17 +77,19 @@ export const emailrgx =
 export const pinCodergx = /^[1-9][0-9]{5}$/
 
 export const getUserInfoFromToken = () => {
-  const data = JSON.parse(localStorage.getItem("user"));
-  const token = data?.token
-  if (token) {
-    const decodedToken = jwt_decode(token)
-    const userId = decodedToken.userId;
-    const roleName = data.roleName;
-    const email = decodedToken.email;
-    const expirationTimeInSeconds = decodedToken.exp;
-    const expirationDate = new Date(expirationTimeInSeconds * 1000);
-    const expirationTime = expirationDate.toLocaleString();
-    return { userId, roleName, email, expirationTime };
+  if (typeof window !== "undefined") {
+    const data = JSON.parse(localStorage.getItem("user"));
+    const token = data?.token;
+    if (token) {
+      const decodedToken = jwt_decode(token);
+      const userId = decodedToken.userId;
+      const roleName = data.roleName;
+      const email = decodedToken.email;
+      const expirationTimeInSeconds = decodedToken.exp;
+      const expirationDate = new Date(expirationTimeInSeconds * 1000);
+      const expirationTime = expirationDate.toLocaleString();
+      return { userId, roleName, email, expirationTime };
+    }
   }
   return { userId: null, roleName: null, email: null, expirationTime: null };
 };

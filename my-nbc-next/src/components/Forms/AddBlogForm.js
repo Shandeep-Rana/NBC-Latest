@@ -224,50 +224,40 @@ const AddBlogForm = () => {
                         )}
                     </div>
                     {/* <div className="form-group">
-                        <label className="text-left">Blog Content <span style={{ color: '#F15B43' }}>*</span></label>
+                        <label className="text-left">
+                            Blog Content <span style={{ color: '#F15B43' }}>*</span>
+                        </label>
                         <Controller
                             name="content"
                             control={control}
-                            render={({ field: { value, onChange } }) => (
-                                <ReactQuill
-                                    modules={{
-                                        toolbar: {
-                                            container: [
-                                                [
-                                                    { header: "1" },
-                                                    { header: "2" },
-                                                    { header: [3, 4, 5, 6] },
-                                                    { font: [] },
-                                                ],
-                                                [{ size: [] }],
-                                                [
-                                                    "bold",
-                                                    "italic",
-                                                    "underline",
-                                                    "strike",
-                                                    "blockquote",
-                                                ],
-                                                [{ list: "ordered" }, { list: "bullet" }],
-                                                ["link", "video"],
-                                                ["link", "image", "video"],
-                                                ["clean"],
-                                                ["code-block"],
-                                            ],
-                                            handlers: {},
-                                        },
-                                    }}
-                                    value={value}
-                                    onChange={onChange}
-                                />
-                            )}
                             defaultValue=""
+                            render={({ field: { value, onChange } }) => {
+                                const editor = useEditor({
+                                    extensions: [StarterKit],
+                                    content: value || '',
+                                    onUpdate: ({ editor }) => {
+                                        onChange(editor.getHTML());
+                                    },
+                                });
+
+                                useEffect(() => {
+                                    if (editor && value !== editor.getHTML()) {
+                                        editor.commands.setContent(value);
+                                    }
+                                }, [value]);
+
+                                return (
+                                    <div className="tiptap-editor">
+                                        <EditorContent editor={editor} />
+                                    </div>
+                                );
+                            }}
                         />
                         {errors?.content && (
-                            <p style={{ color: "red" }}>
-                                {errors?.content?.message}
-                            </p>
+                            <p style={{ color: "red" }}>{errors?.content?.message}</p>
                         )}
                     </div> */}
+
                     <div className="submit-area col-lg-12 col-12">
                         <Link href="/admin/all-blogs" className="button-round button-back">
                             Back to List

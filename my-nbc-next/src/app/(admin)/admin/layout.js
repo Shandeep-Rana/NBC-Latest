@@ -22,7 +22,6 @@ export default function AdminLayout({ children }) {
           <div className="container-fluid" id="main">
             <div className="row">
               <AdminSideBar />
-              {/* <MobileSideBar isShow={isShow} handleClose={handleClose} /> */}
               <div className="col-md-9 col-lg-9 col-12 admin_container col main admin_layout">
                 {children}
                 <footer className="container-fluid">

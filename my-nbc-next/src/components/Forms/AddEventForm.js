@@ -4,6 +4,8 @@ import { eventSchema } from '@/lib/eventSchema';
 import { getAllEventCategories } from '@/Slice/eventCategory';
 import { addEvent } from '@/Slice/events';
 import { yupResolver } from '@hookform/resolvers/yup';
+import Image from 'next/image';
+import Link from 'next/link';
 import React, { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form';
 import { IoClose } from 'react-icons/io5';
@@ -567,12 +569,17 @@ const AddEventForm = () => {
                                                                     {additionalThumbnail.length > 0 && (
                                                                         <div className="preview-image-container">
                                                                             {additionalThumbnail.map((thumbnail, index) => (
-                                                                                <div key={index} className="d-flex justify-content-between align-items-center mt-2 rounded w-100 bg-light pe-2" style={{ backgroundColor: 'rgb(220 220 220)', overflow: 'hidden', border: '1px solid #cdcdcd' }}>
-                                                                                    <img
-                                                                                        style={{ objectFit: 'cover', width: 80, height: 50 }}
-                                                                                        className="preview-image"
+                                                                                <div
+                                                                                    key={index}
+                                                                                    className="d-flex justify-content-between align-items-center mt-2 rounded w-100 bg-light pe-2"
+                                                                                    style={{ backgroundColor: 'rgb(220 220 220)', overflow: 'hidden', border: '1px solid #cdcdcd' }}
+                                                                                >
+                                                                                    <Image
                                                                                         src={thumbnail}
                                                                                         alt={`Additional Thumbnail ${index + 1}`}
+                                                                                        width={80} // Specify width
+                                                                                        height={50} // Specify height
+                                                                                        style={{ objectFit: 'cover' }} // Apply objectFit to match your style
                                                                                     />
                                                                                     <IoClose className="h5 mt-2" style={{ cursor: 'pointer' }} onClick={() => removeImageHandle(index)} />
                                                                                 </div>
@@ -613,11 +620,13 @@ const AddEventForm = () => {
                                                                         className="form-control form-control-lg"
                                                                     />
                                                                     {previewUrl && (
-                                                                        <div className="preview-image-container">
-                                                                            <img
-                                                                                className="preview-image"
+                                                                        <div className="preview-image-container" style={{ position: 'relative', width: '300px', height: '200px' }}>
+                                                                            <Image
                                                                                 src={previewUrl}
                                                                                 alt="Preview"
+                                                                                fill
+                                                                                className="preview-image"
+                                                                                style={{ objectFit: 'contain' }}
                                                                             />
                                                                         </div>
                                                                     )}
@@ -633,7 +642,7 @@ const AddEventForm = () => {
                                                             </span>
                                                         )}
                                                     </div>
-                                                    <div className="form-group">
+                                                    {/* <div className="form-group">
                                                         <label className="text-left">Event Description <span style={{ color: '#F15B43' }}>*</span></label>
                                                         <Controller
                                                             name="description"
@@ -664,9 +673,9 @@ const AddEventForm = () => {
                                                                 {errors?.description?.message}
                                                             </p>
                                                         )}
-                                                    </div>
+                                                    </div> */}
                                                     <div className="submit-area col-lg-12 col-12">
-                                                        <Link to={backPath} className="button-round button-back">
+                                                        <Link href={backPath} className="button-round button-back">
                                                             Back to List
                                                         </Link>
                                                         <button type="submit" className="button-round">

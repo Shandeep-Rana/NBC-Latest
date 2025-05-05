@@ -1,5 +1,6 @@
 "use client";
 
+import { emailrgx } from "@/constants";
 import * as yup from "yup";
 
 // event Schema

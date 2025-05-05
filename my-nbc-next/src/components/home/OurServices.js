@@ -35,7 +35,7 @@ const OurFeatures = () => {
                         <div className="section-title">
                             <h3 className="wow fadeInUp">our feature</h3>
                             <h2 className="text-anime-style-2" data-cursor="-opaque">
-                                Here's how we’re making a difference
+                                Here&apos;s how we&rsquo;re making a difference
                             </h2>
                             <p className="wow fadeInUp" data-wow-delay="0.2s">
                                 At Nangal By Cycle, we&rsquo;re not just about rides, we&rsquo;re about

@@ -61,11 +61,6 @@ const AllRequestedEventList = () => {
     });
   };
 
-  const handleUpdateClick = async (id) => {
-    await dispatch(getEvent(id));
-    router.push(`/admin/update-event/${id}`);
-  };
-
   const handleViewClick = (event) => {
     setSelectedEvent(event);
     toggleEventViewModal();
@@ -132,13 +127,11 @@ const AllRequestedEventList = () => {
           >
             <GiCheckMark />
           </button>
-          <button
-            className="btn text-warning"
-            onClick={() => handleUpdateClick(record.eventId)}
-            title="Edit"
-          >
-            <i className="fa fa-pencil m-r-5" />
-          </button>
+          <Link href={`/admin/event/updateevent/${record.eventId}`} passHref>
+            <button className="btn text-warning">
+              <i className="fa fa-pencil m-r-5" />
+            </button>
+          </Link>
           <button
             className="btn text-primary"
             onClick={() => handleViewClick(record)}

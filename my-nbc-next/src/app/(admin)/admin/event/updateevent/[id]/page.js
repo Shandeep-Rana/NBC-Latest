@@ -1,9 +1,9 @@
-import AdminProfile from '@/components/admin/AdminProfile'
+import UpdateEvent from '@/components/admin/event/UpdateEvent'
 import React from 'react'
 
 const page = () => {
   return (
-    <AdminProfile/>
+    <UpdateEvent/>
   )
 }
 

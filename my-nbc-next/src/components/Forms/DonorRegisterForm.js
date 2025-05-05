@@ -5,6 +5,7 @@ import { donorSchema } from '@/lib/FormSchemas';
 import { getAllVillages } from '@/Slice/master';
 import { yupResolver } from '@hookform/resolvers/yup';
 import moment from 'moment';
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker';
@@ -642,11 +643,14 @@ const DonorRegisterForm = () => {
                   accept=".png,.jpg,.jpeg"
                 />
                 {previewUrl && (
-                  <div className="preview-image-container">
-                    <img
-                      className="preview-image"
+                  <div className="preview-image-container" style={{ position: 'relative', width: '100%', maxWidth: '300px', height: 'auto' }}>
+                    <Image
                       src={previewUrl}
                       alt="Preview"
+                      width={300}
+                      height={200}
+                      className="preview-image"
+                      style={{ objectFit: 'contain' }}
                     />
                   </div>
                 )}

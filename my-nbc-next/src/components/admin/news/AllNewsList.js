@@ -13,12 +13,18 @@ import { RiDeleteBin2Fill } from 'react-icons/ri';
 import { approveNews, deleteNews, disapproveNews, getPaginatedNews, publishNews } from '@/Slice/news';
 import { getUserInfoFromToken, ROLES } from '@/constants';
 import Loader from '@/common/Loader';
+import Link from 'next/link';
 
 const AllNewsList = () => {
     const dispatch = useDispatch();
     const router = useRouter();
 
-    const [userInfo, setUserInfo] = useState(null);
+    const [userInfo, setUserInfo] = useState({ userId: null, roleName: [], email: null, expirationTime: null });
+
+    useEffect(() => {
+        const info = getUserInfoFromToken();
+        setUserInfo(info);
+    }, []);
 
     useEffect(() => {
         const user = getUserInfoFromToken();
@@ -108,52 +114,71 @@ const AllNewsList = () => {
         {
             title: 'Status',
             render: (record) => {
-                if (record.is_delete_requested === 1) return 'Delete Requested';
-                if (record.is_published === 1) return 'Published';
-                if (record.is_approved === 1) return 'Approved';
-                return 'Unapproved';
+                if (record.is_delete_requested === 1) {
+                    return 'Delete Requested';
+                }
+                else if (record.is_published === 1) {
+                    return 'Published';
+                } else if (record.is_published !== 1 && record.is_approved === 1) {
+                    return 'Approved';
+                } else if (record.is_approved !== 1) {
+                    return 'Unapproved';
+                } else {
+                    return 'Created';
+                }
             },
         },
         {
-            title: 'Action',
+            title: "Action",
             render: (text, record) => (
-                <div className="d-flex justify-content-around">
+                <div className="d-flex justify-content-around" data-popper-placement="bottom-end">
                     {userInfo.roleName.includes(ROLES.Admin) && record.is_approved !== 1 && (
-                        <button title="Approve" className="px-2 text-success" onClick={() => handleApproveClick(record.news_id)}>
+                        <Link href={"#"} title="Approve" className="dropdown-item px-2 text-success" onClick={() => handleApproveClick(record.news_id)}>
                             <GiCheckMark />
-                        </button>
+                        </Link>
                     )}
                     {userInfo.roleName.includes(ROLES.Admin) && record.is_approved === 1 && (
-                        <button title="Disapprove" className="px-2 text-danger" onClick={() => handleDisapproveClick(record.news_id)}>
+                        <Link href={"#"} title="DisApprove" className="dropdown-item px-2 text-success" onClick={() => handleDisApproveCLick(record.news_id)}>
                             <FcCancel />
-                        </button>
+                        </Link>
                     )}
-                    {userInfo.roleName.includes(ROLES.Admin) &&
-                        formatDate(record.publish_date) > formatDate(new Date()) &&
-                        record.is_published !== 1 && record.is_approved === 1 && (
-                            <button title="Quick Publish" className="px-2" onClick={() => handlePublishClick(record.news_id)}>
-                                <MdPublish />
-                            </button>
-                        )}
-                    {(userInfo.roleName.includes(ROLES.Admin) || record.is_delete_requested !== 1) && (
-                        <button className="px-2 text-warning" onClick={() => handleUpdateClick(record.news_id)}>
-                            <i className="fa fa-pencil"></i>
-                        </button>
+                    {
+                        userInfo.roleName.includes(ROLES.Admin) && formatDate(record.publish_date) > formatDate(new Date()) &&
+                        record.is_published !== 1 && record.is_approved === 1 &&
+                        <Link href={"#"} title="Quick Publish" className="dropdown-item px-2" onClick={() => handlePublishClick(record.news_id)}>
+                            <MdPublish />
+                        </Link>
+                    }
+                    {(userInfo.roleName.includes(ROLES.Admin) || (!userInfo.roleName.includes(ROLES.Admin) && record.is_delete_requested !== 1)) && (
+                        <Link href={`#`} className="dropdown-item px-2 text-warning">
+                            <i
+                                className={`fa fa-pencil`}
+                                onClick={() => handleUpdateClick(record.news_id)}
+                            ></i>
+                        </Link>
                     )}
-                    {userInfo.roleName.includes(ROLES.Admin) && record.is_delete_requested !== 0 && (
-                        <button title="Delete Requested" className="px-2 text-danger" onClick={() => handleDeleteClick(record.news_id)}>
-                            <RiDeleteBin2Fill />
-                        </button>
-                    )}
-                    {record.is_delete_requested !== 1 && (
-                        <button title="Delete" className="px-2 text-danger" onClick={() => handleDeleteClick(record.news_id)}>
-                            <i className="fa fa-trash" style={{ color: 'red' }}></i>
-                        </button>
-                    )}
+                    {
+                        userInfo.roleName.includes(ROLES.Admin) && record.is_delete_requested !== 0 && (
+                            <Link href={"#"} title="Delete Requested" className="dropdown-item px-2 text-danger" onClick={() => handleDeleteClick(record.news_id)}>
+                                <RiDeleteBin2Fill />
+                            </Link>
+                        )
+                    }
+                    {
+                        record.is_delete_requested !== 1 && (
+                            <Link href={"#"} title="Delete" className="dropdown-item px-2 text-danger">
+                                <i
+                                    className={`fa fa-trash`}
+                                    style={{ color: "red" }}
+                                    onClick={() => handleDeleteClick(record.news_id)}
+                                ></i>
+                            </Link>
+                        )
+                    }
                 </div>
             ),
         },
-    ];
+    ]
 
     return (
         <div className="container-fluid mt-2">

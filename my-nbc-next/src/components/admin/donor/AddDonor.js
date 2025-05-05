@@ -7,6 +7,7 @@ import { addDonor } from '@/Slice/bloodDonation';
 import { getAllVillages } from '@/Slice/master';
 import { yupResolver } from '@hookform/resolvers/yup';
 import moment from 'moment';
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker';
@@ -71,7 +72,7 @@ const AddDonor = () => {
 
     useEffect(() => {
         dispatch(getAllVillages());
-    }, []);
+    }, [dispatch]);
     const dateFormat = 'YYYY/MM/DD';
 
 
@@ -562,11 +563,13 @@ const AddDonor = () => {
                                                                     accept=".jpg,.png,.jpeg"
                                                                 />
                                                                 {previewUrl && (
-                                                                    <div className="preview-image-container">
-                                                                        <img
-                                                                            className="preview-image"
+                                                                    <div className="preview-image-container" style={{ position: 'relative', width: '200px', height: '200px' }}>
+                                                                        <Image
                                                                             src={previewUrl}
                                                                             alt="Preview"
+                                                                            fill 
+                                                                            className="preview-image"
+                                                                            style={{ objectFit: 'cover', borderRadius: '8px' }}
                                                                         />
                                                                     </div>
                                                                 )}

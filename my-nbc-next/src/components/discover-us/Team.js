@@ -1,6 +1,7 @@
 "use client";
 
 import { teamMembers } from "@/constants";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -9,7 +10,7 @@ const Team = () => {
   const router = useRouter();
 
   const handleMemberClick = (id) => {
-    router.push(`/member-details/${id}`); 
+    router.push(`/member-details/${id}`);
   };
 
   return (
@@ -53,8 +54,15 @@ const Team = () => {
                       data-cursor-text="View"
                     >
                       <figure className="image-anime">
-                        <img src={member.image} alt={member.name} />
+                        <Image
+                          src={member.image}
+                          alt={member.name}
+                          width={500} // Set an appropriate width
+                          height={300} // Set an appropriate height
+                          layout="responsive" // Makes the image responsive, you can adjust based on design needs
+                        />
                       </figure>
+
                     </Link>
                   </div>
                   <div className="team-content">

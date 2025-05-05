@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link  from "next/link"; 
+import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import { confirmAlert } from "react-confirm-alert";
@@ -51,10 +51,10 @@ const AllEventList = () => {
     });
   };
 
-//   const handleUpdateClick = (id) => {
-//     dispatch(getEvent(id));
-//     router.push(`/admin/update-event/${id}`);
-//   };
+  //   const handleUpdateClick = (id) => {
+  //     dispatch(getEvent(id));
+  //     router.push(`/admin/update-event/${id}`);
+  //   };
 
   const handleDelete = (id) => {
     dispatch(deleteEvent(id));
@@ -97,7 +97,7 @@ const AllEventList = () => {
     {
       title: "Phone Number",
       dataIndex: "contact",
-      render: (text) => (text ? text : "XXXXXXXXXX"),
+      render: (text) => ( text ? text : "XXXXXXXXXX"),
       sorter: (a, b) => (a.contact || "").length - (b.contact || "").length,
     },
     {
@@ -119,12 +119,11 @@ const AllEventList = () => {
       title: "Action",
       render: (text, record) => (
         <div className="d-flex justify-content-around" data-popper-placement="bottom-end">
-          {/* <button
-            className="dropdown-item px-2 text-warning"
-            onClick={() => handleUpdateClick(record.eventId)}
-          >
-            <i className="fa fa-pencil m-r-5" />
-          </button> */}
+          <Link href={`/admin/event/updateevent/${record.eventId}`} passHref>
+            <button className="dropdown-item px-2 text-warning">
+              <i className="fa fa-pencil m-r-5" />
+            </button>
+          </Link>
           <button
             className="dropdown-item px-2 text-primary"
             onClick={() => handleViewClick(record)}
@@ -139,7 +138,7 @@ const AllEventList = () => {
           </button>
         </div>
       ),
-    },
+    }
   ];
 
   return (

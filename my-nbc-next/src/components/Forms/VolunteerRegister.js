@@ -14,6 +14,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import moment from 'moment';
 import { StatesAndUnionTerritories } from '@/constants';
+import Image from 'next/image';
 
 const VolunteerRegister = () => {
 
@@ -897,18 +898,19 @@ const VolunteerRegister = () => {
                                             onBlur={onBlur}
                                             accept=".png,.jpg,.jpeg"
                                         />
+                                        
                                         {previewUrl && (
-                                            <div
-                                                className="preview-image-container"
-                                                style={{ width: 310 }}
-                                            >
-                                                <img
-                                                    className="preview-image"
+                                            <div className="preview-image-container" style={{ position: 'relative', width: '300px', height: '200px' }}>
+                                                <Image
                                                     src={previewUrl}
                                                     alt="Preview"
+                                                    fill
+                                                    className="preview-image"
+                                                    style={{ objectFit: 'contain' }}
                                                 />
                                             </div>
                                         )}
+
                                     </>
                                 )}
                             />

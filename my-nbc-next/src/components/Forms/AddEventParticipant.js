@@ -3,8 +3,10 @@
 import { eventparticipantSchema } from '@/lib/eventSchema';
 import { addEventParticipant, getALLEvents, getEvent } from '@/Slice/events';
 import { yupResolver } from '@hookform/resolvers/yup';
+import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 import { Controller } from 'react-hook-form';
+import PhoneInput from 'react-phone-input-2';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactSelect from "react-select";
 
@@ -264,12 +266,16 @@ const AddEventParticipant = () => {
                                         accept="image/jpeg, image/jpg, image/png, application/pdf"
                                     />
                                     {previewUrl ? (
-                                        <img
-                                            src={previewUrl}
-                                            alt="Profile Preview"
-                                            className="img-thumbnail mt-2"
-                                            style={{ maxWidth: "150px", height: "auto" }}
-                                        />
+                                        <div style={{ position: 'relative', width: '150px', height: 'auto' }}>
+                                            <Image
+                                                src={previewUrl}
+                                                alt="Profile Preview"
+                                                width={150}
+                                                height={150}
+                                                style={{ objectFit: 'contain' }}
+                                                className="img-thumbnail mt-2"
+                                            />
+                                        </div>
                                     ) : uploadedFile && uploadedFile.type === "application/pdf" ? (
                                         <p className="mt-2">PDF uploaded: {uploadedFile.name}</p>
                                     ) : null}

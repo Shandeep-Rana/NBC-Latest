@@ -38,7 +38,7 @@ const BecomeDonor = () => {
                   Be a Nangal Hero: Donate Blood, Save Lives
                 </h2>
                 <p className="wow fadeInUp">
-                  Are you ready to be a hero in someone's life? Imagine having the power to save lives with just a single act of kindness. That&apos;s the incredible opportunity you have when you become a blood donor. Every day, countless lives are saved because of generous donors like you. Whether it&apos;s a patient undergoing surgery, a cancer patient receiving treatment, or a trauma victim in need of immediate care, your blood donation can make all the difference.
+                  Are you ready to be a hero in someone&apos;s life? Imagine having the power to save lives with just a single act of kindness. That&apos;s the incredible opportunity you have when you become a blood donor. Every day, countless lives are saved because of generous donors like you. Whether it&apos;s a patient undergoing surgery, a cancer patient receiving treatment, or a trauma victim in need of immediate care, your blood donation can make all the difference.
                 </p>
                 <h5 className="wow fadeInUp" data-wow-delay="0.8s">
                   But the benefits of donating blood go beyond just saving lives. As an active blood donor, you&apos;re also contributing to the well-being of your community and society as a whole. Here&apos;s how:
@@ -46,7 +46,7 @@ const BecomeDonor = () => {
 
                 <ul className="wow fadeInUp" data-wow-delay="1.2s">
                   <li>
-                    <b>Saving Lives:</b> Your blood donation can be the lifeline for someone in their darkest hour. It&apos;s a simple yet powerful way to give back to society and make a tangible difference in someone's life.
+                    <b>Saving Lives:</b> Your blood donation can be the lifeline for someone in their darkest hour. It&apos;s a simple yet powerful way to give back to society and make a tangible difference in someone&apos;s life.
                   </li>
                   <li>
                     <b>Health Benefits:</b> Did you know that donating blood has health benefits for the donor too? Regular blood donation helps reduce the risk of heart disease, lowers cholesterol levels, and even helps in the prevention of certain types of cancers. Plus, it stimulates the production of new blood cells, keeping you healthy and rejuvenated.
@@ -58,7 +58,7 @@ const BecomeDonor = () => {
                     <b>Emergency Preparedness:</b> Your blood donation ensures that there&apos;s an adequate supply of blood available for emergencies. Whether it&apos;s a natural disaster, a mass casualty event, or a medical emergency, your contribution helps ensure that blood is readily available to those who need it most.
                   </li>
                   <li>
-                    <b>Personal Fulfillment:</b> There&apos;s a profound sense of fulfillment that comes from knowing you&apos;ve made a difference in someone's life. As a blood donor, you have the power to bring hope and healing to those who are suffering, leaving a lasting impact on both the recipients and their loved ones.
+                    <b>Personal Fulfillment:</b> There&apos;s a profound sense of fulfillment that comes from knowing you&apos;ve made a difference in someone&apos;s life. As a blood donor, you have the power to bring hope and healing to those who are suffering, leaving a lasting impact on both the recipients and their loved ones.
                   </li>
                 </ul>
 

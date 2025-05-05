@@ -1,27 +1,15 @@
 'use client';
 
-import React, { useEffect } from "react";
-import Image from 'next/image';
-// import innerBannerImg1 from '../../Assets/Images/Event-bg-01-01.jpg';
-// import registerimg from '../../Assets/Images/registerimg.jpg';
-// import donor_header_img from '../../Assets/Images/donor-header-img.jpeg';
-// import volunteer_header_img from '../../Assets/Images/Volunteers-working-together-1.jpg';
-// import both_header_img from '../../Assets/Images/photo.jpg';
-// import AddDonor from "./Components/AddDonor";
-// import AddVolunteer from "./Components/AddVolunteer";
-// import RegisterAsBoth from "./Components/RegisterAsBoth";
+import React, { useEffect, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    updateRegisterRoleDonor,
-    updateRegisterRoleVolunteer,
-    updateRegisterRoleBoth
-} from "../../Slice/master";
+import { updateRegisterRoleDonor, updateRegisterRoleVolunteer, updateRegisterRoleBoth } from "../../Slice/master";
 import { RegisterRoles } from "../../constants";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Head from 'next/head';
 import Link from "next/link";
 
-const Register = () => {
+// Your main Register component
+const RegisterComponent = () => {
     const dispatch = useDispatch();
     const { registerRoleCheck } = useSelector(state => state.masterSlice);
     const searchParams = useSearchParams();
@@ -41,7 +29,7 @@ const Register = () => {
                 <title>Register | Join Nangal by Cycle Community</title>
                 <meta name="description" content="Create an account with Nangal by Cycle to participate in our events, access exclusive content, and support our mission. Join our community today." />
             </Head>
-            
+
             <main id="content" className="site-main">
                 <div className="page-header parallaxie">
                     <div className="container">
@@ -67,37 +55,12 @@ const Register = () => {
                     </div>
                 </div>
 
-                {/* <div className="volunteer-wrap" style={{ backgroundImage: `url(${registerimg.src})` }}> */}
                 <div className="container">
                     <div className="row pt-5">
                         <div className="col-lg-8 offset-lg-2">
                             <div className="volunteer-contact-form form_padding_rm">
                                 <div className="form_header_img position-relative">
-                                    {/* <Image
-                                            src={
-                                                registerRoleCheck === RegisterRoles?.Donor
-                                                    ? donor_header_img
-                                                    : registerRoleCheck === RegisterRoles?.Volunteer
-                                                        ? volunteer_header_img
-                                                        : both_header_img
-                                            }
-                                            alt="header"
-                                            className="w-100"
-                                        /> */}
-                                    <div className="position-absolute header_img_title">
-                                        <h1 className="main_title text-center">
-                                            Register As <br />
-                                            {
-                                                registerRoleCheck === RegisterRoles?.Donor
-                                                    ? 'DONOR'
-                                                    : registerRoleCheck === RegisterRoles?.Volunteer
-                                                        ? 'VOLUNTEER'
-                                                        : registerRoleCheck === RegisterRoles?.Both
-                                                            ? 'BOTH'
-                                                            : ''
-                                            }
-                                        </h1>
-                                    </div>
+                                    {/* Add your image here */}
                                 </div>
 
                                 <div className="form-group header_form_radio mt-5 mb-4 d-flex justify-content-center">
@@ -173,14 +136,6 @@ const Register = () => {
                                     </div>
                                 </div>
 
-                                {/* {registerRoleCheck === RegisterRoles?.Donor ? (
-                                        <AddDonor />
-                                    ) : registerRoleCheck === RegisterRoles?.Volunteer ? (
-                                        <AddVolunteer />
-                                    ) : registerRoleCheck === RegisterRoles?.Both ? (
-                                        <RegisterAsBoth />
-                                    ) : null} */}
-
                                 <p className="py-4">
                                     Already have an account?{" "}
                                     <a href="/auth/signin" style={{ color: '#F15B43' }}>Sign in</a>
@@ -188,11 +143,17 @@ const Register = () => {
                             </div>
                         </div>
                     </div>
-                    {/* </div> */}
                 </div>
             </main>
         </>
     );
 };
+
+// Wrapping Register component with Suspense
+const Register = () => (
+    <Suspense fallback={<div>Loading...</div>}>
+        <RegisterComponent />
+    </Suspense>
+);
 
 export default Register;

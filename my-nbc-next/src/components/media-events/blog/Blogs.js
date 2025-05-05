@@ -35,7 +35,8 @@ const Blogs = () => {
       clearTimeout(delayDebounce);
       setLocalLoading(false);
     };
-  }, [dispatch, state.search, state.page, state.pageSize]);
+  }, [dispatch, state.search, state.page, state.pageSize, isPublished, isApproved]);
+
 
   const handleViewMore = () => {
     setState((prevState) => ({

@@ -27,7 +27,7 @@ const UpdateDonor = () => {
             dispatch(getdonor(id));
         };
         reloadData();
-    }, []);
+    }, [dispatch, id]);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -69,7 +69,7 @@ const UpdateDonor = () => {
 
     useEffect(() => {
         dispatch(getAllVillages());
-    }, []);
+    }, [dispatch]);
 
     const formatDate = (date) => {
         return moment(date).format("YYYY-MM-DD");

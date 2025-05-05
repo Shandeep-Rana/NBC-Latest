@@ -13,6 +13,7 @@ import Loader from '@/common/Loader';
 import { StatesAndUnionTerritories } from '@/constants';
 import Link from 'next/link';
 import { skilledPersonSchema } from '@/lib/FormSchemas';
+import Image from 'next/image';
 
 const AddMember = () => {
   const dispatch = useDispatch();
@@ -481,11 +482,13 @@ const AddMember = () => {
                                 accept=".jpg,.png,.jpeg"
                               />
                               {previewUrl && (
-                                <div className="preview-image-container">
-                                  <img
-                                    className="preview-image"
+                                <div className="preview-image-container" style={{ position: 'relative', width: '300px', height: '200px' }}>
+                                  <Image
                                     src={previewUrl}
                                     alt="Preview"
+                                    fill
+                                    className="preview-image"
+                                    style={{ objectFit: 'contain' }}
                                   />
                                 </div>
                               )}

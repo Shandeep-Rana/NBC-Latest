@@ -14,6 +14,7 @@ import Loader from '@/common/Loader';
 import { StatesAndUnionTerritories } from '@/constants';
 import { volunteerSchema } from '@/lib/FormSchemas';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const AddVolunteer = () => {
     const dispatch = useDispatch();
@@ -478,11 +479,13 @@ const AddVolunteer = () => {
                                                                 accept=".jpg,.png,.jpeg"
                                                             />
                                                             {previewUrl && (
-                                                                <div className="preview-image-container">
-                                                                    <img
-                                                                        className="preview-image"
+                                                                <div className="preview-image-container" style={{ position: 'relative', width: '300px', height: '200px' }}>
+                                                                    <Image
                                                                         src={previewUrl}
                                                                         alt="Preview"
+                                                                        fill
+                                                                        className="preview-image"
+                                                                        style={{ objectFit: 'contain' }}
                                                                     />
                                                                 </div>
                                                             )}

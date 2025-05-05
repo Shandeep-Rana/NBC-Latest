@@ -15,21 +15,25 @@ import { yupResolver } from '@hookform/resolvers/yup';
 // import { Helmet } from 'react-helmet';
 import Loader from '@/common/Loader';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const NbcMemberRegisterForm = () => {
     const dispatch = useDispatch();
-    // const navigate = useNavigate();
     const dateFormat = 'yyyy-MM-dd';
     const [previewUrl, setPreviewUrl] = useState("");
     const [selectedOption, setSelectedOption] = useState(null);
     const [selectedProfessionOption, setSelectedProfessionOption] = useState(null);
+    const [id, setId] = useState(null); // Store ID in the state
+
     const { isLoading } = useSelector((state) => state.userRegister);
     const { villages, professions } = useSelector((state) => state.masterSlice);
 
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get('event');
-
     useEffect(() => {
+        // Safely access `window` inside `useEffect` (runs only on the client-side)
+        const params = new URLSearchParams(window.location.search);
+        const eventId = params.get('event');
+        setId(eventId); // Store the id in state
+
         dispatch(getAllProfessions());
         dispatch(getAllVillages());
     }, [dispatch]);
@@ -74,7 +78,7 @@ const NbcMemberRegisterForm = () => {
         }
     };
 
-    const formatDate = (date) => moment(date).format("YYYY-MM-DD")
+    const formatDate = (date) => moment(date).format("YYYY-MM-DD");
 
     const onSubmit = (data) => {
         const formData = new FormData();
@@ -92,12 +96,10 @@ const NbcMemberRegisterForm = () => {
         formData.append("state", data?.state);
         formData.append("profession", data?.currentProfession);
         formData.append("userProfile", data?.userProfile);
-        formData.append("id", id);
-        dispatch(registerAsSkilledPerson(formData,
-            navigate, reset,
-            setPreviewUrl));
+        formData.append("id", id); // Use the `id` from state
+        dispatch(registerAsSkilledPerson(formData, navigate, reset, setPreviewUrl));
     };
-
+    
     return (<>
         {isLoading ? (
             <Loader />
@@ -110,7 +112,7 @@ const NbcMemberRegisterForm = () => {
                 <section className="inner-banner-wrap pb-0">
                     <div
                         className="inner-baner-container"
-                        // style={{ backgroundImage: `url(${innerBannerImg1})` }}
+                    // style={{ backgroundImage: `url(${innerBannerImg1})` }}
                     >
                         <div className="container">
                             <div className="inner-banner-content">
@@ -121,7 +123,7 @@ const NbcMemberRegisterForm = () => {
                         </div>
                     </div>
                 </section>
-                <div className="volunteer-wrap" 
+                <div className="volunteer-wrap"
                 // style={{ backgroundImage: `url(${registerimg})` }}
                 >
                     <div className="container">
@@ -756,15 +758,19 @@ const NbcMemberRegisterForm = () => {
                                                                 onBlur={onBlur}
                                                                 accept=".png,.jpg,.jpeg"
                                                             />
+
                                                             {previewUrl && (
-                                                                <div className="preview-image-container">
-                                                                    <img
-                                                                        className="preview-image"
+                                                                <div className="preview-image-container" style={{ position: 'relative', width: '300px', height: '200px' }}>
+                                                                    <Image
                                                                         src={previewUrl}
                                                                         alt="Preview"
+                                                                        fill
+                                                                        className="preview-image"
+                                                                        style={{ objectFit: 'contain' }}
                                                                     />
                                                                 </div>
                                                             )}
+
                                                         </>
                                                     )}
                                                 />
