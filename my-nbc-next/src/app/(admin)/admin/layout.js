@@ -8,6 +8,7 @@ import AdminSideBar from '@/common/AdminSideBar';
 import "react-phone-input-2/lib/style.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'react-datepicker/dist/react-datepicker.css';
+import "quill/dist/quill.core.css";
 
 export default function AdminLayout({ children }) {
   const [isShow, setShow] = useState(false);
