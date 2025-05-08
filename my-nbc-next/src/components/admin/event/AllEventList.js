@@ -149,7 +149,7 @@ const AllEventList = () => {
             <h1 className="h2">Event List</h1>
           </div>
           <div className="col-auto">
-            <Link href="/admin/add-event" passHref>
+            <Link href="/admin/event/addevent" passHref>
               <button className="button-round border_radius" type="button">
                 <i className="fa fa-plus" aria-hidden="true"></i> Add Event
               </button>

@@ -78,20 +78,30 @@ export const pinCodergx = /^[1-9][0-9]{5}$/
 
 export const getUserInfoFromToken = () => {
   if (typeof window !== "undefined") {
-    const data = JSON.parse(localStorage.getItem("user"));
-    const token = data?.token;
-    if (token) {
-      const decodedToken = jwt_decode(token);
-      const userId = decodedToken.userId;
-      const roleName = data.roleName;
-      const email = decodedToken.email;
-      const expirationTimeInSeconds = decodedToken.exp;
-      const expirationDate = new Date(expirationTimeInSeconds * 1000);
-      const expirationTime = expirationDate.toLocaleString();
-      return { userId, roleName, email, expirationTime };
+    const data = localStorage.getItem("user");
+    if (!data) return null;
+
+    try {
+      const parsedData = JSON.parse(data);
+      const token = parsedData?.token;
+      if (token) {
+        const decodedToken = jwt_decode(token);
+        const userId = decodedToken.userId;
+        const roleName = parsedData.roleName;
+        const email = decodedToken.email;
+        const expirationTimeInSeconds = decodedToken.exp;
+        const expirationDate = new Date(expirationTimeInSeconds * 1000);
+        const expirationTime = expirationDate.toLocaleString();
+
+        return { userId, roleName, email, expirationTime };
+      }
+    } catch (error) {
+      console.error("Error decoding token:", error);
+      return null;
     }
   }
-  return { userId: null, roleName: null, email: null, expirationTime: null };
+
+  return null;
 };
 
 export const linkedinrgx = /([\w]+\.)?linkedin\.com\/in\/[A-z0-9_-]+\/?/;

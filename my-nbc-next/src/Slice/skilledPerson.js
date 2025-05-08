@@ -76,7 +76,7 @@ export const getAllSkilledPersons = (search, page, pageSize, selectedVillage, is
   }
 };
 
-export const addSkilledPerson = (data, navigate, reset, setPreviewUrl) => async (dispatch) => {
+export const addSkilledPerson = (data, router, reset, setPreviewUrl) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/add-skilledperson`, data, {
@@ -89,7 +89,7 @@ export const addSkilledPerson = (data, navigate, reset, setPreviewUrl) => async 
       setPreviewUrl("");
       toast.success(response.data.message);
       dispatch(addSkilledPersonSuccess());
-      navigate('/admin/all-SkilledPersons');
+      router.push('/admin/all-SkilledPersons');
     }
     else {
       toast.error(response.data.message);
@@ -104,13 +104,13 @@ export const getSkilledPerson = (id) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
     const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/skilledPerson/${id}`);
-    if(response.data.success){
+    if (response.data.success) {
       dispatch(getSkilledPersonSuccess(response.data));
     }
-   else{
-    toast.error(response.data.message);
-    dispatch(getSkilledPersonFailure());
-   }
+    else {
+      toast.error(response.data.message);
+      dispatch(getSkilledPersonFailure());
+    }
   } catch (error) {
     toast.error(error.message);
     dispatch(getSkilledPersonFailure());

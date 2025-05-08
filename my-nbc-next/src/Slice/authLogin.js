@@ -97,7 +97,7 @@ const authLoginSlice = createSlice({
   },
 });
 
-export const loginUser = (data, navigate, reset) => async (dispatch) => {
+export const loginUser = (data, router, reset) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
     const params = new URLSearchParams(window.location.search);
@@ -118,13 +118,13 @@ export const loginUser = (data, navigate, reset) => async (dispatch) => {
       toast.success(response.data.message);
 
       if (eventId) {
-        navigate(`/event/participation/${eventId}`);
+        router.push(`/event/participation/${eventId}`);
       } else if (user.roleName.includes(ROLES.Admin)) {
-        navigate("/admin/user-profile");
+        router.push("/admin");
       } else if (user.roleName.includes(ROLES.Volunteer)) {
-        navigate("/user/edit-profile");
+        router.push("/user");
       } else if (user.roleName.includes(ROLES.SkilledPerson)) {
-        navigate("/user/edit-profile");
+        router.push("/user");
       }
     } else {
       toast.error(response.data.message);
@@ -138,13 +138,18 @@ export const loginUser = (data, navigate, reset) => async (dispatch) => {
   }
 };
 
-export const logoutUser = (navigate) => async (dispatch) => {
-  dispatch(setLoading());
-  localStorage.removeItem("user");
-  dispatch(logoutSuccess());
-  toast.success("LoggedOut Successfully");
-  navigate("/auth/login")
+export const logoutUser = (router) => async (dispatch) => {
+  try {
+    dispatch(setLoading());
+    localStorage.removeItem("user");
+    dispatch(logoutSuccess());
+    toast.success("Logged out successfully");
+    router.push("/auth/signin");
+  } catch (error) {
+    toast.error("Logout failed");
+  }
 };
+
 
 export const autologoutUser = (navigate) => async (dispatch) => {
   const userInfo = getUserInfoFromToken();

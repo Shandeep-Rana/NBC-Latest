@@ -5,15 +5,17 @@ import { bloodRequirementSchema } from '@/lib/utils/UtilsSchemas';
 import { addRequirement } from '@/Slice/bloodRequirement';
 import { yupResolver } from '@hookform/resolvers/yup';
 import moment from 'moment';
+import { useRouter } from 'next/navigation';
 import React from 'react'
 import DatePicker from 'react-datepicker';
-import { Controller } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import PhoneInput from 'react-phone-input-2';
 import { useDispatch } from 'react-redux';
 import ReactSelect from "react-select";
 
 const AddBloodRequestForm = () => {
     const dispatch = useDispatch();
+    const router = useRouter();
     const dateFormat = "yyyy-MM-dd";
 
     const {
@@ -40,7 +42,7 @@ const AddBloodRequestForm = () => {
             description: data?.description,
             bloodType: data?.bloodType
         };
-        dispatch(addRequirement(requestData, reset));
+        dispatch(addRequirement(requestData, reset, router));
     };
 
     return (
@@ -108,7 +110,7 @@ const AddBloodRequestForm = () => {
                     <label className="text-left">
                         Phone Number{" "}
                         <span style={{ color: "#F15B43" }}>*</span>
-                    </label>
+                    </label>        
                     <Controller
                         name="contact"
                         control={control}

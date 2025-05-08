@@ -124,7 +124,7 @@ export const getPaginatedBlogs = (search, page, pageSize, userId = null, isPubli
   }
 };
 
-export const addBlog = (data, navigate, reset, userInfo, setThumbnailUrl) => async (dispatch) => {
+export const addBlog = (data, router, reset, userInfo, setThumbnailUrl) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/add-blog`, data, {
@@ -138,9 +138,9 @@ export const addBlog = (data, navigate, reset, userInfo, setThumbnailUrl) => asy
       setThumbnailUrl('');
       dispatch(addBlogSuccess(response.data.data));
       if (userInfo.roleName.includes(ROLES.Admin))
-        navigate("/admin/all-blogs");
+        router.push("/admin/all-blogs");
       else {
-        navigate("/user/blogs");
+        router.push("/user/blogs");
       }
     }
     else {

@@ -84,7 +84,7 @@ export const getAllVolunteers = (search, page, pageSize, selectedVillage, isActi
   }
 };
 
-export const adduser = (data, navigate, reset) => async (dispatch) => {
+export const adduser = (data, router, reset) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/add-volunteer`, data, {
@@ -96,7 +96,7 @@ export const adduser = (data, navigate, reset) => async (dispatch) => {
       reset();
       dispatch(adduserSuccess(data));
       toast.success(response.data.message);
-      navigate("/admin/all-volunteers")
+      router.push("/admin/all-volunteers")
     }
   } catch (error) {
     dispatch(adduserFailure());

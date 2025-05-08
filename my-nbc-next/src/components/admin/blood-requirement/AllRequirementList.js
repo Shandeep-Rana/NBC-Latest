@@ -143,7 +143,7 @@ const AllRequirementList = () => {
                     <h1 className="h2">Blood Requirement Request List</h1>
                 </div>
                 <div className="col-auto">
-                    <Link href="/admin/addbloodrequest" className="button-round border_radius">
+                    <Link href="/admin/bloodrequirement/addbloodrequest" className="button-round border_radius">
                         <i className="fa fa-plus" aria-hidden="true" /> Add Request
                     </Link>
                 </div>

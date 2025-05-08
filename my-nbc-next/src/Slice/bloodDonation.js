@@ -91,7 +91,7 @@ export const getAllDonors = (search, page, pageSize, selectedBloodGroup) => asyn
   }
 };
 
-export const addDonor = (data, navigate, reset, setPreviewUrl) => async (dispatch) => {
+export const addDonor = (data, router, reset, setPreviewUrl) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/add-donor`, data, {
@@ -104,7 +104,7 @@ export const addDonor = (data, navigate, reset, setPreviewUrl) => async (dispatc
       setPreviewUrl("");
       toast.success(response.data.message);
       dispatch(addDonorSuccess(data));
-      navigate('/admin/all-donors');
+      router.push('/admin/all-donors');
     }
     else {
       dispatch(addDonorFailure());

@@ -14,6 +14,7 @@ import { StatesAndUnionTerritories } from '@/constants';
 import Link from 'next/link';
 import { skilledPersonSchema } from '@/lib/FormSchemas';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const AddMember = () => {
   const dispatch = useDispatch();
@@ -90,7 +91,7 @@ const AddMember = () => {
     return moment(date).format("YYYY-MM-DD");
   };
 
-  // const navigate = useNavigate();
+  const router = useRouter();
 
   const onSubmit = (data) => {
     const formData = new FormData();
@@ -108,7 +109,7 @@ const AddMember = () => {
     formData.append("state", data?.state);
     formData.append("profession", data?.profession);
     formData.append("userProfile", data?.userProfile);
-    dispatch(addSkilledPerson(formData, navigate, reset, setPreviewUrl));
+    dispatch(addSkilledPerson(formData, router, reset, setPreviewUrl));
   };
   const dateFormat = 'YYYY/MM/DD';
 

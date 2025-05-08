@@ -14,21 +14,17 @@ import { approveNews, deleteNews, disapproveNews, getPaginatedNews, publishNews 
 import { getUserInfoFromToken, ROLES } from '@/constants';
 import Loader from '@/common/Loader';
 import Link from 'next/link';
+import AdminLoader from '@/common/AdminLoader';
 
 const AllNewsList = () => {
     const dispatch = useDispatch();
     const router = useRouter();
 
-    const [userInfo, setUserInfo] = useState({ userId: null, roleName: [], email: null, expirationTime: null });
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
-        const info = getUserInfoFromToken();
-        setUserInfo(info);
-    }, []);
-
-    useEffect(() => {
-        const user = getUserInfoFromToken();
-        setUserInfo(user);
+        const userInfo = getUserInfoFromToken();
+        setUser(userInfo);
     }, []);
 
     const { newsList, newsCount, isLoading } = useSelector((state) => state.news);
@@ -40,19 +36,19 @@ const AllNewsList = () => {
     });
 
     useEffect(() => {
-        dispatch(getPaginatedNews(state.search, state.page, state.pagesize, userInfo?.userId));
-    }, [dispatch, state.search, state.page, state.pagesize, userInfo?.userId]);
+        dispatch(getPaginatedNews(state.search, state.page, state.pagesize, user?.userId));
+    }, [dispatch, state.search, state.page, state.pagesize, user?.userId]);
 
     const formatDate = (date) => moment(date).format('YYYY-MM-DD');
 
     const handleUpdateClick = (id) => {
-        router.push(userInfo.roleName.includes(ROLES.Admin)
+        router.push(user.roleName.includes(ROLES.Admin)
             ? `/admin/updatenews/${id}`
             : `/user/updatenews/${id}`);
     };
 
     const handleDelete = (id) => {
-        dispatch(deleteNews(id, userInfo.userId));
+        dispatch(deleteNews(id, user.userId));
     };
 
     const handleDeleteClick = (id) => {
@@ -67,15 +63,15 @@ const AllNewsList = () => {
     };
 
     const handleApproveClick = (id) => {
-        dispatch(approveNews({ newsId: id, userId: userInfo.userId }));
+        dispatch(approveNews({ newsId: id, userId: user.userId }));
     };
 
     const handleDisapproveClick = (id) => {
-        dispatch(disapproveNews({ newsId: id, userId: userInfo.userId }));
+        dispatch(disapproveNews({ newsId: id, userId: user.userId }));
     };
 
     const handlePublishClick = (id) => {
-        dispatch(publishNews({ newsId: id, userId: userInfo.userId }));
+        dispatch(publishNews({ newsId: id, userId: user.userId }));
     };
 
     const onShowSizeChange = (current, pageSize) => {
@@ -132,24 +128,24 @@ const AllNewsList = () => {
             title: "Action",
             render: (text, record) => (
                 <div className="d-flex justify-content-around" data-popper-placement="bottom-end">
-                    {userInfo.roleName.includes(ROLES.Admin) && record.is_approved !== 1 && (
+                    {user.roleName.includes(ROLES.Admin) && record.is_approved !== 1 && (
                         <Link href={"#"} title="Approve" className="dropdown-item px-2 text-success" onClick={() => handleApproveClick(record.news_id)}>
                             <GiCheckMark />
                         </Link>
                     )}
-                    {userInfo.roleName.includes(ROLES.Admin) && record.is_approved === 1 && (
+                    {user.roleName.includes(ROLES.Admin) && record.is_approved === 1 && (
                         <Link href={"#"} title="DisApprove" className="dropdown-item px-2 text-success" onClick={() => handleDisApproveCLick(record.news_id)}>
                             <FcCancel />
                         </Link>
                     )}
                     {
-                        userInfo.roleName.includes(ROLES.Admin) && formatDate(record.publish_date) > formatDate(new Date()) &&
+                        user.roleName.includes(ROLES.Admin) && formatDate(record.publish_date) > formatDate(new Date()) &&
                         record.is_published !== 1 && record.is_approved === 1 &&
                         <Link href={"#"} title="Quick Publish" className="dropdown-item px-2" onClick={() => handlePublishClick(record.news_id)}>
                             <MdPublish />
                         </Link>
                     }
-                    {(userInfo.roleName.includes(ROLES.Admin) || (!userInfo.roleName.includes(ROLES.Admin) && record.is_delete_requested !== 1)) && (
+                    {(user.roleName.includes(ROLES.Admin) || (!userInfo.roleName.includes(ROLES.Admin) && record.is_delete_requested !== 1)) && (
                         <Link href={`#`} className="dropdown-item px-2 text-warning">
                             <i
                                 className={`fa fa-pencil`}
@@ -158,7 +154,7 @@ const AllNewsList = () => {
                         </Link>
                     )}
                     {
-                        userInfo.roleName.includes(ROLES.Admin) && record.is_delete_requested !== 0 && (
+                        user.roleName.includes(ROLES.Admin) && record.is_delete_requested !== 0 && (
                             <Link href={"#"} title="Delete Requested" className="dropdown-item px-2 text-danger" onClick={() => handleDeleteClick(record.news_id)}>
                                 <RiDeleteBin2Fill />
                             </Link>
@@ -189,7 +185,7 @@ const AllNewsList = () => {
                 <div className="col-auto">
                     <button
                         onClick={() =>
-                            router.push(userInfo.roleName.includes(ROLES.Admin) ? '/admin/addnews' : '/user/addnews')
+                            router.push(user.roleName.includes(ROLES.Admin) ? '/admin/addnews' : '/user/addnews')
                         }
                         className="button-round border_radius"
                     >
@@ -209,7 +205,7 @@ const AllNewsList = () => {
                 </div>
             </div>
             {isLoading ? (
-                <Loader />
+                <AdminLoader />
             ) : (
                 <Table
                     pagination={{

@@ -158,7 +158,7 @@ const AllRequestedEventList = () => {
           <h1 className="h2">Un-Approved Event List</h1>
         </div>
         <div className="col-auto">
-          <Link href="/admin/add-event" className="button-round border_radius">
+          <Link href="/admin/event/addevent" className="button-round border_radius">
             <i className="fa fa-plus" aria-hidden="true" /> Add Event
           </Link>
         </div>

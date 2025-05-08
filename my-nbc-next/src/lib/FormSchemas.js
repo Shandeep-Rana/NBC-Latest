@@ -145,3 +145,45 @@ export const skilledPersonSchema = yup.object({
     }),
   agreeToTerms: yup.boolean().required("Required").oneOf([true], "You must accept the terms and conditions"),
 });
+
+export const updateUserSchema = yup.object({
+  fullName: yup.string().required("Name is required").trim().min(3, "Name must be at least 3 characters"),
+  dob: yup
+    .date()
+    .typeError("Invalid Date")
+    .required("Date of Birth is required")
+    .max(new Date(), "Date of Birth cannot be in the future")
+    .test('is-at-least-18', 'Age must be at least 18 years old', function (value) {
+      const eighteenYearsAgo = new Date();
+      eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
+      return value <= eighteenYearsAgo;
+    }),
+  gender: yup.string().required("Gender is required").trim(),
+  profession: yup.string().required("Current Profession is required"),
+  interests: yup.string().trim(),
+  email: yup
+    .string()
+    .required("Email is required")
+    .matches(emailrgx, "Invalid Email")
+    .trim(),
+  contact: yup.string().required("Phone Number is required").max(12).min(10),
+  about: yup.string().nullable(),
+  addressLine1: yup.string().required("Field is required").trim(),
+  addressLine2: yup.string().nullable(),
+  village: yup.string().required("Village/City is required"),
+  pincode: yup.string().required("Pin Code is required").matches(/^[0-9]{6}$/, "Pin Code must be 6 digits")
+  ,
+  state: yup.string().required("State is required"),
+  preferredContact: yup
+    .string()
+    .required("Please select the Contact Preference"),
+  additionalComments: yup.string(),
+  userProfile: yup.mixed()
+    .required("User Profile is required")
+    .test("fileType", "Invalid file type", (value) => {
+      if (!value) return true;
+      return ["image/jpeg", "image/png", "image/jpg"].includes(value.type);
+    }),
+});
+
+

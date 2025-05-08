@@ -26,8 +26,8 @@ export default function RootLayout({ children }) {
       <body className={onest.className}>
         <Wow />
         <CustomCursor />
-        <Header />
-        <Providers> 
+        <Providers>
+          <Header />
           {children}
         </Providers>
         <Footer />

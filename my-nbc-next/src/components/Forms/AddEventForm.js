@@ -9,6 +9,7 @@ import { addEvent } from '@/Slice/events';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form';
 import { IoClose } from 'react-icons/io5';
@@ -36,7 +37,7 @@ const AddEventForm = () => {
     const [allowParticipants, setAllowParticipants] = useState('false');
 
     const dispatch = useDispatch();
-    // const navigate = useNavigate();
+    const router = useRouter();
 
     const handleAdditionalThumbnail = (e, onChange) => {
         const newImages = Array.from(e.target.files);
@@ -87,7 +88,7 @@ const AddEventForm = () => {
         for (let i = 0; i < cloneAdditionalThumbnail.length; i++) {
             formData.append('additionalThumbnail', cloneAdditionalThumbnail[i]);
         }
-        dispatch(addEvent(formData, navigate, reset));
+        dispatch(addEvent(formData, router, reset));
     };
 
     const { isLoading } = useSelector((state) => state.event);
@@ -95,7 +96,7 @@ const AddEventForm = () => {
     return (
         <>
             {isLoading ? (
-                <Loader />
+                <Loader />  
             ) : (
                 <>
                     <div id="content">

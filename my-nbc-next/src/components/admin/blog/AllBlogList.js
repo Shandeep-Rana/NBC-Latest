@@ -12,7 +12,7 @@ import { RiDeleteBin2Fill } from "react-icons/ri";
 import Link from "next/link";
 import { getUserInfoFromToken, ROLES } from "@/constants";
 import { approveBlog, deleteBlog, disApproveBlog, getPaginatedBlogs, publishBlog } from "@/Slice/blogs";
-import Loader from "@/common/Loader";
+import AdminLoader from "@/common/AdminLoader";
 // import { useRouter } from "next/navigation";
 
 const AllBlogList = () => {
@@ -236,7 +236,7 @@ const AllBlogList = () => {
                     <input type="text" className="form-control" placeholder="Search" value={state.search} onChange={(e) => setState({ ...state, search: e.target.value })} />
                 </div>
                 {isLoading ? (
-                    <Loader />
+                    <AdminLoader />
                 ) : (
                     <Table
                         pagination={{

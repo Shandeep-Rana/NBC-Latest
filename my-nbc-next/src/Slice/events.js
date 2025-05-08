@@ -304,7 +304,7 @@ export const userEvents = (searchTerm, page, pageSize, id) => async (dispatch) =
 };
 
 export const addEvent = (data,
-  navigate,
+  router,
   reset
 ) => async (dispatch) => {
   try {
@@ -320,10 +320,10 @@ export const addEvent = (data,
       const userInfo = getUserInfoFromToken();
       toast.success("Event Added successfully");
       if (userInfo.roleName.includes(ROLES.Admin)) {
-        navigate("/admin/all-events");
+        router.push("/admin/all-events");
       }
       else if (userInfo.roleName.includes(ROLES.Volunteer)) {
-        navigate("/user/events");
+        router.push("/user/events");
       }
     }
   } catch (error) {
@@ -485,7 +485,7 @@ export const getALLEvents = () => async (dispatch) => {
   }
 };
 
-export const UpdateEventParticipantbyId = (id, data, navigate) => async (dispatch) => {
+export const UpdateEventParticipantbyId = (id, data, router) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/update/Eventparticipant/${id}`, data, {
@@ -496,7 +496,7 @@ export const UpdateEventParticipantbyId = (id, data, navigate) => async (dispatc
     if (response.status === 200) {
       var userInfo = getUserInfoFromToken();
       if (userInfo !== null && userInfo.roleName?.includes(ROLES.Admin)) {
-        navigate(`/admin/allParticipantslist`);
+        router.push(`/admin/event/allParticipantslist`);
       }
       dispatch(updateEventParticipantSuccess());
       toast.success(response.data.message);

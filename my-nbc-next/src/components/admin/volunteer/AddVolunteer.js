@@ -18,7 +18,7 @@ import Image from 'next/image';
 
 const AddVolunteer = () => {
     const dispatch = useDispatch();
-    // const navigate = useNavigate();
+     const router = useRouter();
     const [previewUrl, setPreviewUrl] = useState("");
     const { villages, interests, professions, isLoading } = useSelector(
         (state) => state.masterSlice
@@ -108,7 +108,7 @@ const AddVolunteer = () => {
         formData.append("state", data?.state);
         formData.append("profession", data?.profession);
         formData.append("userProfile", data?.userProfile);
-        dispatch(adduser(formData, navigate, reset));
+        dispatch(adduser(formData, router, reset));
         setPreviewUrl();
     };
     const dateFormat = 'YYYY/MM/DD';

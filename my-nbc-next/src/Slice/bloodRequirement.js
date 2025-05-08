@@ -121,7 +121,7 @@ export const getPaginatedRequests = (search, page, pageSize, selectedBloodGroup)
   }
 };
 
-export const addRequirement = (data, reset) => async (dispatch) => {
+export const addRequirement = (data, reset, router) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/add-requirement`, data, {
@@ -133,6 +133,7 @@ export const addRequirement = (data, reset) => async (dispatch) => {
       reset();
       dispatch(addBloodRequirementSuccess)
       toast.success(response.data.message);
+      router.push('')
     }
     else {
       toast.error(response.data.message);

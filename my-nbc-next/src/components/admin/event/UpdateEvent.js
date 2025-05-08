@@ -1,6 +1,7 @@
 "use client";
 
 import Loader from '@/common/Loader';
+import QuillEditor from '@/common/QuillEditor';
 import { EventTypeOptions } from '@/constants';
 import { eventSchema } from '@/lib/eventSchema';
 import { getAllEventCategories } from '@/Slice/eventCategory';
@@ -721,38 +722,22 @@ const UpdateEvent = () => {
                                                         </span>
                                                     )}
                                                 </div>
-                                                {/* <div className="form-group">
-                                                    <label className="text-left">Event Description <span style={{ color: '#F15B43' }}>*</span></label>
+                                                <div className="col-12 form-group">
+                                                    <label className="text-left">
+                                                        Event Description <span style={{ color: '#F15B43' }}>*</span>
+                                                    </label>
                                                     <Controller
                                                         name="description"
                                                         control={control}
-                                                        render={({ field: { value, onChange } }) => (
-                                                            <ReactQuill
-                                                                className="react_quill_editor"
-                                                                modules={{
-                                                                    toolbar: {
-                                                                        container: [
-                                                                            [{ header: [1, 2, 3, 4, 5, 6] }],
-                                                                            [{ font: [] }],
-                                                                            [{ size: [] }],
-                                                                            ["bold", "italic", "underline"],
-                                                                            [{ list: "ordered" }, { list: "bullet" }],
-                                                                        ],
-                                                                        handlers: {},
-                                                                    },
-                                                                }}
-                                                                value={value}
-                                                                onChange={onChange}
-                                                            />
-                                                        )}
                                                         defaultValue={event?.description}
+                                                        render={({ field: { value, onChange } }) => (
+                                                            <QuillEditor
+                                                                value={value}
+                                                                onChange={onChange} />
+                                                        )}
                                                     />
-                                                    {errors?.description && (
-                                                        <p style={{ color: "red", textAlign: 'left' }}>
-                                                            {errors?.description?.message}
-                                                        </p>
-                                                    )}
-                                                </div> */}
+                                                    {errors?.description && <p style={{ color: "red" }}>{errors.description.message}</p>}
+                                                </div>
                                                 <div className="submit-area col-lg-12 col-12">
                                                     <Link href="/admin/all-events" className="button-round button-back">
                                                         Back to List

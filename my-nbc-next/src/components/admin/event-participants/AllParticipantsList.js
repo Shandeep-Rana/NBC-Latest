@@ -8,8 +8,8 @@ import { Table } from 'antd';
 import ReactSelect from "react-select";
 import { GiCheckMark } from 'react-icons/gi';
 import { getUserInfoFromToken, ROLES } from '@/constants';
-import { attendedEvent, getAllEventParticipants, getALLEvents } from '@/Slice/events';
-import Loader from '@/common/Loader';
+import { attendedEvent, deleteEventParticipant, getAllEventParticipants, getALLEvents } from '@/Slice/events';
+import AdminLoader from '@/common/AdminLoader';
 
 const AllParticipantsList = () => {
   const dispatch = useDispatch();
@@ -88,7 +88,7 @@ const AllParticipantsList = () => {
               <GiCheckMark />
             </Link>
           )}
-          <Link href={`/admin/updateparticipant/${record.id}`} className="dropdown-item px-2 text-warning" onClick={() => { handleUpdateClick(record.id) }}>
+          <Link href={`/admin/event/updateparticipant/${record.id}`} className="dropdown-item px-2 text-warning">
             <i className="fa fa-pencil m-r-5" />
           </Link>
           <Link href="#" className="dropdown-item px-2 text-danger" onClick={() => { handleDeleteClick(record.id); }}>
@@ -118,11 +118,6 @@ const AllParticipantsList = () => {
   const handleDelete = (id) => {
     dispatch(deleteEventParticipant(id));
   };
-
-  const handleUpdateClick = (id) => {
-    // dispatch(getdonor(id)); Uncomment if needed for future updates
-  };
-
   return (
     <div className="container-fluid mt-2">
       <div className='row justify-content-between align-items-center all_donor_header mb-2'>
@@ -130,7 +125,7 @@ const AllParticipantsList = () => {
           <h1 className='h2'>Event Participants List</h1>
         </div>
         <div className="col-auto">
-          <Link href="/admin/addparticipant" className="button-round border_radius" type="button">
+          <Link href="/admin/event/addparticipant" className="button-round border_radius" type="button">
             <i className="fa fa-plus" aria-hidden="true"></i> Add Participant
           </Link>
         </div>
@@ -192,7 +187,7 @@ const AllParticipantsList = () => {
           <input type="text" className="form-control" placeholder="Search" value={state.search} onChange={(e) => setState({ ...state, search: e.target.value })} />
         </div>
         {isLoading ? (
-          <Loader />
+          <AdminLoader />
         ) : (
           <Table
             pagination={{
@@ -209,7 +204,7 @@ const AllParticipantsList = () => {
             style={{ overflowX: "auto" }}
             columns={columns}
             dataSource={eventParticipants}
-            rowKey={(record) => record.donorId}
+            rowKey={(record) => record.id}
           />
         )}
       </div>

@@ -6,10 +6,10 @@ import 'animate.css/animate.min.css';
 import Wow from "@/common/Wow";
 import Header from "@/common/Header";
 import CustomCursor from "@/common/CustomCursor";
-import { Providers } from "@/app/providers";
 import Footer from "@/common/Footer";
 import "react-phone-input-2/lib/style.css";
 import 'react-datepicker/dist/react-datepicker.css';
+import { Providers } from "@/app/providers";
 
 const onest = Onest({
   subsets: ['latin'],
@@ -28,11 +28,11 @@ export default function AuthLayout({ children }) {
       <body className={onest.className}>
         <Wow />
         <CustomCursor />
-        <Header />
-        <Providers> 
+        <Providers>
+          <Header />
           {children}
+          <Footer />
         </Providers>
-        <Footer />
       </body>
     </html>
   );

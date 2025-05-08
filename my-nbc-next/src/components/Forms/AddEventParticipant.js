@@ -5,7 +5,7 @@ import { addEventParticipant, getALLEvents, getEvent } from '@/Slice/events';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
-import { Controller } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import PhoneInput from 'react-phone-input-2';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactSelect from "react-select";
@@ -21,7 +21,7 @@ const AddEventParticipant = () => {
     const { isLoading } = useSelector(state => state.event);
 
     const { event: selectedEvent } = useSelector((state) => state.event);
-    console.log(selectedEvent)
+    
 
     useEffect(() => {
         if (selectedEvent) {

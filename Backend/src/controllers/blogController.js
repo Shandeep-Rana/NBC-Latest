@@ -6,7 +6,8 @@ const volunteerServices = require("../services/volunteerServices");
 const commFunctions = require('../utils/common');
 
 const BlogController = {
-//teest
+
+  
   addBlog: async (req, res) => {
     try {
       const thumbnail_url = req.files["thumbnail"]

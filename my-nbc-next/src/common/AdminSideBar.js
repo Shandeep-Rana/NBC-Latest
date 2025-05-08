@@ -6,7 +6,7 @@ import { TbLogs } from 'react-icons/tb';
 
 const navItems = [
     { href: '/admin/blooddonor/donorlist', icon: 'fa-solid fa-list', label: 'Donor List' },
-    { href: '/admin/bloodrequirementlist', icon: 'fa-solid fa-droplet', label: 'Blood Requirement List' },
+    { href: '/admin/bloodrequirement/bloodrequirementlist', icon: 'fa-solid fa-droplet', label: 'Blood Requirement List' },
     { href: '/admin/volunteer/volunteerlist', icon: 'fa-solid fa-address-card', label: 'Volunteer list' },
     { href: '/admin/nbcmember/memberlist', icon: 'fas fa-graduation-cap', label: 'NBC Members' },
     { href: '/admin/nangalheros/nangalheroslist', icon: 'fa-sharp fa-solid fa-star-half-stroke', label: 'Nangal Heroes' },
@@ -14,7 +14,7 @@ const navItems = [
     { href: '/admin/event/requestedeventlist', icon: 'fa-solid fas fa-tasks', label: 'Pending Events Request' },
     { href: '/admin/event/eventparticipants', icon: 'fa-solid fas fa-users', label: 'Event Participants' },
     { href: '/admin/blog/bloglist', icon: 'fa-solid fa-pen', label: 'Blogs' },
-    { href: '/admin/newslist', icon: 'fa-solid fa-newspaper', label: 'News' },
+    { href: '/admin/news/newslist', icon: 'fa-solid fa-newspaper', label: 'News' },
     { href: '/admin/gallerylist', icon: 'fa-solid fa-image', label: 'Gallery' },
     { href: '/admin/contactlist', icon: 'fa-solid fa-exchange-alt', label: 'Contact Requests' },
     { href: '/admin/faqlist', icon: 'fa-solid fa-question-circle', label: 'Faq' },

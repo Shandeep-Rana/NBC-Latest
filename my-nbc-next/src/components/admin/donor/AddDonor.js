@@ -9,6 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import moment from 'moment';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker';
 import { Controller, useForm } from 'react-hook-form';
@@ -18,7 +19,7 @@ import ReactSelect from "react-select";
 
 const AddDonor = () => {
     const dispatch = useDispatch();
-    // const navigate = useNavigate();
+    const router = useRouter();
 
     const [previewUrl, setPreviewUrl] = useState("");
     const [selectedOption, setSelectedOption] = useState(null);
@@ -67,7 +68,7 @@ const AddDonor = () => {
         formData.append("contactMode", data?.modeofcontact);
         formData.append("medical_history", data?.medicalHistory);
         formData.append("userProfile", data?.donorProfile);
-        dispatch(addDonor(formData, navigate, reset, setPreviewUrl));
+        dispatch(addDonor(formData, router, reset, setPreviewUrl));
     };
 
     useEffect(() => {
