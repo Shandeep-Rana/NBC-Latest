@@ -1,10 +1,14 @@
-import AddNewsForm from '@/components/Forms/AddNewsForm'
-import React from 'react'
+'use client';
 
-const page = () => {
-  return (
-    <AddNewsForm/>
-  )
-}
+import React from 'react';
+import dynamic from 'next/dynamic';
 
-export default page
+const AddNewsForm = dynamic(() => import('@/components/Forms/AddNewsForm'), {
+  ssr: false,
+});
+
+const Page = () => {
+  return <AddNewsForm />;
+};
+
+export default Page;

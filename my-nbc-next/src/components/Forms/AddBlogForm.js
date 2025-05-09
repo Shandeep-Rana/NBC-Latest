@@ -13,6 +13,7 @@ import { blogSchema } from "@/lib/blogSchema";
 import { getUserInfoFromToken, ROLES } from "@/constants";
 import { addBlog } from "@/Slice/blogs";
 import AdminLoader from "@/common/AdminLoader";
+import Image from "next/image";
 
 const AddBlog = () => {
     const router = useRouter();
@@ -26,7 +27,6 @@ const AddBlog = () => {
         if (userInfo) setUser(userInfo);
     }, []);
 
-    console.log(user);
 
     const {
         handleSubmit,
@@ -41,7 +41,7 @@ const AddBlog = () => {
         const formData = new FormData();
         formData.append("title", data.title);
         formData.append("content", data.content);
-        formData.append("author", user.userId); 
+        formData.append("author", user.userId);
         formData.append("publish_date", data.publish_date);
         formData.append("thumbnail", data.thumbnail);
         dispatch(addBlog(formData, router, reset, user, setThumbnailUrl));
@@ -116,7 +116,15 @@ const AddBlog = () => {
                                         />
                                         {thumbnailUrl && (
                                             <div className="preview-image-container">
-                                                <img src={thumbnailUrl} alt="Preview" className="preview-image" />
+                                                <Image
+                                                    className="preview-image"
+                                                    src={thumbnailUrl}
+                                                    alt="Preview"
+                                                    width={365}
+                                                    height={230}
+                                                    style={{ objectFit: 'cover' }}
+                                                    unoptimized // Important if thumbnailUrl is a Blob or local preview
+                                                />
                                             </div>
                                         )}
                                     </>

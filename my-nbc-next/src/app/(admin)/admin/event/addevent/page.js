@@ -1,10 +1,14 @@
-import AddEventForm from '@/components/Forms/AddEventForm'
-import React from 'react'
+'use client';
 
-const page = () => {
-  return (
-    <AddEventForm/>
-  )
-}
+import React from 'react';
+import dynamic from 'next/dynamic';
 
-export default page
+const AddEventForm = dynamic(() => import('@/components/Forms/AddEventForm'), {
+  ssr: false,
+});
+
+const Page = () => {
+  return <AddEventForm />;
+};
+
+export default Page;

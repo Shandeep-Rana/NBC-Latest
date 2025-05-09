@@ -12,6 +12,7 @@ import { getBlogById, updateBlog } from '@/Slice/blogs';
 import { getUserInfoFromToken, ROLES } from '@/constants';
 import Link from 'next/link';
 import QuillEditor from '@/common/QuillEditor';
+import Image from 'next/image';
 
 function UpdateBlog() {
 
@@ -158,10 +159,14 @@ function UpdateBlog() {
                                         />
                                         {thumbnailUrl && (
                                             <div className="preview-image-container">
-                                                <img
+                                                <Image
                                                     className="preview-image"
                                                     src={thumbnailUrl}
                                                     alt="Preview"
+                                                    width={365}
+                                                    height={230}
+                                                    style={{ objectFit: 'cover' }}
+                                                    unoptimized // Important if thumbnailUrl is a Blob or local preview
                                                 />
                                             </div>
                                         )}

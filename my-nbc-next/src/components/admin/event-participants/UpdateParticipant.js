@@ -25,7 +25,7 @@ const UpdateParticipant = () => {
             dispatch(getEventParticipant(id));
         };
         reloadData();
-    }, []);
+    }, [dispatch, id]);
 
     useEffect(() => {
         const timer = setTimeout(() => {

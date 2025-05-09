@@ -9,6 +9,9 @@ import { useParams, useRouter } from 'next/navigation';
 import { getNewsById, updateNews } from '@/Slice/news';
 import { newsSchema } from '@/lib/newsSchema';
 import AdminLoader from '@/common/AdminLoader';
+import QuillEditor from '@/common/QuillEditor';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const schema = yup
   .object({
@@ -32,7 +35,7 @@ const UpdateNews = () => {
   const userInfo = getUserInfoFromToken();
 
   const { news, isLoading } = useSelector((state) => state.news);
-  
+
   const [thumbnailUrl, setThumbnailUrl] = useState("");
   const [file, setFile] = useState(null);
   const [isDelay, setIsDelay] = useState(true);
@@ -161,10 +164,14 @@ const UpdateNews = () => {
                         />
                         {thumbnailUrl && (
                           <div className="preview-image-container">
-                            <img
+                            <Image
                               className="preview-image"
                               src={thumbnailUrl}
                               alt="Preview"
+                              width={365}
+                              height={230}
+                              style={{ objectFit: 'cover' }}
+                              unoptimized // Important if thumbnailUrl is a Blob or local preview
                             />
                           </div>
                         )}
@@ -174,54 +181,20 @@ const UpdateNews = () => {
                           </p>
                         )}
                       </div>
-                      <div className="form-group">
-                        <label className="text-left">news Content <span style={{ color: '#F15B43' }}>*</span></label>
+                      <div className="col-12 form-group">
+                        <label>Content <span className="text-danger">*</span></label>
                         <Controller
                           name="content"
                           control={control}
-                          render={({ field: { value, onChange } }) => (
-                            <ReactQuill
-                              className="react_quill_editor"
-                              modules={{
-                                toolbar: {
-                                  container: [
-                                    [
-                                      { header: "1" },
-                                      { header: "2" },
-                                      { header: [3, 4, 5, 6] },
-                                      { font: [] },
-                                    ],
-                                    [{ size: [] }],
-                                    [
-                                      "bold",
-                                      "italic",
-                                      "underline",
-                                      "strike",
-                                      "blockquote",
-                                    ],
-                                    [{ list: "ordered" }, { list: "bullet" }],
-                                    ["link", "video"],
-                                    ["link", "image", "video"],
-                                    ["clean"],
-                                    ["code-block"],
-                                  ],
-                                  handlers: {},
-                                },
-                              }}
-                              value={value}
-                              onChange={onChange}
-                            />
-                          )}
                           defaultValue={news?.content}
+                          render={({ field: { value, onChange } }) => (
+                            <QuillEditor value={value} onChange={onChange} />
+                          )}
                         />
-                        {errors?.content && (
-                          <p style={{ color: "red", textAlign: 'left' }}>
-                            {errors?.content?.message}
-                          </p>
-                        )}
+                        {errors.content && <p className="text-danger">{errors.content.message}</p>}
                       </div>
                       <div className="submit-area col-lg-12 col-12">
-                        <Link to={userInfo.roleName.includes(ROLES.Admin) ? "/admin/news" : "/user/news"} className="button-round button-back">
+                        <Link href={userInfo.roleName.includes(ROLES.Admin) ? "/admin/news" : "/user/news"} className="button-round button-back">
                           Back to List
                         </Link>
                         <button type="submit" className="button-round">

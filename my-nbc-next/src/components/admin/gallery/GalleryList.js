@@ -14,11 +14,20 @@ import Loader from "@/common/Loader";
 import Image from 'next/image'; // Import Next.js Image component
 
 const GalleryList = () => {
-  const user = getUserInfoFromToken();
+  const [user, setUser] = useState(null);
   const dispatch = useDispatch();
   const fileInputRef = useRef(null);
   const [selectedImageIds, setSelectedImageIds] = useState([]);
   const { isLoading, galleryImages, galleryImagesCount } = useSelector((state) => state.image);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const userInfo = getUserInfoFromToken();
+      if (userInfo) {
+        setUser(userInfo);
+      }
+    }
+  }, []);
 
   const [state, setState] = useState({
     search: "",
@@ -27,9 +36,11 @@ const GalleryList = () => {
   });
 
   useEffect(() => {
-    dispatch(getPaginatedImages(state.search, state.page, state.pagesize, user.userId));
-  }, [dispatch, state.search, state.page, state.pagesize, user.userId]);
-
+    if (user) {
+      dispatch(getPaginatedImages(state.search, state.page, state.pagesize, user.userId));
+    }
+  }, [dispatch, state.search, state.page, state.pagesize, user]);
+  
   const handleAddImage = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -156,7 +167,13 @@ const GalleryList = () => {
         </div>
       ),
     },
+
   ];
+
+
+  if (!user) {
+    return <div>Loading...</div>; // Or return an empty state or a fallback component
+  }
 
   return (
     <div className="container-fluid mt-2">

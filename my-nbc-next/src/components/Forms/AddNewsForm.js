@@ -11,6 +11,7 @@ import { newsSchema } from '@/lib/newsSchema';
 import { addNews } from '@/Slice/news';
 import QuillEditor from '@/common/QuillEditor';
 import AdminLoader from '@/common/AdminLoader';
+import Image from 'next/image';
 
 const AddNewsForm = () => {
   const dispatch = useDispatch();
@@ -116,7 +117,15 @@ const AddNewsForm = () => {
                         />
                         {thumbnailUrl && (
                           <div className="preview-image-container">
-                            <img className="preview-image" src={thumbnailUrl} alt="Preview" />
+                            <Image
+                              className="preview-image"
+                              src={thumbnailUrl}
+                              alt="Preview"
+                              width={365}
+                              height={230}
+                              style={{ objectFit: 'cover' }}
+                              unoptimized // Important if thumbnailUrl is a Blob or local preview
+                            />
                           </div>
                         )}
                       </>
