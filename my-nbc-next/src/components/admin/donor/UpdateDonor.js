@@ -5,78 +5,78 @@ import { donorSchema } from '@/lib/FormSchemas';
 import { getdonor, updatedonor } from '@/Slice/bloodDonation';
 import { getAllVillages } from '@/Slice/master';
 import { yupResolver } from '@hookform/resolvers/yup';
-import moment from 'moment';
-import React, { useEffect, useState } from 'react'
-import { Controller, useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import ReactSelect from "react-select";
-import { useParams } from 'next/navigation';
-import Link from 'next/link';
-import DatePicker from 'react-datepicker';
-import PhoneInput from 'react-phone-input-2';
+    import moment from 'moment';
+    import React, { useEffect, useState } from 'react'
+    import { Controller, useForm } from 'react-hook-form';
+    import { useDispatch, useSelector } from 'react-redux';
+    import ReactSelect from "react-select";
+    import { useParams } from 'next/navigation';
+    import Link from 'next/link';
+    import DatePicker from 'react-datepicker';
+    import PhoneInput from 'react-phone-input-2';
 
-const UpdateDonor = () => {
-    const dispatch = useDispatch();
-    const { villages } = useSelector((state) => state.masterSlice);
-    const { donor, isLoading } = useSelector((state) => state.donor);
-    const { id } = useParams();
-    const [isDelay, setIsDelay] = useState(true);
+    const UpdateDonor = () => {
+        const dispatch = useDispatch();
+        const { villages } = useSelector((state) => state.masterSlice);
+        const { donor, isLoading } = useSelector((state) => state.donor);
+        const { id } = useParams();
+        const [isDelay, setIsDelay] = useState(true);
 
-    useEffect(() => {
-        const reloadData = async () => {
-            dispatch(getdonor(id));
+        useEffect(() => {
+            const reloadData = async () => {
+                dispatch(getdonor(id));
+            };
+            reloadData();
+        }, [dispatch, id]);
+
+        useEffect(() => {
+            const timer = setTimeout(() => {
+                setIsDelay(false);
+            }, 1000);
+
+            return () => clearTimeout(timer);
+        }, []);
+
+        const villageOptions = villages?.map((village) => ({
+            value: village.villageName,
+            label: village.villageName,
+        }));
+
+        const {
+            handleSubmit,
+            control,
+            formState: { errors },
+        } = useForm({
+            resolver: yupResolver(donorSchema),
+        });
+
+        const onSubmit = (data) => {
+            const formData = new FormData();
+            formData.append("fullName", data?.fullName);
+            formData.append("mobile", data?.contact);
+            formData.append("dob", formatDate(data?.dob));
+            formData.append("gender", data?.gender);
+            formData.append("contactMode", data?.modeofcontact);
+            formData.append("village", data?.village);
+            formData.append("addressLine1", data?.addressline1);
+            formData.append("addressLine2", data?.addressLine2);
+            formData.append("pincode", data?.pincode);
+            formData.append("state", data?.stateOption);
+            formData.append("bloodType", data?.bloodType);
+            formData.append("medicalHistory", data?.medicalHistory);
+            dispatch(updatedonor(id, formData));
         };
-        reloadData();
-    }, [dispatch, id]);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsDelay(false);
-        }, 1000);
+        useEffect(() => {
+            dispatch(getAllVillages());
+        }, [dispatch]);
 
-        return () => clearTimeout(timer);
-    }, []);
+        const formatDate = (date) => {
+            return moment(date).format("YYYY-MM-DD");
+        };
+        const dateFormat = 'YYYY/MM/DD';
 
-    const villageOptions = villages?.map((village) => ({
-        value: village.villageName,
-        label: village.villageName,
-    }));
-
-    const {
-        handleSubmit,
-        control,
-        formState: { errors },
-    } = useForm({
-        resolver: yupResolver(donorSchema),
-    });
-
-    const onSubmit = (data) => {
-        const formData = new FormData();
-        formData.append("fullName", data?.fullName);
-        formData.append("mobile", data?.contact);
-        formData.append("dob", formatDate(data?.dob));
-        formData.append("gender", data?.gender);
-        formData.append("contactMode", data?.modeofcontact);
-        formData.append("village", data?.village);
-        formData.append("addressLine1", data?.addressline1);
-        formData.append("addressLine2", data?.addressLine2);
-        formData.append("pincode", data?.pincode);
-        formData.append("state", data?.stateOption);
-        formData.append("bloodType", data?.bloodType);
-        formData.append("medicalHistory", data?.medicalHistory);
-        dispatch(updatedonor(id, formData));
-    };
-
-    useEffect(() => {
-        dispatch(getAllVillages());
-    }, [dispatch]);
-
-    const formatDate = (date) => {
-        return moment(date).format("YYYY-MM-DD");
-    };
-    const dateFormat = 'YYYY/MM/DD';
-
-    return (
+        return (
         <>
             {!isLoading && donor !== null && !isDelay &&
                 (
