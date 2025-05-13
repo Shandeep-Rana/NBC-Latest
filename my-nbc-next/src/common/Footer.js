@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Footer = () => {
   return (
@@ -36,23 +37,23 @@ const Footer = () => {
                     <h3>Follow on</h3>
                     <ul>
                       <li>
-                        <a href="#">
-                          <i className="fab fa-pinterest"></i> {/* Pinterest */}
+                        <a href="https://www.youtube.com/@Nangalbycycle" target="_blank" rel="noopener noreferrer">
+                          <i className="fab fa-youtube"></i>
+                        </a>
+                      </li>
+                      {/* <li>
+                        <a href="https://x.com/nangalbycycle" target="_blank" rel="noopener noreferrer">
+                          <i className="fab fa-x-twitter"></i>
+                        </a>
+                      </li> */}
+                      <li>
+                        <a href="https://www.facebook.com/officialnangalbycycle" target="_blank" rel="noopener noreferrer">
+                          <i className="fab fa-facebook-f"></i>
                         </a>
                       </li>
                       <li>
-                        <a href="#">
-                          <i className="fab fa-twitter"></i> {/* Twitter */}
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i className="fab fa-facebook-f"></i> {/* Facebook */}
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i className="fab fa-instagram"></i> {/* Instagram */}
+                        <a href="https://www.instagram.com/nangalbycycle" target="_blank" rel="noopener noreferrer">
+                          <i className="fab fa-instagram"></i>
                         </a>
                       </li>
                     </ul>
@@ -81,28 +82,29 @@ const Footer = () => {
                   <div className="footer-links">
                     <h3>Quick link</h3>
                     <ul>
-                      <li><a href="index.html"> Home</a></li>
-                      <li><a href="volunteers.html"> Volunteers</a></li>
-                      <li><a href="blood-donors.html"> Blood Donors</a></li>
-                      <li><a href="events.html"> Events</a></li>
+                      <li><Link href="/">Home</Link></li>
+                      <li><Link href="/communitymembers/volunteers">Volunteers</Link></li>
+                      <li><Link href="/communitymembers/donors">Blood Donors</Link></li>
+                      <li><Link href="/communitymembers/nbc-members">NBC Member</Link></li>
                     </ul>
                   </div>
 
                   <div className="footer-links footer-service-links">
                     <h3>Services</h3>
                     <ul>
-                      <li><a href="blood-donors.html"> Blood Donors</a></li>
-                      <li><a href="contact.html"> Blood Request Portal</a></li>
-                      <li><a href="contact.html"> Educational Support</a></li>
-                      <li><a href="contact.html">Youth Development</a></li>
+                      <li><Link href="/media&events/eventss">Events</Link></li>
+                      <li><Link href="/media&events/blogs">Blogs</Link></li>
+                      <li><Link href="/media&events/blogs">Blood Request Portal</Link></li>
+                      <li><Link href="/media&events/gallery">gallery</Link></li>
+                      <li><Link href="/media&events/news">News</Link></li>
                     </ul>
                   </div>
 
                   <div className="footer-links">
                     <h3>Support</h3>
                     <ul>
-                      <li><a href="team.html"> Our Team</a></li>
-                      <li><a href="contact.html"> Contact Us</a></li>
+                      <li><Link href="/discoverus/team">Our Team</Link></li>
+                      <li><Link href="/contact">Contact Us</Link></li>
                     </ul>
                   </div>
                 </div>

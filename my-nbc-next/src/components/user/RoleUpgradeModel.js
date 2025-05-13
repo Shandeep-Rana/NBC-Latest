@@ -1,11 +1,12 @@
 'use client';
 
-import { Modal, ModalBody, ModalHeader } from 'reactstrap'; // Adjust this path as per your setup
+import { useEffect, useState } from 'react';
+import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Controller, useForm } from 'react-hook-form';
-import ReactSelect from 'react-select';// Adjust this import if needed
-import { useDispatch } from 'react-redux'; // Adjust this import path
+import ReactSelect from 'react-select';
+import { useDispatch } from 'react-redux';
 import { getUserInfoFromToken } from '@/constants';
 import { upgradeDonor } from '@/Slice/bloodDonation';
 
@@ -14,8 +15,29 @@ const schema = yup.object({
   medicalHistory: yup.string().trim(),
 }).required();
 
+const BloodGroupOptions = [
+  { value: 'A+', label: 'A+' },
+  { value: 'A-', label: 'A-' },
+  { value: 'B+', label: 'B+' },
+  { value: 'B-', label: 'B-' },
+  { value: 'AB+', label: 'AB+' },
+  { value: 'AB-', label: 'AB-' },
+  { value: 'O+', label: 'O+' },
+  { value: 'O-', label: 'O-' },
+];
+
 const RoleUpgradeModal = ({ isOpen, toggleModal }) => {
   const dispatch = useDispatch();
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const userInfo = getUserInfoFromToken();
+      if (userInfo?.userId) {
+        setUserId(userInfo.userId);
+      }
+    }
+  }, []);
 
   const {
     handleSubmit,
@@ -25,17 +47,16 @@ const RoleUpgradeModal = ({ isOpen, toggleModal }) => {
     resolver: yupResolver(schema),
   });
 
-  const { userId } = getUserInfoFromToken(); // make sure this only runs on client
-  const id = userId;
-
   const onSubmit = (data) => {
+    if (!userId) return;
+
     const requestData = {
-      user_id: id,
+      user_id: userId,
       bloodType: data?.bloodType,
       medicalHistory: data?.medicalHistory,
     };
     dispatch(upgradeDonor(requestData));
-    toggleModal(); // close after submission
+    toggleModal(); // Close modal after submission
   };
 
   return (
@@ -118,7 +139,6 @@ const RoleUpgradeModal = ({ isOpen, toggleModal }) => {
             />
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             style={{
@@ -130,6 +150,7 @@ const RoleUpgradeModal = ({ isOpen, toggleModal }) => {
               cursor: 'pointer',
               width: '100%',
             }}
+            disabled={!userId}
           >
             Submit
           </button>
