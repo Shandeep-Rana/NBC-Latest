@@ -1,4 +1,4 @@
-import Team from '@/components/discover-us/Team'
+import Team from '@/components/Home-pages/discover-us/Team'
 import React from 'react'
 
 const page = () => {

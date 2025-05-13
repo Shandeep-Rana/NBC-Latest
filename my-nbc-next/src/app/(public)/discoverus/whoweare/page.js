@@ -1,4 +1,4 @@
-import WhoWeAre from '@/components/discover-us/whoweare/WhoWeAre'
+import WhoWeAre from '@/components/Home-pages/discover-us/whoweare/WhoWeAre'
 import React from 'react'
 
 const page = () => {

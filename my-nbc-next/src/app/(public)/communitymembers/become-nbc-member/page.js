@@ -1,4 +1,4 @@
-import BecomeNbcMember from '@/components/community-members/BecomeNbcMember'
+import BecomeNbcMember from '@/components/Home-pages/community-members/BecomeNbcMember'
 import React from 'react'
 
 const page = () => {

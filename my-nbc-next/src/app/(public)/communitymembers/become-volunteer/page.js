@@ -1,6 +1,6 @@
 "use client"
 
-import BecomeVolunteer from '@/components/community-members/BecomeVolunteer'
+import BecomeVolunteer from '@/components/Home-pages/community-members/BecomeVolunteer'
 import React from 'react'
 
 const page = () => {

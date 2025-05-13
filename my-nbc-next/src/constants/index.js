@@ -366,7 +366,7 @@ Although now retired, Dr. Naresh continues to remain active in community health 
     id: 'Ramesh Chandra Singh',
     name: 'Ramesh Chandra Singh',
     role: "Mentor",
-    image: "/images/rameshImg.jpg",
+    image: "/images/rameshImg.png",
     description: "Ramesh Chandra Singh is a seasoned security expert and former IPS officer with over 30 years of global experience in high-risk environments. Currently serving as the United Nations Security Adviser for Sri Lanka and Maldives, he brings a wealth of expertise in crisis management, counter-terrorism, and leadership.",
     long_description: `<div><p>We are honored to welcome Ramesh Chandra Singh to the Nangal by Cycle core team as a Mentor.  
     <br/><br/>

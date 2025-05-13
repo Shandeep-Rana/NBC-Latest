@@ -2,8 +2,8 @@
 
 import React, { useEffect, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateRegisterRoleDonor, updateRegisterRoleVolunteer, updateRegisterRoleBoth } from "../../Slice/master";
-import { RegisterRoles } from "../../constants";
+import { updateRegisterRoleDonor, updateRegisterRoleVolunteer, updateRegisterRoleBoth } from "../../../Slice/master";
+import { RegisterRoles } from "../../../constants";
 import { useSearchParams } from "next/navigation";
 import Head from 'next/head';
 import Link from "next/link";

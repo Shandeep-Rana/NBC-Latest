@@ -13,7 +13,6 @@ import Head from "next/head";
 import { emailrgx } from "@/constants";
 import Loader from "@/common/Loader";
 import { loginUser } from "@/Slice/authLogin";
-import Loginbg from "../../../public/images/loginbg.jpg"
 
 const schema = yup.object({
     email: yup
@@ -83,7 +82,7 @@ const Login = () => {
 
                     <div
                         className="volunteer-wrap"
-                        style={{ backgroundImage: `url(${Loginbg.src})` }}
+                        style={{ backgroundImage: `url(/images/loginbg.jpg)` }} 
                     >
                         <Image
                             href="/images/loginbg"

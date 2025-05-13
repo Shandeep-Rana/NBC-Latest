@@ -1,4 +1,4 @@
-import Donors from '@/components/community-members/Donors'
+import Donors from '@/components/Home-pages/community-members/Donors'
 import React from 'react'
 
 const page = () => {
