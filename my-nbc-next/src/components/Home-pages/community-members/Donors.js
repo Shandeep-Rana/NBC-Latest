@@ -4,9 +4,9 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllDonors } from '../../Slice/bloodDonation';
+import { getAllDonors } from '../../../Slice/bloodDonation';
 import { BloodGroupOptions } from '@/constants';
-import Loader from '../../common/Loader';
+import Loader from '../../../common/Loader';
 
 const Donors = () => {
   const [localLoading, setLocalLoading] = useState(false);

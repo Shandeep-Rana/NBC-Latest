@@ -1,4 +1,4 @@
-import NangalHeros from '@/components/community-members/NangalHeros'
+import NangalHeros from '@/components/Home-pages/community-members/NangalHeros'
 import React from 'react'
 
 const page = () => {

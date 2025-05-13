@@ -22,7 +22,7 @@ const AdminHeader = ({ handleShow }) => {
           <i className="h4 text-white fa-solid fa-bars"></i>
         </button>
         <Link href="/" className="navbar-brand">
-          <Image className="white-logo" src="/images/unbound-logo.png" alt="logo" width={120} height={40} />
+          <Image className="white-logo" src="/images/unbound-logo.png" alt="logo" width={200} height={52} />
         </Link>
         <div className="d-flex gap-2">
           <Dropdown>

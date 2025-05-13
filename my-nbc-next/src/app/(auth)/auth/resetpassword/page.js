@@ -1,4 +1,4 @@
-import ResetPassword from '@/components/Auth/ResetPassword'
+import ResetPassword from '@/components/Home-pages/Auth/ResetPassword'
 import React from 'react'
 
 const page = () => {

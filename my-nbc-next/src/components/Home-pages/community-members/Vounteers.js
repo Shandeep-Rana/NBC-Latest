@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllVolunteers } from '../../Slice/volunteers';
-import Loader from '../../common/Loader';
+import { getAllVolunteers } from '../../../Slice/volunteers';
+import Loader from '../../../common/Loader';
 import { getAllVillages } from '@/Slice/master';
 
 const Volunteers = () => {

@@ -1,6 +1,6 @@
 'use client'
-import About from '@/components/home/About'
-import OurFeatures from '@/components/home/OurFeatures'
+import About from '@/components/Home-pages/homePage components/About'
+import OurFeatures from '@/components/Home-pages/homePage components/OurFeatures'
 import Link from 'next/link'
 import React from 'react'
 import HowWeHelpSection from './HowWeHelp'

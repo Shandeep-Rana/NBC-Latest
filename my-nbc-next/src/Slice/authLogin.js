@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { ROLES, getUserInfoFromToken } from "../constants/index";
 import { toast } from "react-hot-toast";
+import http from "@/httpHandler/http";
 
 const authLoginSlice = createSlice({
   name: "userLogin",
@@ -102,7 +103,7 @@ export const loginUser = (data, router, reset) => async (dispatch) => {
     dispatch(setLoading(true));
     const params = new URLSearchParams(window.location.search);
     const eventId = params.get('event');
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/loginUser`, data, {
+    const response = await http.post(`/loginUser`, data, {
       headers: {
         "Content-Type": "application/json",
       },
