@@ -59,3 +59,20 @@ a {
 html {
   scroll-behavior: smooth;
 }
+
+.no-content-section {
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 100px;
+  padding-bottom: 150px;
+  position: relative;
+  z-index: 1;      
+}
+
+@media screen and (max-width: 575px) {
+  .no-content-section {
+    padding-top: 150px;
+    padding-bottom: 80px;
+  }
+}

@@ -1,15 +1,22 @@
 'use client';
 
-import React, { useEffect, Suspense } from "react";
+import React, { useEffect } from "react";
+import Image from 'next/image';
+import registerimg from '../../../../public/images/registerimg.jpg';
+import donor_header_img from '../../../..//public/Images/donor-header-img.jpeg';
+import volunteer_header_img from '../../../..//public/Images/Volunteers-working-together-1.jpg';
+import both_header_img from '../../../..//public/Images/photo.jpg';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useDispatch, useSelector } from "react-redux";
-import { updateRegisterRoleDonor, updateRegisterRoleVolunteer, updateRegisterRoleBoth } from "../../../Slice/master";
-import { RegisterRoles } from "../../../constants";
-import { useSearchParams } from "next/navigation";
 import Head from 'next/head';
-import Link from "next/link";
+import Link from 'next/link';
+import { RegisterRoles } from "@/constants";
+import { updateRegisterRoleBoth, updateRegisterRoleDonor, updateRegisterRoleVolunteer } from "@/Slice/master";
+import RegisterAsBoth from "./Register-Forms/RegisterAsBoth";
+import RegisterDonor from "./Register-Forms/RegisterDonor";
+import RegisterVolunteer from "./Register-Forms/RegisterVolunteer";
 
-// Your main Register component
-const RegisterComponent = () => {
+const Register = () => {
     const dispatch = useDispatch();
     const { registerRoleCheck } = useSelector(state => state.masterSlice);
     const searchParams = useSearchParams();
@@ -23,11 +30,27 @@ const RegisterComponent = () => {
         }
     }, [role, dispatch]);
 
+    const renderHeaderImage = () => {
+        switch (registerRoleCheck) {
+            case RegisterRoles.Donor:
+                return donor_header_img;
+            case RegisterRoles.Volunteer:
+                return volunteer_header_img;
+            case RegisterRoles.Both:
+                return both_header_img;
+            default:
+                return '';
+        }
+    };
+
     return (
         <>
             <Head>
                 <title>Register | Join Nangal by Cycle Community</title>
-                <meta name="description" content="Create an account with Nangal by Cycle to participate in our events, access exclusive content, and support our mission. Join our community today." />
+                <meta
+                    name="description"
+                    content="Create an account with Nangal by Cycle to participate in our events, access exclusive content, and support our mission. Join our community today."
+                />
             </Head>
 
             <main id="content" className="site-main">
@@ -55,91 +78,93 @@ const RegisterComponent = () => {
                     </div>
                 </div>
 
-                <div className="container">
-                    <div className="row pt-5">
-                        <div className="col-lg-8 offset-lg-2">
-                            <div className="volunteer-contact-form form_padding_rm">
-                                <div className="form_header_img position-relative">
-                                    {/* Add your image here */}
-                                </div>
-
-                                <div className="form-group header_form_radio mt-5 mb-4 d-flex justify-content-center">
-                                    <div className="header_wrapper">
-                                        <div
-                                            className="form-check form-check-inline no-margin"
-                                            style={{ background: registerRoleCheck === RegisterRoles?.Donor ? '#F15B43' : "white" }}
-                                        >
-                                            <input
-                                                className="form-check-input"
-                                                type="radio"
-                                                name="userType"
-                                                id="donor"
-                                                style={{ display: 'none' }}
-                                                value={RegisterRoles?.Donor}
-                                                checked={registerRoleCheck === RegisterRoles?.Donor}
-                                                onChange={() => dispatch(updateRegisterRoleDonor())}
+                <div
+                    className="volunteer-wrap"
+                    style={{ backgroundImage: `url(${registerimg.src})` }}
+                >
+                    <div className="container">
+                        <div className="row pt-5">
+                            <div className="col-lg-8 offset-lg-2">
+                                <div className="volunteer-contact-form form_padding_rm">
+                                    <div className="form_header_img position-relative">
+                                        {renderHeaderImage() && (
+                                            <Image
+                                                src={renderHeaderImage()}
+                                                alt="Header Role Image"
+                                                layout="responsive"
+                                                width={1200}
+                                                height={400}
+                                                objectFit="cover"
+                                                priority
                                             />
-                                            <label
-                                                className="form-check-label"
-                                                htmlFor="donor"
-                                                style={{ color: registerRoleCheck === RegisterRoles?.Donor ? '' : 'black' }}
-                                            >
-                                                Donor
-                                            </label>
-                                        </div>
-
-                                        <div
-                                            className="form-check form-check-inline no-margin"
-                                            style={{ background: registerRoleCheck === RegisterRoles?.Volunteer ? '#F15B43' : "white" }}
-                                        >
-                                            <input
-                                                className="form-check-input"
-                                                type="radio"
-                                                name="userType"
-                                                id="volunteer"
-                                                style={{ display: 'none' }}
-                                                value={RegisterRoles?.Volunteer}
-                                                checked={registerRoleCheck === RegisterRoles?.Volunteer}
-                                                onChange={() => dispatch(updateRegisterRoleVolunteer())}
-                                            />
-                                            <label
-                                                className="form-check-label"
-                                                htmlFor="volunteer"
-                                                style={{ color: registerRoleCheck === RegisterRoles?.Volunteer ? '' : 'black' }}
-                                            >
-                                                Volunteer
-                                            </label>
-                                        </div>
-
-                                        <div
-                                            className="form-check form-check-inline no-margin"
-                                            style={{ background: registerRoleCheck === RegisterRoles?.Both ? '#F15B43' : "white" }}
-                                        >
-                                            <input
-                                                className="form-check-input"
-                                                type="radio"
-                                                name="userType"
-                                                id="registerBoth"
-                                                style={{ display: 'none' }}
-                                                value={RegisterRoles?.Both}
-                                                checked={registerRoleCheck === RegisterRoles?.Both}
-                                                onChange={() => dispatch(updateRegisterRoleBoth())}
-                                            />
-                                            <label
-                                                className="form-check-label"
-                                                htmlFor="registerBoth"
-                                                style={{ color: registerRoleCheck === RegisterRoles?.Both ? '' : 'black' }}
-                                            >
-                                                As Both
-                                            </label>
+                                        )}
+                                        <div className="position-absolute header_img_title">
+                                            <h1 className="main_title text-center">
+                                                Register As <br />
+                                                {registerRoleCheck === RegisterRoles.Donor
+                                                    ? 'DONOR'
+                                                    : registerRoleCheck === RegisterRoles.Volunteer
+                                                        ? 'VOLUNTEER'
+                                                        : registerRoleCheck === RegisterRoles.Both
+                                                            ? 'BOTH'
+                                                            : ''}
+                                            </h1>
                                         </div>
                                     </div>
-                                </div>
 
-                                <p className="py-4">
-                                    Already have an account?{" "}
-                                    <a href="/auth/signin" style={{ color: '#F15B43' }}>Sign in</a>
-                                </p>
+                                    <div className="form-group header_form_radio mt-5 mb-4 d-flex justify-content-center">
+                                        <div className="header_wrapper">
+                                            {['Donor', 'Volunteer', 'Both'].map((roleKey) => {
+                                                const isSelected = registerRoleCheck === RegisterRoles[roleKey];
+                                                const updateRole = {
+                                                    Donor: updateRegisterRoleDonor,
+                                                    Volunteer: updateRegisterRoleVolunteer,
+                                                    Both: updateRegisterRoleBoth,
+                                                }[roleKey];
+
+                                                return (
+                                                    <div
+                                                        key={roleKey}
+                                                        className="form-check form-check-inline no-margin"
+                                                        style={{ background: isSelected ? '#F15B43' : 'white' }}
+                                                    >
+                                                        <input
+                                                            className="form-check-input"
+                                                            type="radio"
+                                                            name="userType"
+                                                            id={roleKey.toLowerCase()}
+                                                            style={{ display: 'none' }}
+                                                            checked={isSelected}
+                                                            onChange={() => dispatch(updateRole())}
+                                                        />
+                                                        <label
+                                                            className="form-check-label"
+                                                            htmlFor={roleKey.toLowerCase()}
+                                                            style={{ color: isSelected ? '' : 'black' }}
+                                                        >
+                                                            {roleKey === 'Both' ? 'As Both' : roleKey}
+                                                        </label>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+
+                                    {registerRoleCheck === RegisterRoles.Donor ? (
+                                        <RegisterDonor />
+                                    ) : registerRoleCheck === RegisterRoles.Volunteer ? (
+                                        <RegisterVolunteer />
+                                    ) : registerRoleCheck === RegisterRoles.Both ? (
+                                        <RegisterAsBoth />
+                                    ) : null}
+
+                                    <p className="py-4">
+                                        Already have an account?{' '}
+                                        <Link href="/auth/login" style={{ color: '#F15B43' }}>
+                                            Sign in
+                                        </Link>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -148,12 +173,5 @@ const RegisterComponent = () => {
         </>
     );
 };
-
-// Wrapping Register component with Suspense
-const Register = () => (
-    <Suspense fallback={<div>Loading...</div>}>
-        <RegisterComponent />
-    </Suspense>
-);
 
 export default Register;
