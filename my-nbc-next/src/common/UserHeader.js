@@ -111,7 +111,7 @@ const UserHeader = ({ mobiletoggleNav }) => {
                             <nav id="navigation" className="navigation d-none d-lg-inline-block">
                                 <ul>
                                     <li>
-                                        <Link href="/home" className={isActive('/home') ? 'current-menu-item' : ''}>
+                                        <Link href="/" className={isActive('/home') ? 'current-menu-item' : ''}>
                                             Home
                                         </Link>
                                     </li>
@@ -197,7 +197,7 @@ const UserHeader = ({ mobiletoggleNav }) => {
                                     </Link>
                                 </Dropdown.Item>
                                 <Dropdown.Item>
-                                    <Link href="/user/socialMedia-links">
+                                    <Link href="/user/socialmedialinks">
                                         <i className="fa-solid fa-users px-2"></i> Social Media
                                     </Link>
                                 </Dropdown.Item>

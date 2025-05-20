@@ -86,6 +86,7 @@ const Footer = () => {
                       <li><Link href="/communitymembers/volunteers">Volunteers</Link></li>
                       <li><Link href="/communitymembers/donors">Blood Donors</Link></li>
                       <li><Link href="/communitymembers/nbc-members">NBC Member</Link></li>
+                       <li><Link href="/e-certificates">E-Certificates</Link></li>
                     </ul>
                   </div>
 
@@ -105,6 +106,7 @@ const Footer = () => {
                     <ul>
                       <li><Link href="/discoverus/team">Our Team</Link></li>
                       <li><Link href="/contact">Contact Us</Link></li>
+                      <li><Link href="/feedback">FeedBack</Link></li>
                     </ul>
                   </div>
                 </div>

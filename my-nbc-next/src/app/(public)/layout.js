@@ -1,3 +1,4 @@
+// No "use client" needed
 import "./globals.css";
 import Header from "../../common/Header";
 import Footer from "../../common/Footer";
@@ -8,6 +9,8 @@ import { Onest } from 'next/font/google';
 import 'animate.css/animate.min.css';
 import Wow from "@/common/Wow";
 import { Providers } from "../providers";
+import { Toaster } from "react-hot-toast";
+import FeedbackPopUp from "@/common/FeedBackPopUp";
 
 const onest = Onest({
   subsets: ['latin'],
@@ -29,8 +32,10 @@ export default function RootLayout({ children }) {
         <Providers>
           <Header />
           {children}
+          <Toaster position="top-right" reverseOrder={false} />
         </Providers>
         <Footer />
+        <FeedbackPopUp />
       </body>
     </html>
   );

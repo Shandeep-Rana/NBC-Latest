@@ -13,11 +13,9 @@ import Link from "next/link";
 import { getUserInfoFromToken, ROLES } from "@/constants";
 import { approveBlog, deleteBlog, disApproveBlog, getPaginatedBlogs, publishBlog } from "@/Slice/blogs";
 import AdminLoader from "@/common/AdminLoader";
-// import { useRouter } from "next/navigation";
 
 const AllBlogList = () => {
     const dispatch = useDispatch();
-    // const router = useRouter();
 
     const [userInfo, setUserInfo] = useState({ userId: null, roleName: [], email: null, expirationTime: null });
 
@@ -39,10 +37,6 @@ const AllBlogList = () => {
     }, [dispatch, state.search, state.page, state.pagesize, userInfo.userId]);
 
     const formatDate = (date) => moment(date).format("YYYY-MM-DD");
-
-    // const handleUpdateClick = (id) => {
-    //     router.push(userInfo.roleName.includes(ROLES.Admin) ? `/admin/blog/updateblog/${id}` : `/user/update-blog/${id}`);
-    // };
 
     const handleDelete = (id) => {
         dispatch(deleteBlog(id, userInfo.userId));

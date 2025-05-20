@@ -3,10 +3,9 @@
 import React, { useEffect } from "react";
 import Image from 'next/image';
 import registerimg from '../../../../public/images/registerimg.jpg';
-import donor_header_img from '../../../..//public/Images/donor-header-img.jpeg';
-import volunteer_header_img from '../../../..//public/Images/Volunteers-working-together-1.jpg';
-import both_header_img from '../../../..//public/Images/photo.jpg';
-import { useRouter, useSearchParams } from 'next/navigation';
+import donor_header_img from '../../../../public/Images/donor-header-img.jpeg';
+import volunteer_header_img from '../../../../public/Images/Volunteers-working-together-1.jpg';
+import both_header_img from '../../../../public/Images/photo.jpg';
 import { useDispatch, useSelector } from "react-redux";
 import Head from 'next/head';
 import Link from 'next/link';
@@ -16,11 +15,9 @@ import RegisterAsBoth from "./Register-Forms/RegisterAsBoth";
 import RegisterDonor from "./Register-Forms/RegisterDonor";
 import RegisterVolunteer from "./Register-Forms/RegisterVolunteer";
 
-const Register = () => {
+const Register = ({ role }) => {
     const dispatch = useDispatch();
     const { registerRoleCheck } = useSelector(state => state.masterSlice);
-    const searchParams = useSearchParams();
-    const role = searchParams.get('role');
 
     useEffect(() => {
         if (role === 'donor') {
@@ -78,10 +75,7 @@ const Register = () => {
                     </div>
                 </div>
 
-                <div
-                    className="volunteer-wrap"
-                    style={{ backgroundImage: `url(${registerimg.src})` }}
-                >
+                <div className="volunteer-wrap" style={{ backgroundImage: `url(${registerimg.src})` }}>
                     <div className="container">
                         <div className="row pt-5">
                             <div className="col-lg-8 offset-lg-2">
@@ -104,10 +98,10 @@ const Register = () => {
                                                 {registerRoleCheck === RegisterRoles.Donor
                                                     ? 'DONOR'
                                                     : registerRoleCheck === RegisterRoles.Volunteer
-                                                        ? 'VOLUNTEER'
-                                                        : registerRoleCheck === RegisterRoles.Both
-                                                            ? 'BOTH'
-                                                            : ''}
+                                                    ? 'VOLUNTEER'
+                                                    : registerRoleCheck === RegisterRoles.Both
+                                                    ? 'BOTH'
+                                                    : ''}
                                             </h1>
                                         </div>
                                     </div>

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
+    "start": "cross-env NODE_ENV=production node server.js",
     "lint": "next lint",
     "export": "next export"
   },
@@ -19,9 +19,11 @@
     "antd": "^5.24.8",
     "axios": "^1.8.4",
     "bootstrap": "^5.3.3",
+    "express": "^5.1.0",
     "framer-motion": "^12.7.4",
     "gsap": "^3.12.7",
     "jquery": "^3.7.1",
+    "jspdf": "^3.0.1",
     "jwt-decode": "^4.0.0",
     "magnific-popup": "^1.2.0",
     "moment": "^2.30.1",
@@ -51,6 +53,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "cross-env": "^7.0.3",
     "eslint": "^9",
     "eslint-config-next": "15.3.0"
   }

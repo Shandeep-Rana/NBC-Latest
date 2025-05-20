@@ -281,11 +281,11 @@ export const approveEvent = (id, data) => async (dispatch) => {
   }
 };
 
-export const userEvents = (searchTerm, page, pageSize, id) => async (dispatch) => {
+export const userEvents = (searchTerm, page, pageSize, userId) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/User-event/${id}`, {
+      `${process.env.NEXT_PUBLIC_API_URL}/User-event/${userId}`, {
       params: {
         searchTerm,
         page,

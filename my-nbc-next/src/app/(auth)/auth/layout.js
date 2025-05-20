@@ -10,6 +10,7 @@ import Footer from "@/common/Footer";
 import "react-phone-input-2/lib/style.css";
 import 'react-datepicker/dist/react-datepicker.css';
 import { Providers } from "@/app/providers";
+import { Toaster } from "react-hot-toast";
 
 const onest = Onest({
   subsets: ['latin'],
@@ -31,6 +32,7 @@ export default function AuthLayout({ children }) {
         <Providers>
           <Header />
           {children}
+          <Toaster position="top-right" reverseOrder={false} />
           <Footer />
         </Providers>
       </body>

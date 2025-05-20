@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Dropdown } from "react-bootstrap";
 import { getUserInfoFromToken, ROLES } from "@/constants";
 import { logoutUser } from "@/Slice/authLogin";
 import { useRouter } from "next/navigation";
@@ -18,7 +17,6 @@ const Header = () => {
     const userInfo = getUserInfoFromToken();
     if (userInfo) setUser(userInfo);
   }, []);
-
 
   const handleLogout = () => {
     dispatch(logoutUser(router));
@@ -78,84 +76,80 @@ const Header = () => {
                       <li><a className="nav-link" href="services.html">Services</a></li>
                     </ul>
                   </li>
+
+                  {!user ? (
+                    <li className="nav-item">
+                      <Link href="/auth/signin" className="nav-link">Sign in</Link>
+                    </li>
+                  ) : (
+                    <li className="nav-item submenu user-dropdown">
+                      <a className="nav-link d-flex align-items-center gap-2">
+                        <Image
+                          src={user?.userProfile || "/images/Generic-img.png"}
+                          alt="user"
+                          width={40}
+                          height={40}
+                          className="user_profile_image"
+                        />
+                        <i className="fa-solid fa-chevron-down"></i>
+                      </a>
+                      <ul>
+                        <li>
+                          <Link href={user.roleName.includes(ROLES.Admin) ? "/admin" : "/user"} className="nav-link">
+                            <i className="fa-solid fa-user px-2"></i>
+                            Edit Profile
+                          </Link>
+                        </li>
+
+                        {!user.roleName.includes(ROLES.Admin) && (
+                          <>
+                            <li>
+                              <Link href="/user/socialmedialinks" className="nav-link">
+                                <i className="fa-solid fa-users px-2"></i>
+                                Social Media
+                              </Link>
+                            </li>
+                            <li>
+                              <Link href="/user/blogs" className="nav-link">
+                                <i className="fa-solid fa-pen px-2 pt-1"></i>
+                                Blogs
+                              </Link>
+                            </li>
+                            <li>
+                              <Link href="/user/events" className="nav-link">
+                                <i className="fa-solid fa-list px-2 pt-1"></i>
+                                Events
+                              </Link>
+                            </li>
+                            <li>
+                              <Link href="/user/gallery" className="nav-link">
+                                <i className="fa-solid fa-image px-2 pt-1"></i>
+                                Gallery
+                              </Link>
+                            </li>
+                          </>
+                        )}
+
+                        <li>
+                          <Link href="/password/change-password" className="nav-link">
+                            <i className="fa-solid fa-key px-2"></i>
+                            Change Password
+                          </Link>
+                        </li>
+                        <li>
+                          <a onClick={handleLogout} className="nav-link" style={{ color: "red", cursor: "pointer" }}>
+                            <i className="fa-solid fa-arrow-right-from-bracket px-2"></i>
+                            Log Out
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                  )}
                 </ul>
               </div>
 
               <div className="contact-now-box d-flex align-items-center gap-3">
                 <Link href="/contact" className="cutm-con-link">Contact Us</Link>
-
-                {!user ? (
-                  <Link href="/auth/signin" className="nav-link">Sign in</Link>
-                ) : (
-                  <Dropdown>
-                    <Dropdown.Toggle id="dropdown-basic" className="btn-dark">
-                      <Image
-                        src={user?.userProfile || "/images/Generic-img.png"}
-                        alt="user"
-                        width={40}
-                        height={40}
-                        className="user_profile_image"
-                      />
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu>
-                      <Dropdown.Item as="span">
-                        <Link href={user.roleName.includes(ROLES.Admin) ? "/admin" : "/user"} className="dropdown-link">
-                          <i className="fa-solid fa-user px-2"></i>
-                          Edit Profile
-                        </Link>
-                      </Dropdown.Item>
-
-                      {!user.roleName.includes(ROLES.Admin) && (
-                        <Dropdown.Item as="span">
-                          <Link href="/user/socialMedia-links" className="dropdown-link">
-                            <i className="fa-solid fa-users px-2"></i>
-                            Social Media
-                          </Link>
-                        </Dropdown.Item>
-                      )}
-
-                      {!user.roleName.includes(ROLES.Admin) && (
-                        <Dropdown.Item as="span">
-                          <Link href="/user/blogs" className="dropdown-link">
-                            <i className="fa-solid fa-pen px-2 pt-1"></i>
-                            Blogs
-                          </Link>
-                        </Dropdown.Item>
-                      )}
-
-                      {!user.roleName.includes(ROLES.Admin) && (
-                        <Dropdown.Item as="span">
-                          <Link href="/user/events" className="dropdown-link">
-                            <i className="fa-solid fa-list px-2 pt-1"></i>
-                            Events
-                          </Link>
-                        </Dropdown.Item>
-                      )}
-
-                      {!user.roleName.includes(ROLES.Admin) && (
-                        <Dropdown.Item as="span">
-                          <Link href="/user/gallery" className="dropdown-link">
-                            <i className="fa-solid fa-image px-2 pt-1"></i>
-                            Gallery
-                          </Link>
-                        </Dropdown.Item>
-                      )}
-
-                      <Dropdown.Item as="span">
-                        <Link href="/password/change-password" className="dropdown-link">
-                          <i className="fa-solid fa-key px-2"></i>
-                          Change Password
-                        </Link>
-                      </Dropdown.Item>
-
-                      <Dropdown.Item as="span" onClick={handleLogout} style={{ color: "red" }}>
-                        <i className="fa-solid fa-arrow-right-from-bracket px-2"></i>
-                        Log Out
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                )}
               </div>
             </div>
           </div>

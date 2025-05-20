@@ -46,8 +46,8 @@ const UserSideBar = () => {
   const isDonor = user?.roleName?.includes('donor');
 
   const navItems = [
-    { label: 'Events', href: '/user/events' },
-    { label: 'Blogs', href: '/user/blogs' },
+    { label: 'Events', href: '/user/events/userevents' },
+    { label: 'Blogs', href: '/user/blogs/blogslist' },
     { label: 'News', href: '/user/news' },
     { label: 'Gallery', href: '/user/gallery' },
   ];

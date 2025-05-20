@@ -89,11 +89,10 @@ const About = () => {
                     </figure>
                   </div>
                   <div className="helped-fund-content">
-                    <h2>
-                      <span className="counter">75,958</span>
-                    </h2>
-                    <h3>helped fund</h3>
-                    <p>Supporting growth through community-funding.</p>
+                    <h3>
+                      <span className="counter">We&apos;re trusted</span>
+                    </h3><br/>
+                    <p>NBC – Trusted for 5+ years, leading life-saving projects like blood donation camps and tree plantations to create a healthier, greener tomorrow.</p>
                   </div>
                 </div>
               </div>

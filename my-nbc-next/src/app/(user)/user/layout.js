@@ -5,6 +5,11 @@ import { Onest } from 'next/font/google';
 import { Providers } from "@/app/providers";
 import UserHeader from "@/common/UserHeader";
 import UserSideBar from "@/common/UserSidebar";
+import { Toaster } from "react-hot-toast";
+import "react-phone-input-2/lib/style.css";
+import "quill/dist/quill.core.css";
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 const onest = Onest({
   subsets: ['latin'],
@@ -30,6 +35,7 @@ export default function UserLayout({ children }) {
               </div>
               <div className="col-md-9 main mt-3">
                 {children}
+                <Toaster position="top-right" reverseOrder={false} />
               </div>
             </div>
           </div>
