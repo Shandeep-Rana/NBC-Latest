@@ -12,7 +12,6 @@ import { FcCancel } from 'react-icons/fc';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
 import { approveNews, deleteNews, disapproveNews, getPaginatedNews, publishNews } from '@/Slice/news';
 import { getUserInfoFromToken, ROLES } from '@/constants';
-import Loader from '@/common/Loader';
 import Link from 'next/link';
 import AdminLoader from '@/common/AdminLoader';
 
@@ -145,7 +144,7 @@ const AllNewsList = () => {
                             <MdPublish />
                         </Link>
                     }
-                    {(user.roleName.includes(ROLES.Admin) || (!userInfo.roleName.includes(ROLES.Admin) && record.is_delete_requested !== 1)) && (
+                    {(user.roleName.includes(ROLES.Admin) || (!user.roleName.includes(ROLES.Admin) && record.is_delete_requested !== 1)) && (
                         <Link href={`#`} className="dropdown-item px-2 text-warning">
                             <i
                                 className={`fa fa-pencil`}
@@ -185,7 +184,7 @@ const AllNewsList = () => {
                 <div className="col-auto">
                     <button
                         onClick={() =>
-                            router.push(user.roleName.includes(ROLES.Admin) ? '/admin/addnews' : '/user/addnews')
+                            router.push(user.roleName.includes(ROLES.Admin) ? '/admin/addnews' : '/user/news/addnews')
                         }
                         className="button-round border_radius"
                     >

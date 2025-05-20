@@ -218,7 +218,7 @@ const AllBlogList = () => {
                     <h1 className="h2">Blogs</h1>
                 </div>
                 <div className="col-auto">
-                    <Link href={userInfo.roleName.includes(ROLES.Admin) ? "/admin/blog/addblog" : "/user/add-blog"} passHref>
+                    <Link href={userInfo.roleName.includes(ROLES.Admin) ? "/admin/blog/addblog" : "/user/blogs/addblog"} passHref>
                         <div className={`button-round border_radius`} type="button">
                             <i className={`fa fa-plus`} aria-hidden="true"></i> Add Blog
                         </div>

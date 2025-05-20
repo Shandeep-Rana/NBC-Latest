@@ -48,7 +48,7 @@ const UserSideBar = () => {
   const navItems = [
     { label: 'Events', href: '/user/events/userevents' },
     { label: 'Blogs', href: '/user/blogs/blogslist' },
-    { label: 'News', href: '/user/news' },
+    { label: 'News', href: '/user/news/newslist' },
     { label: 'Gallery', href: '/user/gallery' },
   ];
 

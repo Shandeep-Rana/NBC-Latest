@@ -1,7 +1,7 @@
 'use client';
 
 import moment from 'moment';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,11 +12,19 @@ import { addNews } from '@/Slice/news';
 import QuillEditor from '@/common/QuillEditor';
 import AdminLoader from '@/common/AdminLoader';
 import Image from 'next/image';
+import { getUserInfoFromToken, ROLES } from '@/constants';
 
 const AddNewsForm = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const userInfo = getUserInfoFromToken();
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const userInfo = getUserInfoFromToken();
+    setUser(userInfo);
+  }, []);
+
   const [thumbnailUrl, setThumbnailUrl] = useState("");
   const { isLoading } = useSelector((state) => state.news);
 
@@ -33,10 +41,10 @@ const AddNewsForm = () => {
     const formData = new FormData();
     formData.append("title", data?.title);
     formData.append("content", data?.content);
-    formData.append("author", userInfo.userId);
+    formData.append("author", user?.userId);
     formData.append("publish_date", data?.publish_date);
     formData.append("thumbnail", data?.thumbnail);
-    dispatch(addNews(formData, router, reset, userInfo, setThumbnailUrl));
+    dispatch(addNews(formData, router, reset, user, setThumbnailUrl));
   };
 
   if (!user || isLoading) {
@@ -151,7 +159,7 @@ const AddNewsForm = () => {
 
                 <div className="submit-area col-12">
                   <Link
-                    href={userInfo.roleName.includes(ROLES.Admin) ? "/admin/news" : "/user/news"}
+                    href={user?.roleName.includes(ROLES.Admin) ? "/admin/news" : "/user/news"}
                     className="button-round button-back"
                   >
                     Back to List

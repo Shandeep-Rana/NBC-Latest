@@ -7,7 +7,6 @@ const commFunctions = require('../utils/common');
 
 const BlogController = {
 
-  
   addBlog: async (req, res) => {
     try {
       const thumbnail_url = req.files["thumbnail"]
@@ -40,6 +39,7 @@ const BlogController = {
     try {
       const { page, pageSize, search, userId, isPublished, isApproved } = req.query;
       const descryptedUserId = userId ? commFunctions.decrypt(userId) : null;
+      
       const result = await blogServices.getPaginatedBlogsAsync({
         page,
         pageSize,
