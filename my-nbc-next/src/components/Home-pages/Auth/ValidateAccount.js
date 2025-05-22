@@ -47,7 +47,7 @@ function ValidateAccount() {
         if (eventId) {
             router.push(`/event/participation/${eventId}`);
         } else {
-            router.push('/auth/login');
+            router.push('/auth/signin');
         }
     };
 

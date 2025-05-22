@@ -8,7 +8,7 @@ import { Table } from "antd";
 import { BsHandThumbsUp } from "react-icons/bs";
 import { FcCancel } from "react-icons/fc";
 import { RiDeleteBin2Fill } from "react-icons/ri";
-import { approveImage, deleteImage, disApproveImage, getPaginatedImages } from "@/Slice/gallery";
+import { addImage, approveImage, deleteImage, disApproveImage, getPaginatedImages } from "@/Slice/gallery";
 import { getUserInfoFromToken, ROLES } from "@/constants";
 import Loader from "@/common/Loader";
 import Image from 'next/image'; // Import Next.js Image component

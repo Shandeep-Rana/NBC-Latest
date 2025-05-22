@@ -6,13 +6,6 @@ import Head from 'next/head';
 export default function UnAuthorizedPage() {
   return (
     <>
-      <Head>
-        <title>Unauthorized | Nangal By Cycle</title>
-        <meta
-          name="description"
-          content="You are not authorized to view this page."
-        />
-      </Head>
 
       <main id="content" className="site-main">
         <div className="no-content-section 404-page relative w-full h-screen">

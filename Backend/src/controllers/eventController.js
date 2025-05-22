@@ -56,9 +56,12 @@ const eventController = {
       const { title, organiser, description, contact, startDateTime, endDateTime, location, userId, eventType, eventCategory, requireUpload,
         allowParticipants, maxParticipants } = req.body;
 
-      const decryptedUserId = commFunctions.decrypt(userId);
+      const decodedUserId = decodeURIComponent(userId);
+      const decryptedUserId = commFunctions.decrypt(decodedUserId);
 
       const isTitleExist = await eventServices.isTitleExistAsync(title);
+       console.log(isTitleExist)
+
       if (isTitleExist)
         throw new Error(`Event with title(${title}) is already existed`);
 
@@ -96,7 +99,7 @@ const eventController = {
         organiser,
         organiserId: decryptedUserId,
         location,
-        isdeleted: false, 
+        isdeleted: false,
         isactivated: isActivated,
         deletedOn: null,
         activatedOn: new Date(),
@@ -128,12 +131,12 @@ const eventController = {
         organiser,
         allowParticipants,
         thumbnail: thumbnail
-        ? `${URL}/thumbnail/${thumbnail}`
-        : null,
+          ? `${URL}/thumbnail/${thumbnail}`
+          : null,
       };
 
       if (isActivated) {
-       await mailServices.sendEventCreatedMail(eventDetails);
+        await mailServices.sendEventCreatedMail(eventDetails);
       }
 
 
@@ -213,8 +216,8 @@ const eventController = {
         const formattedDate = `${startDate.toDateString()} - ${endDate.toDateString()}`;
 
         const thumbnailUrl = eventDetails.thumbnail
-        ? `${URL}/thumbnail/${eventDetails.thumbnail}`
-        : null;
+          ? `${URL}/thumbnail/${eventDetails.thumbnail}`
+          : null;
 
         // Update eventDetails with formatted date
         const updatedEventDetails = {

@@ -10,6 +10,8 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import "quill/dist/quill.core.css";
 import { Toaster } from "react-hot-toast";
+import AuthGuard from '@/common/AuthGuard';
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 export default function AdminLayout({ children }) {
   const [isShow, setShow] = useState(false);
@@ -20,22 +22,23 @@ export default function AdminLayout({ children }) {
     <html lang="en">
       <body>
         <Providers>
-          <AdminHeader handleShow={handleShow} />
-          <div className="container-fluid" id="main">
-            <div className="row">
-              <AdminSideBar />
-              <div className="col-md-9 col-lg-9 col-12 admin_container col main admin_layout">
-                {children}
-                <Toaster position="top-right" reverseOrder={false} />
-                <footer className="container-fluid">
-                  <p className="text-right small">©2024-2025 Company</p>
-                </footer>
+          <AuthGuard allowedRoles={['admin']}>
+            <AdminHeader handleShow={handleShow} />
+            <div className="container-fluid" id="main">
+              <div className="row">
+                <AdminSideBar />
+                <div className="col-md-9 col-lg-9 col-12 admin_container col main admin_layout">
+                  {children}
+                  <Toaster position="top-right" reverseOrder={false} />
+                  <footer className="container-fluid">
+                    <p className="text-right small">©2024-2025 Company</p>
+                  </footer>
+                </div>
               </div>
             </div>
-          </div>
+          </AuthGuard>
         </Providers>
       </body>
     </html>
   );
 }
-

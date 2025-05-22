@@ -12,27 +12,30 @@ import ReactSelect from "react-select";
 import PhoneInput from 'react-phone-input-2';
 import DatePicker from 'react-datepicker';
 import { yupResolver } from '@hookform/resolvers/yup';
-// import { Helmet } from 'react-helmet';
 import Loader from '@/common/Loader';
 import Link from 'next/link';
 import Image from 'next/image';
+import registerimg from '../../../public/images/registerimg.jpg';
+import { useRouter } from 'next/navigation';
+import { parseISO } from 'date-fns';
 
 const NbcMemberRegisterForm = () => {
     const dispatch = useDispatch();
+    const router = useRouter();
+
     const dateFormat = 'yyyy-MM-dd';
     const [previewUrl, setPreviewUrl] = useState("");
     const [selectedOption, setSelectedOption] = useState(null);
     const [selectedProfessionOption, setSelectedProfessionOption] = useState(null);
-    const [id, setId] = useState(null); // Store ID in the state
+    const [id, setId] = useState(null);
 
     const { isLoading } = useSelector((state) => state.userRegister);
     const { villages, professions } = useSelector((state) => state.masterSlice);
 
     useEffect(() => {
-        // Safely access `window` inside `useEffect` (runs only on the client-side)
         const params = new URLSearchParams(window.location.search);
         const eventId = params.get('event');
-        setId(eventId); // Store the id in state
+        setId(eventId);
 
         dispatch(getAllProfessions());
         dispatch(getAllVillages());
@@ -78,7 +81,7 @@ const NbcMemberRegisterForm = () => {
         }
     };
 
-    const formatDate = (date) => moment(date).format("YYYY-MM-DD");
+    const formatDate  = (date) => moment(date).format("YYYY-MM-DD");
 
     const onSubmit = (data) => {
         const formData = new FormData();
@@ -96,42 +99,45 @@ const NbcMemberRegisterForm = () => {
         formData.append("state", data?.state);
         formData.append("profession", data?.currentProfession);
         formData.append("userProfile", data?.userProfile);
-        formData.append("id", id); // Use the `id` from state
-        dispatch(registerAsSkilledPerson(formData, navigate, reset, setPreviewUrl));
+        formData.append("id", id);
+        dispatch(registerAsSkilledPerson(formData, router, reset, setPreviewUrl));
     };
-    
+
     return (<>
         {isLoading ? (
             <Loader />
         ) : (
             <main id="content" className="site-main">
-                {/* <Helmet>
-                    <title>Nangal By Cycle Skills Database | Share Your Expertise</title>
-                    <meta name="description" content="Register your skills with Nangal By Cycle. Contribute your expertise to our cycling community and sustainable tourism initiatives in Nangal." />
-                </Helmet> */}
-                <section className="inner-banner-wrap pb-0">
-                    <div
-                        className="inner-baner-container"
-                    // style={{ backgroundImage: `url(${innerBannerImg1})` }}
-                    >
-                        <div className="container">
-                            <div className="inner-banner-content">
-                                <h1 className="inner-title">Register as an NBC Member</h1>
-                                <h4 style={{ color: 'rgb(115 115 115)' }}>This platform meant to enables all our local community, discover and book courses, classes, activities and workshops in their Area. We list the course and classes that are handpicked by our professionals.
-                                </h4>
+                <div className="page-header parallaxie">
+                    <div className="container">
+                        <div className="row align-items-center">
+                            <div className="col-lg-12">
+                                <div className="page-header-box">
+                                    <h1 className="text-anime-style-2" data-cursor="-opaque">
+                                        <span>NBC Member</span> Register
+                                    </h1>
+                                    <nav className="wow fadeInUp">
+                                        <ol className="breadcrumb">
+                                            <li className="breadcrumb-item">
+                                                <Link href="/">home</Link>
+                                            </li>
+                                            <li className="breadcrumb-item active" aria-current="page">
+                                                Register Member
+                                            </li>
+                                        </ol>
+                                    </nav>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </section>
-                <div className="volunteer-wrap"
-                // style={{ backgroundImage: `url(${registerimg})` }}
-                >
+                </div>
+                <div className="volunteer-wrap" style={{ backgroundImage: `url(${registerimg.src})` }}>
                     <div className="container">
                         <div className="row pt-5">
                             <div className="col-lg-8 offset-lg-2">
                                 <div className="volunteer-contact-form form_padding_rm">
                                     <div className="form_header_img position-relative">
-                                        {/* <img src={skill_register_img} alt="" /> */}
+                                        <Image src={registerimg} alt="" />
                                     </div>
                                     <form onSubmit={handleSubmit(onSubmit)}
                                         className="volunteer-form mt-5"
@@ -161,7 +167,13 @@ const NbcMemberRegisterForm = () => {
                                                 )}
                                             </div>
                                             <div className="col-lg-6 col-md-6 col-sm-6 col-12 form-group">
-                                                <label className="text-left">Date Of Birth <span style={{ fontSize: 12, color: '#9d9d9d' }}>(YYYY-MM-DD)</span><span style={{ color: '#F15B43' }}>*</span></label>
+                                                <label htmlFor="" className="text-left">
+                                                    Date Of Birth{" "}
+                                                    <span style={{ fontSize: 12, color: "#9d9d9d" }}>
+                                                        (YYYY-MM-DD)
+                                                    </span>
+                                                    <span style={{ color: "#F15B43" }}> *</span>
+                                                </label>
                                                 <Controller
                                                     name="skilledPersonDOB"
                                                     control={control}
@@ -169,12 +181,19 @@ const NbcMemberRegisterForm = () => {
                                                         <DatePicker
                                                             showIcon
                                                             placeholderText="Date Of Birth"
-                                                            className={`w-100 input_fixed_width ${errors?.skilledPersonDOB ? 'valid_error' : ''}`}
+                                                            className={`w-100 input_fixed_width ${errors?.skilledPersonDOB ? "valid_error" : ""
+                                                                }`}
                                                             selected={value ? parseISO(value) : null}
-                                                            style={{ height: 45, border: '1px solid #B8BDC9', borderRadius: '6px', overflow: 'hidden', lineHeight: '4px' }}
+                                                            style={{
+                                                                height: 45,
+                                                                border: "1px solid #B8BDC9",
+                                                                borderRadius: "6px",
+                                                                overflow: "hidden",
+                                                                lineHeight: "4px",
+                                                            }}
                                                             onChange={(date) => {
                                                                 if (date && moment(date).isValid()) {
-                                                                    onChange(format(date, dateFormat));
+                                                                    onChange(formatDate(date, dateFormat));
                                                                 } else {
                                                                     onChange(null);
                                                                 }
@@ -185,7 +204,9 @@ const NbcMemberRegisterForm = () => {
                                                             showYearDropdown
                                                             showMonthDropdown
                                                             dropdownMode="select"
-                                                            openToDate={value ? parseISO(value) : new Date('2000-01-01')}
+                                                            openToDate={
+                                                                value ? parseISO(value) : new Date("2000-01-01")
+                                                            }
                                                         />
                                                     )}
                                                     defaultValue=""

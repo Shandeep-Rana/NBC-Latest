@@ -64,7 +64,7 @@ class EventServices {
     async getAllEvents() {
         try {
             const currentDate = new Date().toISOString();
-    
+
             const query = knex(tableName)
                 .select('*')
                 .where('isDeleted', false)
@@ -77,22 +77,22 @@ class EventServices {
                     CASE WHEN startDateTime > ? THEN startDateTime ELSE NULL END ASC,
                     CASE WHEN endDateTime < ? THEN endDateTime ELSE NULL END DESC
                 `, [currentDate, currentDate, currentDate, currentDate, currentDate, currentDate, currentDate, currentDate]);
-    
+
             const countQuery = knex(tableName)
                 .count('* as total')
                 .where('isDeleted', false)
                 .andWhere('isactivated', true);
-    
+
             const [events, countResult] = await Promise.all([query, countQuery]);
             const total = parseInt(countResult[0].total, 10);
-    
+
             const eventsWithImageUrl = events.map(event => {
                 const imageUrl = event.thumbnail
                     ? `${URL}/thumbnail/${event.thumbnail}`
                     : null;
                 return { ...event, imageUrl };
             });
-    
+
             return {
                 message: 'Events fetched successfully',
                 statusCode: 200,
@@ -102,7 +102,7 @@ class EventServices {
                     total
                 },
             };
-    
+
         } catch (err) {
             return {
                 message: err.message,
@@ -116,9 +116,9 @@ class EventServices {
     async isTitleExistAsync(title) {
         try {
             let event = await knex(tableName).select('eventId').where('title', title).andWhere('isdeleted', false).first();
-            
-            if (!event)
-                return false;
+
+            if (!event) { return false; }
+
 
             return true;
         }

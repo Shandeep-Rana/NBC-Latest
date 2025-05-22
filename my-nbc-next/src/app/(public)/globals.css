@@ -4,7 +4,7 @@
 @import '../../assets/css/swiper-bundle.min.css';
 @import '../../assets/css/magnific-popup.css';
 @import '../../assets/css/mousecursor.css';
-@import '../../assets/css/all.min.css'; 
+@import '../../assets/css/all.min.css';
 @import '../../assets/css/bootstrap.min.css';
 
 
@@ -60,6 +60,13 @@ html {
   scroll-behavior: smooth;
 }
 
+@media screen and (max-width: 575px) {
+  .no-content-section {
+    padding-top: 150px;
+    padding-bottom: 80px;
+  }
+}
+
 .no-content-section {
   background-position: center center;
   background-size: cover;
@@ -67,7 +74,7 @@ html {
   padding-top: 100px;
   padding-bottom: 150px;
   position: relative;
-  z-index: 1;      
+  z-index: 1;
 }
 
 @media screen and (max-width: 575px) {
@@ -75,4 +82,100 @@ html {
     padding-top: 150px;
     padding-bottom: 80px;
   }
+}
+
+.no-content-wrap {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+}
+
+.no-content-wrap span {
+  color: rgba(255, 255, 255, 0.32);
+  font-size: 350px;
+  font-family: "Playfair Display", sans-serif;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.no-content-wrap h1 {
+  color: #ffffff !important;
+  font-size: 65px !important;
+  margin-bottom: 0 !important;
+  position: absolute !important;
+  -webkit-transform: translate(0, -65%) !important;
+  -moz-transform: translate(0, -65%) !important;
+  -ms-transform: translate(0, -65%) !important;
+  -o-transform: translate(0, -65%) !important;
+  transform: translate(0, -65%) !important;
+  top: 50%;
+  left: 0;
+  right: 0;
+}
+
+.no-content-wrap p {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 70px;
+}
+
+.no-content-wrap .search-form-wrap {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 46px;
+}
+
+.no-content-wrap .search-form-wrap .search-form input {
+  padding: 0 55px 0 20px;
+}
+
+.no-content-wrap .search-form-wrap .search-form button {
+  -webkit-border-radius: 0 25px 25px 0;
+  -moz-border-radius: 0 25px 25px 0;
+  -ms-border-radius: 0 25px 25px 0;
+  border-radius: 0 25px 25px 0;
+  padding: 10px 20px;
+  top: 0;
+  right: 0;
+  height: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .no-content-wrap span {
+    font-size: 224px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .no-content-wrap span {
+    font-size: 145px;
+    line-height: 1;
+  }
+
+  .no-content-wrap h1 {
+    -webkit-transform: translate(0, -198%);
+    -moz-transform: translate(0, -198%);
+    -ms-transform: translate(0, -198%);
+    -o-transform: translate(0, -198%);
+    transform: translate(0, -198%);
+    font-size: 22px;
+  }
+
+  .no-content-wrap p {
+    font-size: 16px;
+    margin-top: 40px;
+  }
+}
+
+
+.overlay {
+  background-color: #151515bf;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }

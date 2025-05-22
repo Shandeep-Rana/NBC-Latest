@@ -91,7 +91,6 @@ const Header = () => {
                           height={40}
                           className="user_profile_image"
                         />
-                        <i className="fa-solid fa-chevron-down"></i>
                       </a>
                       <ul>
                         <li>

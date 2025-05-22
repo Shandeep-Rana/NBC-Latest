@@ -69,7 +69,7 @@ const authRegisterSlice = createSlice({
 });
 
 export const registerAsVolunteer =
-  (data, navigate, reset, setPreviewUrl) => async (dispatch) => {
+  (data, router, reset, setPreviewUrl) => async (dispatch) => {
     try {
       dispatch(setLoading(true));
       const response = await axios.post(
@@ -86,7 +86,7 @@ export const registerAsVolunteer =
         setPreviewUrl("");
         toast.success(response.data.message);
         dispatch(registerAsVolunteerSuccess());
-        navigate("/auth/login");
+        router.push("/auth/login");
       } else {
         dispatch(registerAsVolunteerFailure());
       }
@@ -171,7 +171,7 @@ export const UpgradeToMember = (data, toogleModal) => async (dispatch) => {
 };
 
 export const registerAsDonor =
-  (data, navigate, reset, setPreviewUrl) => async (dispatch) => {
+  (data, router, reset, setPreviewUrl) => async (dispatch) => {
     try {
       dispatch(setLoading(true));
       const response = await axios.post(
@@ -188,7 +188,7 @@ export const registerAsDonor =
         setPreviewUrl("");
         toast.success(response.data.message);
         dispatch(registerAsDonorSuccess());
-        navigate("/donors");
+        router.push("/communitymembers/donors");
       } else {
         dispatch(registerAsDonorFailure());
       }
@@ -204,7 +204,7 @@ export const registerAsDonor =
 
 export const registerAsSkilledPerson =
   (data,
-     navigate, reset, 
+     router, reset, 
     setPreviewUrl) => async (dispatch) => {
       try {
         dispatch(setLoading(true));
@@ -222,7 +222,7 @@ export const registerAsSkilledPerson =
           setPreviewUrl("");
           toast.success(response.data.message);
           dispatch(registerAsSkilledPersonSuccess());
-          navigate("/auth/login");
+          router.push("/auth/signin");
         } else {
           dispatch(registerAsSkilledPersonFailure());
         }

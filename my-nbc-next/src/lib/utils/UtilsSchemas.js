@@ -56,3 +56,15 @@ export const userprofileSchema = yup.object({
     fullName: yup.string().required("Name is required").trim(),
     email: yup.string().required("Email is required").trim(),
 });
+
+export const contactSchema = yup.object({
+    name: yup.string().required("Name is required").trim(),
+    email: yup.string().required("Email is required").trim(),
+    subject: yup.string().required("Subject is required").trim(),
+    phone: yup
+      .number()
+      .typeError("contact must be a number")
+      .required("Phone Number is required"),
+    description: yup.string().required("Description is required").trim(),
+  })
+  .required();

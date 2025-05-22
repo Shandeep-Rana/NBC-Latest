@@ -87,7 +87,7 @@ export const getAllrequests =
     }
   };
 
-export const addrequest = (data, reset, navigate) => async (dispatch) => {
+export const addrequest = (data, reset, router) => async (dispatch) => {
   try {
     dispatch(setHome());
     dispatch(setLoading());
@@ -104,7 +104,7 @@ export const addrequest = (data, reset, navigate) => async (dispatch) => {
       reset();
       dispatch(addrequestSuccess(data));
       toast.success(response.data.message);
-      navigate("/thankyou");
+      router.push("/thankyou");
     }
   } catch (error) {
     dispatch(addrequestFailure());

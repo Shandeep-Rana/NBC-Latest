@@ -57,7 +57,7 @@ const BecomeNbcMember = () => {
                         </div>
 
                         <div className="mt-4 wow fadeInUp text-center" data-wow-delay="0.6s">
-                            <Link href="/register" className="text-white btn-default">
+                            <Link href="/auth/nbcmemberregister" className="text-white btn-default">
                                 Register as a NBC Member
                             </Link>
                         </div>

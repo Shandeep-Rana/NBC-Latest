@@ -84,7 +84,7 @@ function RegisterDonor() {
     formData.append("pincode", data?.pincode);
     formData.append("state", data?.state);
     formData.append("userProfile", data?.donorProfile);
-    dispatch(registerAsDonor(formData, navigate, reset, setPreviewUrl));
+    dispatch(registerAsDonor(formData, router, reset, setPreviewUrl));
   };
 
   return (
