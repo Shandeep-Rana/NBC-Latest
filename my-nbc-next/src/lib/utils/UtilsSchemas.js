@@ -62,9 +62,22 @@ export const contactSchema = yup.object({
     email: yup.string().required("Email is required").trim(),
     subject: yup.string().required("Subject is required").trim(),
     phone: yup
-      .number()
-      .typeError("contact must be a number")
-      .required("Phone Number is required"),
+        .number()
+        .typeError("contact must be a number")
+        .required("Phone Number is required"),
     description: yup.string().required("Description is required").trim(),
-  })
-  .required();
+})
+    .required();
+
+export const heroSchema = yup.object({
+    name: yup.string().required("Hero's Name is required").trim(),
+    recognition_title: yup.string().trim(),
+    recognition_description: yup.string().required("Description is required"),
+    recognition_date: yup.string(),
+    photo_url: yup.mixed()
+        .required("Photo is required")
+        .test("fileType", "Invalid file type", (value) => {
+            if (!value) return true;
+            return ["image/jpeg", "image/png", "image/jpg"].includes(value.type);
+        }),
+}).required();

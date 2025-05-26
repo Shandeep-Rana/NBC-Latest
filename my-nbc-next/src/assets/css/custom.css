@@ -498,7 +498,7 @@ body {
 	position: relative;
 	display: inline-block;
 	font-size: 15px;
-	font-weight: 500;
+	font-weight: 500 !important;
 	line-height: normal;
 	letter-spacing: 0.2em;
 	text-transform: uppercase;
@@ -1465,9 +1465,9 @@ header.main-header .header-sticky.active {
 
 .what-we-item-content h3 {
 	font-size: 20px;
-	font-weight: 600;
+	font-weight: 600 !important;
 	text-transform: capitalize;
-	margin-bottom: 10px;
+	margin-bottom: 10px !important;
 }
 
 .what-we-item-content p {
@@ -1601,7 +1601,7 @@ header.main-header .header-sticky.active {
 
 .causes-content h3 {
 	font-size: 20px;
-	margin-bottom: 10px;
+	margin-bottom: 10px !important;
 }
 
 .causes-content p {
@@ -1713,8 +1713,8 @@ header.main-header .header-sticky.active {
 
 .why-choose-counter-item h2 {
 	font-size: 50px;
-	color: var(--accent-color);
-	margin-bottom: 5px;
+	color: var(--accent-color) !important;
+	margin-bottom: 5px !important;
 }
 
 .why-choose-counter-item p {
@@ -2228,9 +2228,9 @@ header.main-header .header-sticky.active {
 
 .how-it-work-body h3 {
 	font-size: 20px;
-	font-weight: 600;
+	font-weight: 600 !important;
 	text-transform: capitalize;
-	margin-bottom: 10px;
+	margin-bottom: 10px !important;
 }
 
 .how-it-work-body p {

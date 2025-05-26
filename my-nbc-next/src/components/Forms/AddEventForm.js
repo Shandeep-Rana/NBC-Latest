@@ -30,7 +30,7 @@ const AddEventForm = () => {
     const userInfo = getUserInfoFromToken();
     const userId = userInfo ? userInfo.userId : null;
     const isAdmin = userInfo?.roleName?.includes(ROLES.Admin);
-    const backPath = isAdmin ? "/admin/all-events" : "/user/events";
+    const backPath = isAdmin ? "/admin/event/eventlist" : "/user/events/userevents";
     const [previewUrl, setPreviewUrl] = useState("");
     const [additionalThumbnail, setAdditionalThumbnail] = useState([]);
     const [cloneAdditionalThumbnail, setCloneAdditionalThumbnail] = useState([]);

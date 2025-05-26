@@ -69,7 +69,6 @@ const Testimonials = () => {
                                     What our happy donors say !!
                                 </h2>
                             </div>
-
                             <Swiper
                                 modules={[Pagination, Autoplay]}
                                 loop={true}

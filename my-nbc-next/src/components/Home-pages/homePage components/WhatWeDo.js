@@ -21,16 +21,15 @@ const WhatWeDo = () => {
                                     <div className="icon-box">
                                         <Image
                                             src="/images/icon-what-we-1.svg"
-                                            alt="Economic Empowerment"
-                                            width={50}
-                                            height={50}
+                                            alt="Social Work in Public Health"
+                                            width={72}
+                                            height={72}
                                         />
                                     </div>
                                     <div className="what-we-item-content">
-                                        <h3>economic empowerment</h3>
+                                        <h3>Social Work in Public Health</h3>
                                         <p>
-                                            Empowering individuals through job training, financial literacy, and
-                                            small business support to create sustainable livelihoods.
+                                            We actively promote health awareness by conducting campaigns, organising free check-ups, and running educational drives. Our volunteers play a vital role in making public health resources accessible to all.
                                         </p>
                                     </div>
                                 </div>
@@ -39,15 +38,14 @@ const WhatWeDo = () => {
                                         <Image
                                             src="/images/icon-what-we-2.svg"
                                             alt="Clean Water"
-                                            width={50}
-                                            height={50}
+                                            width={72}
+                                            height={72}
                                         />
                                     </div>
                                     <div className="what-we-item-content">
-                                        <h3>clean water and sanitation</h3>
+                                        <h3>Blood Donation Camps</h3>
                                         <p>
-                                            Empowering individuals through job training, financial literacy, and
-                                            small business support to create sustainable livelihoods.
+                                            We organize regular blood donation camps in collaboration with local hospitals and healthcare providers. These camps not only save lives but also bring communities together for a noble cause.
                                         </p>
                                     </div>
                                 </div>
@@ -55,17 +53,15 @@ const WhatWeDo = () => {
                                     <div className="icon-box">
                                         <Image
                                             src="/images/icon-what-we-3.svg"
-                                            alt="Education Support"
-                                            width={50}
-                                            height={50}
+                                            alt="Community Empowerment & Support"
+                                            width={72}
+                                            height={72}
                                         />
                                     </div>
                                     <div className="what-we-item-content">
-                                        <h3>education support</h3>
+                                        <h3>Community Empowerment & Support</h3>
                                         <p>
-                                            Empowering individuals through job training, financial literacy, and
-                                            small business support to create sustainable livelihoods.
-                                        </p>
+                                            We focus on uplifting underprivileged communities through education, skill development workshops, environmental initiatives, and direct support during times of crisis. </p>
                                     </div>
                                 </div>
                             </div>

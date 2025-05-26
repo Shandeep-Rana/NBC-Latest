@@ -11,10 +11,9 @@ const OurFeatures = () => {
                     <div className="col-lg-12">
                         <div className="section-title">
                             <h3 className="wow fadeInUp">our feature</h3>
-                            <h2 className="text-anime-style-2" data-cursor="-opaque">Highlights our impactful work</h2>
+                            <h2 className="text-anime-style-2" data-cursor="-opaque">Heres how we&apos;re making a difference</h2>
                             <p className="wow fadeInUp" data-wow-delay="0.2s">
-                                Discover the positive change we&apos;ve created through our programs, partnerships, and dedicated efforts.
-                                From healthcare and education to environmental sustainability.
+                                At Nangal By Cycle, we&apos;re not just about rides, we&apos;re about rewriting the story of tourism in Punjab, one pedal at a time.
                             </p>
                         </div>
                     </div>
@@ -27,53 +26,50 @@ const OurFeatures = () => {
                             <div className="our-features-item">
                                 <div className="our-features-image">
                                     <figure className="image-anime reveal">
-                                        <Image src="/images/our-features-img-1.jpg" alt="Healthcare Support" width={600} height={400} />
+                                        <Image src="/images/our-features-img-1.jpg" alt="Sustainable Tourism" width={383.28} height={321.95} />
                                     </figure>
                                 </div>
                                 <div className="our-features-content">
                                     <div className="our-features-body">
-                                        <h2><span className="counter">96</span>%</h2>
-                                        <h3>healthcare support</h3>
-                                        <p>Provide essential healthcare services and resources to communities.</p>
+                                        <h3>Sustainable Tourism</h3>
+                                        <p>We promote eco-friendly travel that treads lightly on the environment. No engines. No emissions. Just fresh air and clean adventures.</p>
                                     </div>
                                     <div className="icon-box">
-                                        <Image src="/images/icon-our-features-1.svg" alt="Healthcare Icon" width={40} height={40} />
+                                        <Image src="/images/icon-our-features-1.png" alt="Healthcare Icon" width={72} height={72} />
                                     </div>
                                 </div>
                             </div>
                             <div className="our-features-item">
                                 <div className="our-features-image">
                                     <figure className="image-anime reveal">
-                                        <Image src="/images/our-features-img-2.jpg" alt="Education Support" width={600} height={400} />
+                                        <Image src="/images/our-features-img-2.jpg" alt="Cultural Revival" width={383.28} height={321.95} />
                                     </figure>
                                 </div>
 
                                 <div className="our-features-content">
                                     <div className="our-features-body">
-                                        <h2><span className="counter">94</span>%</h2>
-                                        <h3>education support</h3>
-                                        <p>Provide essential healthcare services and resources to communities.</p>
+                                        <h3>Cultural Revival</h3>
+                                        <p>We spotlight the hidden gems of Nangal&apos;s forgotten trails, untold stories, and the real flavor of Punjab that doesn’t make it into guidebooks.</p>
                                     </div>
                                     <div className="icon-box">
-                                        <Image src="/images/icon-our-features-2.svg" alt="Education Icon" width={40} height={40} />
+                                        <Image src="/images/icon-our-features-2.png" alt="Education Icon" width={72} height={72} />
                                     </div>
                                 </div>
                             </div>
                             <div className="our-features-item">
                                 <div className="our-features-image">
                                     <figure className="image-anime reveal">
-                                        <Image src="/images/our-features-img-3.jpg" alt="Food Support" width={600} height={400} />
+                                        <Image src="/images/our-features-img-3.jpg" alt="Local Empowerment" width={383.28} height={321.95} />
                                     </figure>
                                 </div>
 
                                 <div className="our-features-content">
                                     <div className="our-features-body">
-                                        <h2><span className="counter">95</span>%</h2>
-                                        <h3>food support</h3>
-                                        <p>Provide essential healthcare services and resources to communities.</p>
+                                        <h3>Local Empowerment</h3>
+                                        <p>Our rides support local guides, artisans, and farmers. Every tour is a step toward strengthening the community economy and celebrating regional talent.</p>
                                     </div>
                                     <div className="icon-box">
-                                        <Image src="/images/icon-our-features-3.svg" alt="Food Icon" width={40} height={40} />
+                                        <Image src="/images/icon-our-features-3.png" alt="Food Icon" width={72} height={72} />
                                     </div>
                                 </div>
                             </div>

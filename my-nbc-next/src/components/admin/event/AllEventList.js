@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import { confirmAlert } from "react-confirm-alert";
 import { Table } from "antd";
-import { deleteEvent, userEvents } from "@/Slice/events";
+import { deleteEvent, getAllEvents } from "@/Slice/events";
 import Loader from "@/common/Loader";
 
 const AllEventList = () => {
@@ -24,7 +24,7 @@ const AllEventList = () => {
 
   useEffect(() => {
     const reloadData = async () => {
-      dispatch(userEvents(state.search, state.page, state.pagesize));
+      dispatch(getAllEvents(state.search, state.page, state.pagesize));
     };
     reloadData();
   }, [dispatch, state.search, state.page, state.pagesize]);

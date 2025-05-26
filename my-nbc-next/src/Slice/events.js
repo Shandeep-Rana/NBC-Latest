@@ -320,10 +320,10 @@ export const addEvent = (data,
       const userInfo = getUserInfoFromToken();
       toast.success("Event Added successfully");
       if (userInfo.roleName.includes(ROLES.Admin)) {
-        router.push("/admin/all-events");
+        router.push("/admin/event/eventlist");
       }
       else if (userInfo.roleName.includes(ROLES.Volunteer)) {
-        router.push("/user/events");
+        router.push("/user/events/userevents");
       }
     }
   } catch (error) {

@@ -82,7 +82,7 @@ export const getPaginatedHeroes = (search, page, pageSize) => async (dispatch) =
     }
 };
 
-export const addHero = (data, userId, navigate, reset, setPhotoUrl) => async (dispatch) => {
+export const addHero = (data, userId, router, reset, setPhotoUrl) => async (dispatch) => {
     try {
         dispatch(setLoading(true));
         const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/add-hero`, data, {
@@ -96,7 +96,7 @@ export const addHero = (data, userId, navigate, reset, setPhotoUrl) => async (di
             setPhotoUrl('');
             toast.success(response.data.message);
             dispatch(addHeroSuccess(response.data.data));
-            navigate("/admin/heroes");
+            router.push("/admin/nangalheros/nangalheroslist");
         }
         else {
             toast.error(response.data.message);
@@ -128,7 +128,7 @@ export const getHeroDetail = (id) => async (dispatch) => {
     }
 };
 
-export const updateHero = (id, userId, data, navigate, reset, setPhotoUrl) => async (dispatch) => {
+export const updateHero = (id, userId, data, router, reset, setPhotoUrl) => async (dispatch) => {
     try {
         dispatch(setLoading(true));
         const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/update-hero/${id}`, data, {
@@ -142,7 +142,7 @@ export const updateHero = (id, userId, data, navigate, reset, setPhotoUrl) => as
             setPhotoUrl('');
             toast.success(response.data.message);
             dispatch(updateHeroSuccess(response.data.data));
-            navigate("/admin/heroes");
+            router.push("/admin/nangalheros/nangalheroslist");
         }
         else {
             toast.error(response.data.message);

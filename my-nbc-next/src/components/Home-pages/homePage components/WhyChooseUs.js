@@ -40,29 +40,29 @@ const WhyChooseUs = () => {
                                 <h3 className="wow fadeInUp">why choose us</h3>
                                 <h2 className="text-anime-style-2" data-cursor="-opaque">Why we stand out together</h2>
                                 <p className="wow fadeInUp" data-wow-delay="0.2s">
-                                    Our dedication, transparency, and community-driven approach set us apart. Partnering with us creates programs that create meaningful change.
+                                    We are proud to be the best volunteering portal for you – whether you&apos;re a student, professional, or someone simply looking to give back to society.
                                 </p>
                             </div>
                             <div className="why-choose-list wow fadeInUp" data-wow-delay="0.4s">
                                 <ul>
-                                    <li>Community-centered approach</li>
-                                    <li>Transparency and accountability</li>
-                                    <li>Empowerment through partnerships</li>
-                                    <li>Volunteer and donor engagement</li>
+                                    <li>Volunteer Opportunities</li>
+                                    <li>Flexible & Impactful</li>
+                                    <li>Empowerment through partner</li>
+                                    <li>Recognition & Community</li>
                                 </ul>
                             </div>
                             <div className="why-choose-counters">
                                 <div className="why-choose-counter-item">
-                                    <h2><span className="counter">25</span>+</h2>
+                                    <h2><span className="counter">5</span>+</h2>
                                     <p>Years of experience</p>
                                 </div>
                                 <div className="why-choose-counter-item">
-                                    <h2><span className="counter">230</span>+</h2>
-                                    <p>Thousands of volunteers</p>
+                                    <h2><span className="counter">200</span>+</h2>
+                                    <p> volunteers</p>
                                 </div>
                                 <div className="why-choose-counter-item">
-                                    <h2><span className="counter">400</span>+</h2>
-                                    <p>Worldwide offices</p>
+                                    <h2><span className="counter">50</span>+</h2>
+                                    <p>Life Saving Events</p>
                                 </div>
                             </div>
                         </div>

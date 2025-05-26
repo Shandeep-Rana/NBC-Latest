@@ -11,12 +11,12 @@ const HowItWorks = () => {
                 <div className="row section-row">
                     <div className="col-lg-12">
                         <div className="section-title">
-                            <h3 className="wow fadeInUp">How it works</h3>
+                            <h3 className="wow fadeInUp">Welcome to our Service Directory, dedicated space created</h3>
                             <h2 className="text-anime-style-2" data-cursor="-opaque">
-                                Step by step working process
+                                By the Community and for the Community.
                             </h2>
                             <p className="wow fadeInUp" data-wow-delay="0.2s">
-                                Our step-by-step process ensures meaningful change: identifying community needs, designing tailored programs, implementing sustainable solutions.
+                                Our mission is to foster a supportive and connected environment for the residents of our Beautiful Nangal and the surrounding 100+ villages. We believe in the power of collective effort and aim to make a positive impact on the lives of our community members through various initiatives.
                             </p>
                         </div>
                     </div>
@@ -31,8 +31,8 @@ const HowItWorks = () => {
                                         <Image
                                             src="/images/how-it-work-img-1.jpg"
                                             alt="Healthcare Support"
-                                            width={600}  
-                                            height={400}  
+                                            width={295}
+                                            height={255.47}
                                             layout="responsive"
                                         />
                                     </figure>
@@ -42,8 +42,8 @@ const HowItWorks = () => {
                                         <Image
                                             src="/images/icon-how-it-work-1.svg"
                                             alt="Icon 1"
-                                            width={50}  
-                                            height={50}  
+                                            width={55}
+                                            height={55}
                                         />
                                     </div>
                                     <div className="how-it-work-body">
@@ -58,8 +58,8 @@ const HowItWorks = () => {
                                         <Image
                                             src="/images/how-it-work-img-2.jpg"
                                             alt="Plan and Design"
-                                            width={600}  
-                                            height={400}  
+                                            width={295}
+                                            height={255.47}
                                             layout="responsive"
                                         />
                                     </figure>
@@ -67,10 +67,10 @@ const HowItWorks = () => {
                                 <div className="how-it-work-content wow fadeInUp" data-wow-delay="0.4s">
                                     <div className="icon-box">
                                         <Image
-                                            src="/images/icon-how-it-work-2.svg"
+                                            src="/images/icon-how-it-work-2.png"
                                             alt="Icon 2"
-                                            width={50}  
-                                            height={50}  
+                                            width={55}
+                                            height={55}
                                         />
                                     </div>
                                     <div className="how-it-work-body">
@@ -85,8 +85,8 @@ const HowItWorks = () => {
                                         <Image
                                             src="/images/how-it-work-img-3.jpg"
                                             alt="Implement Solutions"
-                                            width={600}  
-                                            height={400}  
+                                            width={295}
+                                            height={255.47}
                                             layout="responsive"
                                         />
                                     </figure>
@@ -96,8 +96,8 @@ const HowItWorks = () => {
                                         <Image
                                             src="/images/icon-how-it-work-3.svg"
                                             alt="Icon 3"
-                                            width={50} 
-                                            height={50}  
+                                            width={55}
+                                            height={55}
                                         />
                                     </div>
                                     <div className="how-it-work-body">
@@ -112,8 +112,8 @@ const HowItWorks = () => {
                                         <Image
                                             src="/images/how-it-work-img-4.jpg"
                                             alt="Report and Share"
-                                            width={600}  
-                                            height={400}  
+                                            width={295}
+                                            height={255.47}
                                             layout="responsive"
                                         />
                                     </figure>
@@ -121,10 +121,10 @@ const HowItWorks = () => {
                                 <div className="how-it-work-content wow fadeInUp" data-wow-delay="0.6s">
                                     <div className="icon-box">
                                         <Image
-                                            src="/images/icon-how-it-work-4.svg"
+                                            src="/images/icon-how-it-work-4.png"
                                             alt="Icon 4"
-                                            width={50}  
-                                            height={50} 
+                                            width={55}
+                                            height={55}
                                         />
                                     </div>
                                     <div className="how-it-work-body">
@@ -139,7 +139,7 @@ const HowItWorks = () => {
                     <div className="col-lg-12">
                         <div className="section-footer-text how-work-footer-text wow fadeInUp" data-wow-delay="0.8s">
                             <p>
-                                Help Our Kids with Education, Food, Health Support.{' '}
+                                Together, we can build healthier, stronger communities.{' '}
                                 <Link href="contact">Contact us</Link>
                             </p>
                         </div>

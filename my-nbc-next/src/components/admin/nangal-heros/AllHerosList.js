@@ -95,7 +95,7 @@ const AllHerosList = () => {
       render: (text, record) => (
         <div className="d-flex justify-content-around">
           <Link
-            href={`/admin/update-hero/${record.hero_id}`}
+            href={`/admin/nangalheros/updatehero/${record.hero_id}`}
             className="dropdown-item px-2 text-warning"
           >
             <i className={`fa fa-pencil`}></i>
@@ -120,7 +120,7 @@ const AllHerosList = () => {
         </div>
         <div className="col-auto">
           <Link
-            href="/admin/add-hero"
+            href="/admin/nangalheros/addnangalhero"
             className={`button-round border_radius`}
           >
             <i className={`fa fa-plus`} aria-hidden="true"></i> Add Hero
