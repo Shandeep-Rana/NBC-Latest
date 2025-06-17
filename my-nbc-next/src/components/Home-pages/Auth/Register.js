@@ -2,10 +2,6 @@
 
 import React, { useEffect } from "react";
 import Image from 'next/image';
-import registerimg from '../../../../public/images/registerimg.jpg';
-import donor_header_img from '../../../../public/Images/donor-header-img.jpeg';
-import volunteer_header_img from '../../../../public/Images/Volunteers-working-together-1.jpg';
-import both_header_img from '../../../../public/Images/photo.jpg';
 import { useDispatch, useSelector } from "react-redux";
 import Head from 'next/head';
 import Link from 'next/link';
@@ -14,6 +10,9 @@ import { updateRegisterRoleBoth, updateRegisterRoleDonor, updateRegisterRoleVolu
 import RegisterAsBoth from "./Register-Forms/RegisterAsBoth";
 import RegisterDonor from "./Register-Forms/RegisterDonor";
 import RegisterVolunteer from "./Register-Forms/RegisterVolunteer";
+
+// ✅ Use string path for background image
+const registerimg = '/images/registerimg.jpg';
 
 const Register = ({ role }) => {
     const dispatch = useDispatch();
@@ -27,14 +26,15 @@ const Register = ({ role }) => {
         }
     }, [role, dispatch]);
 
+    // ✅ Return string path for image
     const renderHeaderImage = () => {
         switch (registerRoleCheck) {
             case RegisterRoles.Donor:
-                return donor_header_img;
+                return '/Images/donor-header-img.jpeg';
             case RegisterRoles.Volunteer:
-                return volunteer_header_img;
+                return '/Images/Volunteers-working-together-1.jpg';
             case RegisterRoles.Both:
-                return both_header_img;
+                return '/Images/photo.jpg';
             default:
                 return '';
         }
@@ -75,7 +75,8 @@ const Register = ({ role }) => {
                     </div>
                 </div>
 
-                <div className="volunteer-wrap" style={{ backgroundImage: `url(${registerimg.src})` }}>
+                {/* ✅ Corrected background image */}
+                <div className="volunteer-wrap" style={{ backgroundImage: `url(${registerimg})` }}>
                     <div className="container">
                         <div className="row pt-5">
                             <div className="col-lg-8 offset-lg-2">

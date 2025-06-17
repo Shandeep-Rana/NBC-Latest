@@ -16,6 +16,7 @@ import { getUserData, updateUser } from "@/Slice/authLogin";
 import { getAllIntrests, getAllProfessions, getAllVillages } from "@/Slice/master";
 import { updateUserSchema } from "@/lib/FormSchemas";
 import AdminLoader from "@/common/AdminLoader";
+import Image from "next/image";
 
 function ProfileUpdate() {
     const dispatch = useDispatch();
@@ -756,12 +757,14 @@ function ProfileUpdate() {
                                         defaultValue={file}
                                     />
                                     {previewUrl && (
-                                        <div className="preview-image-container mt-2" >
-                                            <img
-                                                className="preview-image"
+                                        <div className="preview-image-container" style={{ width: 310, height: 'auto', position: 'relative' }}>
+                                            <Image
                                                 src={previewUrl}
                                                 alt="Preview"
-                                                style={{ width: 365, height: 230, objectFit: 'cover' }}
+                                                fill
+                                                className="preview-image"
+                                                style={{ objectFit: 'contain' }}
+                                                unoptimized // ⚠️ Required for blob/base64/image previews
                                             />
                                         </div>
                                     )}

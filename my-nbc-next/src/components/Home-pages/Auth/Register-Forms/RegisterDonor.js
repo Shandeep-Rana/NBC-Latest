@@ -18,6 +18,7 @@ import Link from "next/link";
 import { donorSchema } from "@/lib/FormSchemas";
 import { getAllVillages } from "@/Slice/master";
 import UpgradeDonorToVolunteer from "./UpgradeDonorToVolunteer";
+import Image from "next/image";
 
 function RegisterDonor() {
   const router = useRouter();
@@ -652,11 +653,14 @@ function RegisterDonor() {
                       accept=".png,.jpg,.jpeg"
                     />
                     {previewUrl && (
-                      <div className="preview-image-container">
-                        <img
-                          className="preview-image"
+                      <div className="preview-image-container" style={{ width: 310, height: 'auto', position: 'relative' }}>
+                        <Image
                           src={previewUrl}
                           alt="Preview"
+                          fill
+                          className="preview-image"
+                          style={{ objectFit: 'contain' }}
+                          unoptimized // ⚠️ Required for blob/base64/image previews
                         />
                       </div>
                     )}
@@ -698,7 +702,7 @@ function RegisterDonor() {
               </button>
             </div>
             <p className="py-4">
-              Already a Blood Donor. Want to become Volunteer/Member? 
+              Already a Blood Donor. Want to become Volunteer/Member?
               <Link href="#" style={{ color: '#F15B43' }} onClick={toggleModal}>Click here</Link>
             </p>
           </div>

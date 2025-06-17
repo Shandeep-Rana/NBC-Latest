@@ -16,6 +16,7 @@ import { StatesAndUnionTerritories } from "@/constants";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { volunteerSchema } from "@/lib/FormSchemas";
+import Image from "next/image";
 
 const RegisterVolunteer = () => {
     const dispatch = useDispatch();
@@ -899,14 +900,14 @@ const RegisterVolunteer = () => {
                                             accept=".png,.jpg,.jpeg"
                                         />
                                         {previewUrl && (
-                                            <div
-                                                className="preview-image-container"
-                                                style={{ width: 310 }}
-                                            >
-                                                <img
-                                                    className="preview-image"
+                                            <div className="preview-image-container" style={{ width: 310, height: 'auto', position: 'relative' }}>
+                                                <Image
                                                     src={previewUrl}
                                                     alt="Preview"
+                                                    fill
+                                                    className="preview-image"
+                                                    style={{ objectFit: 'contain' }}
+                                                    unoptimized // ⚠️ Required for blob/base64/image previews
                                                 />
                                             </div>
                                         )}

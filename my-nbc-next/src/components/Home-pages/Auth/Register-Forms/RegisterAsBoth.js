@@ -18,6 +18,7 @@ import Link from "next/link";
 import { BloodGroupOptions, emailrgx, pinCodergx, StatesAndUnionTerritories } from "@/constants";
 import { useRouter } from "next/navigation";
 import { getAllProfessions, getAllVillages } from "@/Slice/master";
+import Image from "next/image";
 
 const schema = yup.object({
   fullName: yup.string().required("Name is required").trim(),
@@ -856,11 +857,14 @@ const RegisterAsBoth = () => {
                       accept=".png,.jpg,.jpeg"
                     />
                     {previewUrl && (
-                      <div className="preview-image-container" style={{ width: 310 }}>
-                        <img
-                          className="preview-image"
+                      <div className="preview-image-container" style={{ width: 310, height: 'auto', position: 'relative' }}>
+                        <Image
                           src={previewUrl}
                           alt="Preview"
+                          fill
+                          className="preview-image"
+                          style={{ objectFit: 'contain' }}
+                          unoptimized // ⚠️ Required for blob/base64/image previews
                         />
                       </div>
                     )}
