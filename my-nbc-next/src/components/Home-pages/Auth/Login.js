@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
 
@@ -84,13 +83,6 @@ const Login = () => {
                         className="volunteer-wrap"
                         style={{ backgroundImage: `url(/images/loginbg.jpg)` }} 
                     >
-                        <Image
-                            href="/images/loginbg"
-                            alt="Login Background"
-                            fill
-                            className="object-cover"
-                            quality={100}
-                        />
                         <div className="container">
                             <div className="row pt-5">
                                 <div className="col-lg-8 offset-lg-2">

@@ -1,15 +1,17 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
 
 export default function QuillEditor({ value, onChange }) {
     const editorRef = useRef(null);
-    const quillRef = useRef(null);
+    const quillRef = useRef(null);  
 
     useEffect(() => {
+        // Ensure it's only run in browser
         if (!editorRef.current) return;
+
+        const Quill = require('quill').default; // ✅ Lazy load Quill (fixes the error)
 
         if (!quillRef.current) {
             quillRef.current = new Quill(editorRef.current, {

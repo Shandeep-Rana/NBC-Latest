@@ -1,19 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Link from 'next/link';
 
-export default function TeamDetailPage() {
-    const [activeTab, setActiveTab] = useState('professional_skills');
-
-    const handleTabChange = (tab) => {
-        setActiveTab(tab);
-    };
-
+export default function TeamDetailPage({ member }) {
     return (
-
         <>
             <div className="page-header parallaxie">
                 <div className="container">
@@ -32,7 +24,7 @@ export default function TeamDetailPage() {
                                             Team
                                         </li>
                                         <li className="breadcrumb-item active" aria-current="page">
-                                            Login
+                                            {member.name}
                                         </li>
                                     </ol>
                                 </nav>
@@ -47,15 +39,16 @@ export default function TeamDetailPage() {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="page-team-single-box">
+
                                 {/* Team Member Info */}
                                 <div className="team-member-info-box">
                                     <div className="team-member-image">
                                         <figure className="image-anime reveal">
                                             <Image
-                                                src="/images/team-2.jpg"
-                                                alt="Lakshya Garg"
-                                                width={400}
-                                                height={400}
+                                                src={member.image}
+                                                alt={member.name}
+                                                width={605}
+                                                height={641.3}
                                                 className="img-fluid"
                                             />
                                         </figure>
@@ -65,100 +58,16 @@ export default function TeamDetailPage() {
                                         <div className="team-info-header">
                                             <div className="team-member-info">
                                                 <div className="section-title">
-                                                    <h2>Lakshya Garg</h2>
-                                                    <p>Co-Founder & Junior Developer</p>
+                                                    <h2>{member.name}</h2>
+                                                    <p>{member.role}</p>
                                                 </div>
                                             </div>
 
-                                            {/* Tabs */}
-                                            <div className="member-about-box">
-                                                <ul className="nav nav-tabs">
-                                                    <li className="nav-item">
-                                                        <button
-                                                            className={`nav-link ${activeTab === 'personal_info' ? 'active' : ''}`}
-                                                            onClick={() => handleTabChange('personal_info')}
-                                                        >
-                                                            Personal Info
-                                                        </button>
-                                                    </li>
-                                                    <li className="nav-item">
-                                                        <button
-                                                            className={`nav-link ${activeTab === 'professional_skills' ? 'active' : ''}`}
-                                                            onClick={() => handleTabChange('professional_skills')}
-                                                        >
-                                                            Professional Skills
-                                                        </button>
-                                                    </li>
-                                                    <li className="nav-item">
-                                                        <button
-                                                            className={`nav-link ${activeTab === 'award_win' ? 'active' : ''}`}
-                                                            onClick={() => handleTabChange('award_win')}
-                                                        >
-                                                            Award Win
-                                                        </button>
-                                                    </li>
-                                                </ul>
-
-                                                {/* Tab Content */}
-                                                <div className="tab-content mt-4">
-                                                    {activeTab === 'personal_info' && (
-                                                        <div className="tab-pane fade show active">
-                                                            <div className="section-title">
-                                                                <h3>About Me</h3>
-                                                                <h2>Lakshya Garg</h2>
-                                                                <p>
-                                                                    Born in the vibrant city of Beirut on January 29, 2013, Lakshya Garg is the young and
-                                                                    dynamic force behind our community support website. At just 11 years old, Lakshya embodies
-                                                                    a zest for life and a determination to make a positive impact in the world around him.
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    )}
-
-                                                    {activeTab === 'professional_skills' && (
-                                                        <div className="tab-pane fade show active">
-                                                            <div className="section-title">
-                                                                <p>
-                                                                    With a keen interest in technology, Lakshya has delved into the world of coding over the
-                                                                    past three years...
-                                                                </p>
-                                                            </div>
-                                                            <div className="skills-progress-bar">
-                                                                <div className="skillbar" data-percent="97%">
-                                                                    <div className="skill-data">
-                                                                        <div className="skill-title">Passionate Learner & Coder</div>
-                                                                        <div className="skill-no">97%</div>
-                                                                    </div>
-                                                                    <div className="skill-progress">
-                                                                        <div className="count-bar bg-primary" style={{ width: '97%' }}></div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div className="skillbar" data-percent="84%">
-                                                                    <div className="skill-data">
-                                                                        <div className="skill-title">Advocacy</div>
-                                                                        <div className="skill-no">84%</div>
-                                                                    </div>
-                                                                    <div className="skill-progress">
-                                                                        <div className="count-bar bg-success" style={{ width: '84%' }}></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    )}
-
-                                                    {activeTab === 'award_win' && (
-                                                        <div className="tab-pane fade show active">
-                                                            <div className="section-title">
-                                                                <h3>Award List</h3>
-                                                                <h2>Michael Carter</h2>
-                                                                <p>
-                                                                    As a dedicated and results-driven professional, I bring years of experience in corporate
-                                                                    strategy and team leadership...
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    )}
+                                            {/* Long Description */}
+                                            <div className="member-about-box mt-4">
+                                                <div className="section-title">
+                                                    <h3>About {member.name}</h3>
+                                                    <p>{member.description}</p>
                                                 </div>
                                             </div>
                                         </div>

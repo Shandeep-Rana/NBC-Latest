@@ -10,7 +10,7 @@ const Team = () => {
   const router = useRouter();
 
   const handleMemberClick = (id) => {
-    router.push(`/member-details/${id}`);
+    router.push(`/discoverus/team-detail/${id}`);
   };
 
   return (

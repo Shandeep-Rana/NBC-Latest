@@ -363,7 +363,7 @@ Although now retired, Dr. Naresh continues to remain active in community health 
     We look forward to the exciting journeys and stories that Abhishek will bring to the Nangal by Cycle community, further strengthening our efforts to celebrate and protect our cultural and natural heritage.</p></div>`
   },
   {
-    id: 'Ramesh Chandra Singh',
+    id: 'Ramesh-Chandra-Singh',
     name: 'Ramesh Chandra Singh',
     role: "Mentor",
     image: "/images/rameshImg.png",

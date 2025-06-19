@@ -95,7 +95,7 @@ const AllBlogList = () => {
         }
         return originalElement;
     };
-
+  
     const truncateWithEllipsis = (str, maxLength) => {
         return str.length > maxLength ? str.slice(0, maxLength) + "..." : str;
     };
