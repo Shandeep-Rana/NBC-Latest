@@ -81,7 +81,7 @@ const Blogs = () => {
             <div className="container">
               <div className="row">
                 {blogsList?.length > 0 ? blogsList.map((post, index) => {
-                  const blogUrl = `/blog/${rewriteUrl(post?.title || "")}-${numberToString(post?.blog_id || 0)}`;
+                  const blogUrl = `/media&events/blog/${rewriteUrl(post?.title || "")}-${numberToString(post?.blog_id || 0)}`;
 
                   return (
                     <div className="col-lg-4 col-md-6" key={post.id || index}>

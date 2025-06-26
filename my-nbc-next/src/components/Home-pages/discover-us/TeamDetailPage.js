@@ -74,17 +74,19 @@ export default function TeamDetailPage({ member }) {
                                     </div>
                                 </div>
 
-                                {/* Experience */}
-                                <div className="team-member-experience mt-5">
+                                <div className="team-member-experience">
                                     <div className="team-experience-box">
                                         <div className="section-title">
-                                            <h2>Personal Experience</h2>
-                                            <p>
-                                                Each team member brings a wealth of personal experience that drives their passion for making a
-                                                difference...
+                                            <h2 className="text-anime-style-2" data-cursor="-opaque">Personal experience</h2>
+                                            <p className="wow fadeInUp">
+                                                &quot;Each team member brings a wealth of personal experience that drives their passion for making a
+                                                difference. From firsthand involvement in community initiatives to years of volunteering and advocacy,
+                                                their diverse backgrounds enrich our mission. Their experiences have shaped their commitment to creating
+                                                positive change, enabling them to connect deeply with the communities we serve. This personal insight fuels
+                                                their dedication to developing impactful programs.&quot;
                                             </p>
                                         </div>
-                                        <div className="team-experience-body">
+                                        <div className="team-experience-body wow fadeInUp" data-wow-delay="0.2s">
                                             <ul>
                                                 <li>Community Engagement</li>
                                                 <li>Volunteer Leadership</li>
@@ -95,38 +97,48 @@ export default function TeamDetailPage({ member }) {
                                             </ul>
                                         </div>
                                     </div>
-                                </div>
 
-                                {/* Contact Form */}
-                                <div className="team-contact-form mt-5">
-                                    <div className="section-title">
-                                        <h2>Get in Touch with Us</h2>
-                                    </div>
-
-                                    <form className="contact-form">
-                                        <div className="row">
-                                            <div className="form-group col-md-6 mb-3">
-                                                <input type="text" className="form-control" placeholder="First Name" required />
-                                            </div>
-                                            <div className="form-group col-md-6 mb-3">
-                                                <input type="text" className="form-control" placeholder="Last Name" required />
-                                            </div>
-                                            <div className="form-group col-md-6 mb-3">
-                                                <input type="email" className="form-control" placeholder="E-mail Address" required />
-                                            </div>
-                                            <div className="form-group col-md-6 mb-3">
-                                                <input type="text" className="form-control" placeholder="Phone No." required />
-                                            </div>
-                                            <div className="form-group col-md-12 mb-3">
-                                                <textarea className="form-control" rows="4" placeholder="Write message"></textarea>
-                                            </div>
-                                            <div className="col-md-12">
-                                                <button type="submit" className="btn btn-primary">Send Message</button>
-                                            </div>
+                                    <div className="team-contact-form">
+                                        <div className="section-title">
+                                            <h2 className="text-anime-style-2" data-cursor="-opaque">Get in Touch with Us</h2>
                                         </div>
-                                    </form>
-                                </div>
+                                        <div className="contact-form">
+                                            <form id="contactForm" action="#" method="POST" data-toggle="validator" className="wow fadeInUp">
+                                                <div className="row">
+                                                    <div className="form-group col-md-6 mb-4">
+                                                        <input type="text" name="fname" className="form-control" id="fname" placeholder="First name" required />
+                                                        <div className="help-block with-errors"></div>
+                                                    </div>
 
+                                                    <div className="form-group col-md-6 mb-4">
+                                                        <input type="text" name="lname" className="form-control" id="lname" placeholder="Last name" required />
+                                                        <div className="help-block with-errors"></div>
+                                                    </div>
+
+                                                    <div className="form-group col-md-6 mb-4">
+                                                        <input type="email" name="email" className="form-control" id="email" placeholder="E-mail address" required />
+                                                        <div className="help-block with-errors"></div>
+                                                    </div>
+
+                                                    <div className="form-group col-md-6 mb-4">
+                                                        <input type="text" name="phone" className="form-control" id="phone" placeholder="Phone no." required />
+                                                        <div className="help-block with-errors"></div>
+                                                    </div>
+
+                                                    <div className="form-group col-md-12 mb-5">
+                                                        <textarea name="message" className="form-control" id="message" rows="4" placeholder="Write message"></textarea>
+                                                        <div className="help-block with-errors"></div>
+                                                    </div>
+
+                                                    <div className="col-md-12">
+                                                        <button type="submit" className="btn-default">send message</button>
+                                                        <div id="msgSubmit" className="h3 hidden"></div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

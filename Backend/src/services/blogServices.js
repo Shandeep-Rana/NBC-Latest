@@ -139,7 +139,7 @@ class BlogServices {
                 countQuery = countQuery.andWhere('blogs.is_approved', true);
             }
 
-            query = query.orderBy(sortBy, sortOrder);
+            query = query.orderBy('published_on', 'desc');
             query = query.limit(pageSize).offset(offset);
 
             let blogs = await query;

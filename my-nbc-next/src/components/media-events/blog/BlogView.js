@@ -78,11 +78,8 @@ export default function BlogView() {
                         <li className="breadcrumb-item">
                           <Link href="/">home</Link>
                         </li>
-                        <li className="breadcrumb-item">
-                          <Link href="/blog">blog</Link>
-                        </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                          {blog?.title}
+                          <Link href="/blog">blog</Link>
                         </li>
                       </ol>
                     </nav>

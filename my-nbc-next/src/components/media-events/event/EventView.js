@@ -104,11 +104,8 @@ export default function EventView() {
                         <li className="breadcrumb-item">
                           <Link href="/">home</Link>
                         </li>
-                        <li className="breadcrumb-item">
-                          <Link href="/events">events</Link>
-                        </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                          {event?.title}
+                          <Link href="/events">event</Link>
                         </li>
                       </ol>
                     </nav>

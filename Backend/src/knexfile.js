@@ -7,7 +7,7 @@ module.exports = {
     client: 'mysql',
     connection: {
       host: '185.199.53.75',
-      database: 'nbcdev',
+      database: 'nbc',
       user: 'nbc',
       password: 'g3jJ1#1{1@4',
       port: 3306,
