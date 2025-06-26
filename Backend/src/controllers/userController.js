@@ -145,42 +145,31 @@ const UserController = {
     try {
       const { otp, userId } = req.body;
 
-      if (typeof userId !== 'string') {
-        return res.status(400).json({ error: "Invalid user ID format", success: false });
-      }
-
-      const decodedUserId = decodeURIComponent(userId);
-      const decryptedUserId = commonFunc.decrypt(decodedUserId);
+      var decryptedUserId = commonFunc.decrypt(userId);
 
       const otpRecordRes = await otpServices.getOtpByUserIdAsync(decryptedUserId);
 
-      if (!otpRecordRes.success) {
+      if (!otpRecordRes.success)
         return res.status(404).json(otpRecordRes);
-      }
 
-      if (otpRecordRes.data.is_otp_used) {
+      if (otpRecordRes.data.is_otp_used)
         return res.status(400).json({ error: "OTP has already been used", success: false });
-      }
 
       const currentTime = new Date();
-      const diff = new Date(otpRecordRes.data.expiry_date) - currentTime;
+      const diff = otpRecordRes.data.expiry_date - currentTime;
 
-      if (diff < 0) {
+      if (diff < 0)
         return res.status(400).json({ error: "OTP has expired", success: false });
-      }
 
-      if (otpRecordRes.data.otp !== otp) {
+      if (otpRecordRes.data.otp !== otp)
         return res.status(400).json({ error: "Invalid OTP", success: false });
-      }
 
       await otpServices.updateOtpUsedAsync(decryptedUserId);
-
-      const verifyRes = await userServices.verifyUserAccountAsync(decryptedUserId);
-
+      var verifyRes = await userServices.verifyUserAccountAsync(decryptedUserId);
       return res.status(200).json(verifyRes);
 
-    } catch (error) {
-      console.error("OTP Verification Error:", error);
+    }
+    catch (error) {
       res.status(500).json({ error: error.message, success: false });
     }
   },
@@ -188,9 +177,7 @@ const UserController = {
   resendVerifyOtp: async (req, res) => {
     try {
       const { userId } = req.body;
-
-      const decodedUserId = decodeURIComponent(userId);
-      const decryptedUserId = commonFunc.decrypt(decodedUserId);
+      const decryptedUserId = commonFunc.decrypt(userId);
 
       const user = await userServices.getUserByIdAsync(decryptedUserId);
       if (!user.success) {

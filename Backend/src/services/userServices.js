@@ -58,7 +58,8 @@ class UserServices {
             if (!userExistRes.success) {
                 throw new Error('User not found with this email address.');
             }
-            const userRes = await this.getUserByIdAsync(userExistRes.data.id);
+            const userRes = await this.getUserByIdAsync(userExistRes.data.user_id);
+
             const user = userRes.data;
 
             const roleRes = await rolesServices.getUserRolesByIdAsync(user.Id);
@@ -101,7 +102,7 @@ class UserServices {
 
     async getUserByEmailAsync(email) {
         try {
-            let user = await knex(tableName).select('user_id as id').where('email', email).andWhere('is_deleted', false).first();
+            let user = await knex(tableName).select('*').where('email', email).andWhere('is_deleted', false).first();
             if (user) {
                 return {
                     message: "Fetched Successfully",
@@ -766,7 +767,6 @@ class UserServices {
     }
 
 }
-
 
 
 module.exports = new UserServices();

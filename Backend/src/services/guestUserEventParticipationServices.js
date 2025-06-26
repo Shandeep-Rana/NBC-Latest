@@ -1,21 +1,19 @@
 const knexConfig = require("../knexfile");
 const knex = require("knex")(knexConfig["development"]);
-const tableName = "event_participants";
+const tableName = "guest_event_participants";
 const constants = require("../constants/index");
 const auditServices = require("./auditServices");
 const URL = constants.IMAGE_URL;
 
 class event_participantsServices {
 
-    async addParticipantAsync(data) {
+    async addGuestUserParticipantAsync(data) {
 
         try {
-
             const existingParticipant = await knex(tableName)
                 .where({
-                    email: data.email,
-                    event_id: data.event,
-                    isDeleted: false
+                    guest_user_id: data.userId,
+                    event_id: data.eventId,
                 })
                 .first();
 
@@ -24,12 +22,8 @@ class event_participantsServices {
             }
 
             const newParticipant = {
-                name: data.name,
-                email: data.email,
-                contact: data.contact,
-                event_id: data.event,
-                user_id: data.user_id,
-                uploads: data.upload
+                guest_user_id: data.userId,
+                event_id: data.eventId,
             };
 
             const [id] = await knex(tableName).insert(newParticipant);
@@ -61,93 +55,71 @@ class event_participantsServices {
         try {
             const offset = (page - 1) * pageSize;
 
-            const participantQuery = knex('event_participants')
+            let query = knex(tableName)
                 .select(
                     'event_participants.id',
                     'event_participants.name',
                     'event_participants.email',
                     'event_participants.contact',
-                    'event_participants.uploads',
-                    'event_participants.attended',
-                    'events.title as eventTitle',
-                    knex.raw(`'registered' as userType`)
+                    "event_participants.uploads",
+                    "event_participants.attended",
+                    'events.title as eventTitle'
                 )
+                .where('event_participants.isdeleted', false)
                 .leftJoin('events', 'event_participants.event_id', 'events.eventId')
-                .where('event_participants.isDeleted', false)
-                .andWhere('events.isDeleted', false);
+                .andWhere('events.isdeleted', false);
 
-            const guestQuery = knex('guestuser')
-                .select(
-                    'guestuser.id',
-                    'guestuser.name',
-                    'guestuser.email',
-                    'guestuser.contact',
-                    'guestuser.upload as uploads',
-                    'guest_event_participants.has_attended as attended',
-                    'events.title as eventTitle',
-                    knex.raw(`'guest' as userType`)
-                )
-                .innerJoin('guest_event_participants', 'guestuser.id', 'guest_event_participants.guest_user_id')
-                .leftJoin('events', 'guest_event_participants.event_id', 'events.eventId')
-                .where('guestuser.isDeleted', false)
-                .andWhere('guest_event_participants.is_deleted', false)
-                .andWhere('events.isDeleted', false);
-
-            // Add filters
-            if (selectedEvent) {
-                participantQuery.andWhere('event_participants.event_id', selectedEvent);
-                guestQuery.andWhere('guest_event_participants.event_id', selectedEvent);
-            }
+            let countQuery = knex(tableName)
+                .count('event_participants.id as count')
+                .where('event_participants.isdeleted', false);
 
             if (search) {
-                participantQuery.andWhere(builder => {
+                query = query.andWhere(builder => {
                     builder.where('event_participants.name', 'like', `%${search}%`)
                         .orWhere('event_participants.email', 'like', `%${search}%`)
                         .orWhere('event_participants.contact', 'like', `%${search}%`);
                 });
 
-                guestQuery.andWhere(builder => {
-                    builder.where('guestuser.name', 'like', `%${search}%`)
-                        .orWhere('guestuser.email', 'like', `%${search}%`)
-                        .orWhere('guestuser.contact', 'like', `%${search}%`);
+                countQuery = countQuery.andWhere(builder => {
+                    builder.where('event_participants.name', 'like', `%${search}%`)
+                        .orWhere('event_participants.email', 'like', `%${search}%`)
+                        .orWhere('event_participants.contact', 'like', `%${search}%`);
                 });
             }
 
-            const [participants, guestUsers] = await Promise.all([
-                participantQuery,
-                guestQuery
-            ]);
+            query = query.orderBy(sortBy, sortOrder).limit(pageSize).offset(offset);
 
-            const allParticipants = [...participants, ...guestUsers].map(p => ({
-                ...p,
-                uploads: p.uploads ? `${URL}/gallery/competetion/${p.uploads}` : null
-            }));
+            if (selectedEvent) {
+                query = query.andWhere('event_participants.event_id', selectedEvent);
+                countQuery = countQuery.andWhere('event_participants.event_id', selectedEvent);
+            }
 
-            // Sort combined data
-            const sortedParticipants = allParticipants.sort((a, b) => {
-                const aVal = a[sortBy];
-                const bVal = b[sortBy];
-                return sortOrder === 'asc' ? (aVal > bVal ? 1 : -1) : (aVal < bVal ? 1 : -1);
+            const participants = await query;
+            const [{ count }] = await countQuery;
+
+            const processedParticipants = participants.map(participant => {
+                participant.uploads = participant.uploads
+                    ? `${URL}/gallery/competetion/${participant.uploads}`
+                    : null;
+
+                return participant;
             });
 
-            // Paginate in-memory
-            const paginated = sortedParticipants.slice(offset, offset + pageSize);
 
             return {
                 message: "Fetched Successfully",
                 statusCode: 200,
                 success: true,
                 data: {
-                    participants: paginated,
+                    participants: processedParticipants,
                     pagination: {
-                        total: allParticipants.length,
+                        total: parseInt(count, 10),
                         currentPage: page,
-                        totalPages: Math.ceil(allParticipants.length / pageSize)
+                        totalPages: Math.ceil(count / pageSize)
                     },
-                    eventTitle: paginated.length > 0 ? paginated[0].eventTitle : null
+                    eventTitle: participants.length > 0 ? participants[0].eventTitle : null
                 }
             };
-
         } catch (error) {
             return {
                 message: error.message,
@@ -202,50 +174,6 @@ class event_participantsServices {
         }
     }
 
-    async getAllArtGalleryParticipantsSimpleAsync() {
-        try {
-            let query = knex(tableName)
-                .select(
-                    'event_participants.id',
-                    'event_participants.name',
-                    'event_participants.email',
-                    'event_participants.contact',
-                    'event_participants.uploads',
-                    'events.title as eventTitle',
-                )
-                .where('event_participants.isdeleted', false)
-                .andWhere('event_participants.event_id', 133) // Filter by event_id = 133
-                .leftJoin('events', 'event_participants.event_id', 'events.eventId')
-                .andWhere('events.isdeleted', false);
-
-            const participants = await query;
-
-            const processedParticipants = participants.map(participant => {
-                participant.uploads = participant.uploads
-                    ? `${URL}/gallery/competetion/${participant.uploads}`
-                    : null;
-
-                return participant;
-            });
-
-            return {
-                message: "Fetched Successfully",
-                statusCode: 200,
-                success: true,
-                data: {
-                    participants: processedParticipants,
-                    eventTitle: participants.length > 0 ? participants[0].eventTitle : null
-                }
-            };
-        } catch (error) {
-            return {
-                message: error.message,
-                statusCode: 400,
-                success: false,
-                data: null
-            };
-        }
-    }
 
     async deleteEventParticipantAsync(id) {
         try {

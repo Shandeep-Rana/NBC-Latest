@@ -6,10 +6,9 @@ const ParticipantController = {
     try {
       const upload = req.file ? req.file.filename : null;
 
-      const { name, email, contact, event } = req.body;
+      const { email, intID } = req.body
 
       const existingUserResult = await userServices.getUserByEmailAsync(email);
-      console.log(existingUserResult)
 
       if (!existingUserResult.success || !existingUserResult.data) {
         return res.status(400).json({
@@ -19,14 +18,14 @@ const ParticipantController = {
         });
       }
 
-      const user = existingUserResult.data ? existingUserResult.data.id : null;
+      const user = existingUserResult?.data;
 
       const newEventParticipant = {
-        name,
+        name: user?.full_name,
         email,
-        contact,
-        event,
-        user_id: user,
+        contact: user?.mobile,
+        event: intID,
+        user_id: user?.user_id,
         upload
       };
 
@@ -63,6 +62,17 @@ const ParticipantController = {
     try {
       // Fetch all participants without any filters
       const participantsResult = await eventParticipationServices.getAllParticipantsSimpleAsync();
+
+      res.status(200).json(participantsResult);
+    } catch (error) {
+      res.status(500).json({ message: error.message, success: false });
+    }
+  },
+
+  getAllArtGalleryParticipantswithoutpagination: async (req, res) => {
+    try {
+      // Fetch all participants without any filters
+      const participantsResult = await eventParticipationServices.getAllArtGalleryParticipantsSimpleAsync();
 
       res.status(200).json(participantsResult);
     } catch (error) {

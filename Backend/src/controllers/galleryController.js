@@ -106,8 +106,15 @@ const galleryController = {
 
   getAllImages: async (req, res) => {
     try {
-      const result = await galleryServices.getAllImagesAsync();
-      res.status(200).json(result);
+      const { category_id } = req.query;
+
+      const result = await galleryServices.getAllImagesAsync(
+        'uploaded_at', 
+        'desc',            
+        category_id || null 
+      );
+
+      res.status(result.statusCode).json(result);
     } catch (error) {
       const resultObject = {
         message: error.message,

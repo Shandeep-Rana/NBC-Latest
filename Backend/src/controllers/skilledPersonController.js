@@ -21,6 +21,9 @@ module.exports = {
         pincode, state, profession, id
       } = req.body;
 
+      console.log(req.body);
+
+      // Treat `id` as `null` if it is not provided
       const requestId = id || "null";
 
       const existingUserResult = await userServices.getUserByEmailAsync(email);

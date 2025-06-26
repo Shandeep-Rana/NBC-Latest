@@ -77,16 +77,26 @@ class BlogServices {
         }
     }
 
-    async getPaginatedBlogsAsync({ page = 1, pageSize = 10, search, userId = null, isPublished = null, isApproved = null, sortBy = 'created_on', sortOrder = 'desc' }) {
+    async getPaginatedBlogsAsync({
+        page = 1,
+        pageSize = 10,
+        search,
+        userId = null,
+        isPublished = null,
+        isApproved = null,
+        sortBy = 'publish_date', // Default sort by publish_date
+        sortOrder = 'desc'       // Default to descending order
+    }) {
         try {
             const offset = (page - 1) * pageSize;
-
+    
+            // Check and auto-publish eligible blogs
             let allBlogsQuery = knex(tableName)
                 .select('blogs.*')
                 .where('is_deleted', false);
-
+    
             let allBlogs = await allBlogsQuery;
-
+    
             for (const blog of allBlogs) {
                 if (new Date(blog.publish_date) < new Date() && blog.is_approved && !blog.is_published) {
                     await knex(tableName)
@@ -97,7 +107,8 @@ class BlogServices {
                         });
                 }
             }
-
+    
+            // Main query to fetch paginated blogs
             let query = knex(tableName)
                 .select(
                     'blogs.*',
@@ -106,57 +117,60 @@ class BlogServices {
                 )
                 .leftJoin('users', 'blogs.author', 'users.user_id')
                 .where('blogs.is_deleted', false);
+    
             let countQuery = knex(tableName).count('blog_id as count').where('is_deleted', false);
-
+    
             if (userId) {
                 const userResult = await userServices.getUserByIdAsync(userId);
                 if (!userResult.success)
                     throw new Error("Invalid User");
-
+    
                 const roleResult = await rolesServices.getUserRolesByIdAsync(userResult.data.Id);
                 if (!roleResult.success)
                     throw new Error("Invalid Error");
+    
                 const userRoles = roleResult.data;
-
+    
                 if (!userRoles.includes(constants.ROLES.Admin)) {
                     query = query.where('blogs.author', userId);
                     countQuery = countQuery.where('blogs.author', userId);
                 }
             }
-
+    
             if (search) {
                 query = query.andWhere('blogs.title', 'like', `%${search}%`);
                 countQuery = countQuery.andWhere('blogs.title', 'like', `%${search}%`);
             }
-
+    
             if (isPublished) {
                 query = query.andWhere('blogs.is_published', true);
                 countQuery = countQuery.andWhere('blogs.is_published', true);
             }
-
+    
             if (isApproved) {
                 query = query.andWhere('blogs.is_approved', true);
                 countQuery = countQuery.andWhere('blogs.is_approved', true);
             }
-
-            query = query.orderBy('published_on', 'desc');
+    
+            query = query.orderBy(sortBy, sortOrder);
+    
             query = query.limit(pageSize).offset(offset);
-
-            let blogs = await query;
+    
+            const blogs = await query;
             const [{ count }] = await countQuery;
-
+    
             const processedBlogs = blogs.map(blog => {
                 blog.thumbnail_url = blog.thumbnail_url
                     ? `${URL}/blogThumbnail/${blog.thumbnail_url}`
                     : null;
-
+    
                 blog.author_profile_url = blog.author_profile_url
                     ? `${URL}/userProfile/${blog.author_profile_url}`
                     : null;
-
+    
                 return blog;
             });
-
+    
             return {
                 message: "Fetched Successfully",
                 statusCode: 200,
@@ -170,7 +184,7 @@ class BlogServices {
                     }
                 }
             };
-
+    
         } catch (err) {
             return {
                 message: err.message,

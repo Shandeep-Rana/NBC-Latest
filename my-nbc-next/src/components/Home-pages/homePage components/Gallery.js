@@ -1,8 +1,35 @@
 'use client';
 import React from 'react'
 import Image from 'next/image'
+import { useDispatch } from 'react-redux';
+import { getAllImages } from '@/Slice/gallery';
 
 const Gallery = () => {
+
+    const dispatch = useDispatch();
+    const { allImages, galleryCategory, isLoading } = useSelector((state) => state.image);
+    const [selectedCategory, setSelectedCategory] = useState("all");
+
+    useEffect(() => {
+        dispatch(getAllImages());
+    }, [dispatch]);
+
+    useEffect(() => {
+        const grid = document.querySelector(".grid");
+        if (grid && allImages?.length) {
+            const delay = 500;
+            const timeoutId = setTimeout(() => {
+                new Masonry(grid, { itemSelector: ".grid-item" });
+            }, delay);
+            return () => clearTimeout(timeoutId);
+        }
+    }, [allImages]);
+
+    const handleCategoryClick = (id) => {
+        setSelectedCategory(id);
+        dispatch(getAllImages(id === "all" ? null : id));
+    };
+
     return (
         <div className="our-gallery">
             <div className="container-fluid">

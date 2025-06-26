@@ -334,29 +334,51 @@ class GalleryServices {
         }
     }
 
-    async getAllImagesAsync(sortBy = 'uploaded_at', sortOrder = 'desc') {
+    async getAllImagesAsync(sortBy = 'uploaded_at', sortOrder = 'desc', category_id = null) {
         try {
-            let query = knex(tableName).select('galleryImages.image_id', 'galleryImages.title', 'galleryImages.image_url', 'users.full_name as uploaded_by')
+            // 👉 Use category_id = 1 as default if none is passed or empty
+            const effectiveCategoryId = category_id === null || category_id === undefined || category_id === '' ? 1 : category_id;
+
+            // 1. Build image query
+            let query = knex(tableName)
+                .select(
+                    'galleryImages.image_id',
+                    'galleryImages.title',
+                    'galleryImages.image_url',
+                    'users.full_name as uploaded_by',
+                    'gallery_category.name as category_name',
+                    'galleryImages.category_id'
+                )
                 .leftJoin('users', 'galleryImages.uploaded_by', 'users.user_id')
+                .leftJoin('gallery_category', 'galleryImages.category_id', 'gallery_category.id')
                 .where('galleryImages.is_deleted', false)
                 .where('galleryImages.is_approved', true);
 
+            if (effectiveCategoryId !== 'all') {
+                query = query.andWhere('galleryImages.category_id', effectiveCategoryId);
+            }
+
             query = query.orderBy(sortBy, sortOrder);
 
-            var images = await query;
+            let images = await query;
 
             images = images.map(img => {
-                img.image_url = img.image_url
-                    ? `${URL}/gallery/${img.image_url}`
-                    : null;
+                img.image_url = img.image_url ? `${URL}/gallery/${img.image_url}` : null;
                 return img;
             });
+
+            const categories = await knex('gallery_category')
+                .select('id', 'name')
+                .where('is_deleted', false);
 
             return {
                 message: "Fetched Successfully",
                 statusCode: 200,
                 success: true,
-                data: images
+                data: {
+                    images,
+                    categories,
+                }
             };
         } catch (err) {
             return {

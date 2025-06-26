@@ -31,6 +31,7 @@ const ParticipantController = require("../controllers/eventParticipantsControlle
 const SpecializedCategoryController = require("../controllers/specializedCategoryController");
 const PersonSpecializedSkillController = require("../controllers/personSpecializedSkillController");
 const EventCategoryController = require("../controllers/eventCategoryController");
+const guestUserController = require("../controllers/guestUserController");
 const router = express.Router();
 
 // User login 
@@ -124,6 +125,7 @@ router.get("/get/allEventCategories", EventCategoryController.getAllEventCategor
 router.post("/add-eventParticipant", competetionMulter.single("upload"), ParticipantController.createParticipant);
 router.get("/get-all/Eventparticipants", ParticipantController.getAllParticipants);
 router.get("/get-all/Eventparticipantswithoutpagination", ParticipantController.getAllParticipantswithoutpagination);
+router.get("/get-all/Eventparticipantswithoutpaginationartgallery", ParticipantController.getAllArtGalleryParticipantswithoutpagination);
 router.get("/get/Eventparticipant/:id", ParticipantController.getEventParticipant);
 router.post("/update/Eventparticipant/:id", ParticipantController.updateEventParticipant);
 router.post("/delete-eventParticipant/:id", ParticipantController.deleteEventParticipantById);
@@ -219,5 +221,8 @@ router.post("/addSkills", PersonSpecializedSkillController.addPersonSpecializedS
 router.post("/getskillsofperson", PersonSpecializedSkillController.getSkillsForPerson);
 router.post("/deleteskillofperson", PersonSpecializedSkillController.deletePersonSpecializedSkill);
 router.get("/getallpersonhavingskill", PersonSpecializedSkillController.getAllPersonhavingSpecializedSkill);
+
+// guest users crud
+router.post("/addGuestUser", guestUserController.addGuestUser);
 
 module.exports = router;
