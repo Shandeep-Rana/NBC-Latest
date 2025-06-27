@@ -10,6 +10,7 @@ const Imageslice = createSlice({
     galleryImagesCount: null,
     allImages: [],
     isLoading: false,
+    galleryCategory: []
   },
   reducers: {
     getImagesuccess: (state, action) => {
@@ -26,9 +27,9 @@ const Imageslice = createSlice({
     updateImageFailure: (state, action) => {
       state.isLoading = false;
     },
-
     getAllImagesSuccess: (state, action) => {
-      state.allImages = action.payload.data;
+      state.allImages = action.payload.data.images;
+      state.galleryCategory = action.payload.data.categories;
       state.isLoading = false;
     },
     getAllImagesFailure: (state, action) => {
@@ -207,10 +208,17 @@ export const disApproveImage = (data) => async (dispatch) => {
   }
 }
 
-export const getAllImages = () => async (dispatch) => {
+export const getAllImages = (category_id = null) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/all-images`);
+
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/all-images`,
+      {
+        params: category_id ? { category_id } : {},
+      }
+    );
+
     if (response.data.success) {
       dispatch(getAllImagesSuccess(response.data));
     } else {

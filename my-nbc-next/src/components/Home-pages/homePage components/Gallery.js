@@ -1,167 +1,135 @@
 'use client';
-import React from 'react'
-import Image from 'next/image'
-import { useDispatch } from 'react-redux';
+
+import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { getAllImages } from '@/Slice/gallery';
+import { useRouter } from 'next/navigation';
+import { Fancybox as NativeFancybox } from '@fancyapps/ui';
+import '@fancyapps/ui/dist/fancybox/fancybox.css';
+import Image from 'next/image';
 
 const Gallery = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
 
-    const dispatch = useDispatch();
-    const { allImages, galleryCategory, isLoading } = useSelector((state) => state.image);
-    const [selectedCategory, setSelectedCategory] = useState("all");
+  const { allImages, galleryCategory } = useSelector((state) => state.image);
+  const [selectedCategory, setSelectedCategory] = useState('all');
 
-    useEffect(() => {
-        dispatch(getAllImages());
-    }, [dispatch]);
+  // Fetch all images when component mounts or category changes
+  useEffect(() => {
+    dispatch(getAllImages());
+  }, [dispatch]);
 
-    useEffect(() => {
-        const grid = document.querySelector(".grid");
-        if (grid && allImages?.length) {
-            const delay = 500;
-            const timeoutId = setTimeout(() => {
-                new Masonry(grid, { itemSelector: ".grid-item" });
-            }, delay);
-            return () => clearTimeout(timeoutId);
-        }
-    }, [allImages]);
+  // Bind Fancybox after images are updated and DOM is ready
+  useLayoutEffect(() => {
+    NativeFancybox.destroy();
+    NativeFancybox.bind('[data-fancybox="gallery"]', {
+      Carousel: { infinite: false },
+    });
 
-    const handleCategoryClick = (id) => {
-        setSelectedCategory(id);
-        dispatch(getAllImages(id === "all" ? null : id));
-    };
+    return () => NativeFancybox.destroy(); // cleanup
+  }, [allImages]);
 
-    return (
-        <div className="our-gallery">
-            <div className="container-fluid">
-                <div className="row section-row no-gutters">
-                    <div className="col-lg-12">
-                        <div className="section-title">
-                            <h3 className="wow fadeInUp">gallery</h3>
-                            <h2 className="text-anime-style-2" data-cursor="-opaque">Our image gallery</h2>
-                        </div>
-                    </div>
-                </div>
+  const handleCategoryClick = (id) => {
+    setSelectedCategory(id);
+    dispatch(getAllImages(id === 'all' ? null : id));
+  };
 
-                <div className="row">
-                    <div className="col-lg-12">
-                        <div className="our-gallery-nav wow fadeInUp" data-wow-delay="0.2s">
-                            <ul>
-                                <li><a href="#" className="active-btn" data-filter="*">all</a></li>
-                                <li><a href="#" data-filter=".health">health</a></li>
-                                <li><a href="#" data-filter=".education">education</a></li>
-                                <li><a href="#" data-filter=".food">food</a></li>
-                            </ul>
-                        </div>
-                    </div>
+  const filteredCategories = galleryCategory?.filter(
+    (cat) => cat.name?.toLowerCase() !== 'all'
+  );
 
-                    <div className="col-lg-12">
-                        <div className="gallery-item-boxes">
-                            <div className="gallery-item-box health food">
-                                <figure className="image-anime">
-                                    <Image
-                                        src="/images/gallery-1.jpg"
-                                        alt="Gallery Image 1"
-                                        width={400}
-                                        height={300}
-                                    />
-                                </figure>
-                            </div>
-                            <div className="gallery-item-box food">
-                                <figure className="image-anime">
-                                    <Image
-                                        src="/images/gallery-2.jpg"
-                                        alt="Gallery Image 2"
-                                        width={400}
-                                        height={300}
-                                    />
-                                </figure>
-                            </div>
-                            <div className="gallery-item-box food education">
-                                <figure className="image-anime">
-                                    <Image
-                                        src="/images/gallery-3.jpg"
-                                        alt="Gallery Image 3"
-                                        width={400}
-                                        height={300}
-                                    />
-                                </figure>
-                            </div>
-                            <div className="gallery-item-box health education">
-                                <figure className="image-anime">
-                                    <Image
-                                        src="/images/gallery-4.jpg"
-                                        alt="Gallery Image 4"
-                                        width={400}
-                                        height={300}
-                                    />
-                                </figure>
-                            </div>
-                            <div className="gallery-item-box health">
-                                <figure className="image-anime">
-                                    <Image
-                                        src="/images/gallery-5.jpg"
-                                        alt="Gallery Image 5"
-                                        width={400}
-                                        height={300}
-                                    />
-                                </figure>
-                            </div>
-                            <div className="gallery-item-box food education">
-                                <figure className="image-anime">
-                                    <Image
-                                        src="/images/gallery-6.jpg"
-                                        alt="Gallery Image 6"
-                                        width={400}
-                                        height={300}
-                                    />
-                                </figure>
-                            </div>
-                            <div className="gallery-item-box health">
-                                <figure className="image-anime">
-                                    <Image
-                                        src="/images/gallery-7.jpg"
-                                        alt="Gallery Image 7"
-                                        width={400}
-                                        height={300}
-                                    />
-                                </figure>
-                            </div>
-                            <div className="gallery-item-box food">
-                                <figure className="image-anime">
-                                    <Image
-                                        src="/images/gallery-8.jpg"
-                                        alt="Gallery Image 8"
-                                        width={400}
-                                        height={300}
-                                    />
-                                </figure>
-                            </div>
-                            <div className="gallery-item-box education">
-                                <figure className="image-anime">
-                                    <Image
-                                        src="/images/gallery-9.jpg"
-                                        alt="Gallery Image 9"
-                                        width={400}
-                                        height={300}
-                                    />
-                                </figure>
-                            </div>
-                            <div className="gallery-item-box health education">
-                                <figure className="image-anime">
-                                    <Image
-                                        src="/images/gallery-10.jpg"
-                                        alt="Gallery Image 10"
-                                        width={400}
-                                        height={300}
-                                    />
-                                </figure>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  const visibleImages = allImages?.slice(0, 10);
+
+  const handleViewMore = () => {
+    router.push('/media&events/gallery');
+  };
+
+  return (
+    <div className="our-gallery">
+      <div className="container-fluid">
+        <div className="row section-row no-gutters">
+          <div className="col-lg-12">
+            <div className="section-title">
+              <h3 className="wow fadeInUp">gallery</h3>
+              <h2 className="text-anime-style-2" data-cursor="-opaque">
+                Our image gallery
+              </h2>
             </div>
+          </div>
         </div>
-    )
-}
 
-export default Gallery
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="our-gallery-nav wow fadeInUp" data-wow-delay="0.2s">
+              <ul>
+                <li>
+                  <button
+                    className={selectedCategory === 'all' ? 'active-btn' : ''}
+                    onClick={() => handleCategoryClick('all')}
+                  >
+                    all
+                  </button>
+                </li>
+                {filteredCategories?.map((cat) => (
+                  <li key={cat.id}>
+                    <button
+                      className={selectedCategory === cat.id ? 'active-btn' : ''}
+                      onClick={() => handleCategoryClick(cat.id)}
+                    >
+                      {cat.name}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="col-lg-12">
+            <div className="gallery-item-boxes grid">
+              {visibleImages && visibleImages.length > 0 ? (
+                visibleImages.map((img) => (
+                  <div
+                    className={`gallery-item-box grid-item ${img.category_class || ''}`}
+                    key={img.image_id}
+                  >
+                    <figure className="image-anime">
+                      <a
+                        key={img.image_id + '-fancybox'}
+                        href={img.image_url}
+                        data-fancybox="gallery"
+                        data-caption={`Credit To: ${img.uploaded_by || img.title}`}
+                        style={{ display: 'block', cursor: 'pointer' }}
+                      >
+                        <Image
+                          src={img.image_url}
+                          alt={img.title}
+                          width={400}
+                          height={300}
+                        />
+                      </a>
+                    </figure>
+                  </div>
+                ))
+              ) : (
+                <p>No images available.</p>
+              )}
+            </div>
+          </div>
+
+          <div className="col-lg-12 text-center mt-4">
+            <button
+              className="btn btn-primary"
+              onClick={handleViewMore}
+              style={{ backgroundColor: '#f15b43', borderColor: '#f15b43' }}
+            >
+              View More
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Gallery;

@@ -12,12 +12,14 @@ import HowItWorks from './homePage components/HowItWorks'
 import Testimonials from './homePage components/Testimonials'
 import Gallery from './homePage components/Gallery'
 import BlogSection from './homePage components/BlogSection'
+// import MembersCountSection from './homePage components/MembersCountSection'
 
 const Home = () => {
     return (
         <>
             <OurHeros />
             <About />
+            {/* <MembersCountSection /> */}
             <WhatWeDo />
             <OurCausesSection />
             <WhyChooseUs />

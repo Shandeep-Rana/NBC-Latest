@@ -6,6 +6,7 @@
 @import '../../assets/css/mousecursor.css';
 @import '../../assets/css/all.min.css';
 @import '../../assets/css/bootstrap.min.css';
+@import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
 
 :root {

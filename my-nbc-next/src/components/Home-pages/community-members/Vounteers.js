@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllVolunteers } from '../../../Slice/volunteers';
 import Loader from '../../../common/Loader';
 import { getAllVillages } from '@/Slice/master';
+import { rewriteUrl } from '@/constants';
+import { numberToString } from '@/constants/utils';
 
 const Volunteers = () => {
   const [localLoading, setLocalLoading] = useState(false);
@@ -166,7 +168,7 @@ return (
                           </a>
                         </strong>
                         <div className="social-links">
-                          <Link className="cutm-con-link mt-4" href="/team-single.html">
+                          <Link className="cutm-con-link mt-4" href={`/communitymembers/volunteers/detail-page/${rewriteUrl(volunteer?.name)}-${numberToString(volunteer?.volunteerId)}`}>
                             View Details
                           </Link>
                         </div>

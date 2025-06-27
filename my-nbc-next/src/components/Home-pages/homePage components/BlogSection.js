@@ -72,7 +72,7 @@ const BlogSection = () => {
                             const blogUrl = `/media&events/blog/${rewriteUrl(blog?.title || "")}-${numberToString(blog?.blog_id || 0)}`;
 
                             return (
-                                <div className="col-lg-4 col-md-6" key={blog.blogId}>
+                                <div className="col-lg-4 col-md-6" key={blog.blog_id}>
                                     <div className="post-item wow fadeInUp" data-wow-delay={`${index * 0.2}s`}>
                                         <div className="post-item-header">
                                             <div className="post-item-meta">

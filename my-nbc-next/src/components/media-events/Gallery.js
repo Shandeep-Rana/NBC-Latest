@@ -1,17 +1,38 @@
-'use client'
+'use client';
 import { getAllImages } from '@/Slice/gallery';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Fancybox as NativeFancybox } from '@fancyapps/ui';
+import '@fancyapps/ui/dist/fancybox/fancybox.css';
 
 const Gallery = () => {
   const dispatch = useDispatch();
-  const { allImages, isLoading } = useSelector((state) => state.image);
+  const { allImages, galleryCategory, isLoading } = useSelector((state) => state.image);
+  const [selectedCategory, setSelectedCategory] = useState('all');
 
   useEffect(() => {
     dispatch(getAllImages());
   }, [dispatch]);
+
+  useLayoutEffect(() => {
+    NativeFancybox.destroy();
+    NativeFancybox.bind('[data-fancybox="gallery"]', {
+      Carousel: { infinite: false },
+    });
+
+    return () => NativeFancybox.destroy();
+  }, [allImages]);
+
+  const handleCategoryClick = (id) => {
+    setSelectedCategory(id);
+    dispatch(getAllImages(id === 'all' ? null : id));
+  };
+
+  const filteredCategories = galleryCategory?.filter(
+    (cat) => cat.name?.toLowerCase() !== 'all'
+  );
 
   return (
     <>
@@ -44,9 +65,9 @@ const Gallery = () => {
           <div className="row section-row no-gutters">
             <div className="col-lg-12">
               <div className="section-title">
-                <h3 className="wow fadeInUp">Gallery</h3>
+                <h3 className="wow fadeInUp">gallery</h3>
                 <h2 className="text-anime-style-2" data-cursor="-opaque">
-                  Our Nangal Gallery
+                  Our image gallery
                 </h2>
               </div>
             </div>
@@ -57,65 +78,59 @@ const Gallery = () => {
               <div className="our-gallery-nav wow fadeInUp" data-wow-delay="0.2s">
                 <ul>
                   <li>
-                    <Link href="#" className="active-btn" data-filter="*">
+                    <button
+                      className={selectedCategory === 'all' ? 'active-btn' : ''}
+                      onClick={() => handleCategoryClick('all')}
+                    >
                       all
-                    </Link>
+                    </button>
                   </li>
-                  <li>
-                    <Link href="#" data-filter=".health">
-                      health
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#" data-filter=".education">
-                      education
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#" data-filter=".food">
-                      food
-                    </Link>
-                  </li>
+                  {filteredCategories?.map((cat) => (
+                    <li key={cat.id}>
+                      <button
+                        className={selectedCategory === cat.id ? 'active-btn' : ''}
+                        onClick={() => handleCategoryClick(cat.id)}
+                      >
+                        {cat.name}
+                      </button>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
 
             <div className="col-lg-12">
-              <div className="gallery-item-boxes">
-                {isLoading ? (
-                  <p style={{ textAlign: 'center' }}>Loading gallery...</p>
-                ) : allImages && allImages.length > 0 ? (
-                  allImages.map((item) => (
+              <div className="gallery-item-boxes grid">
+                {allImages && Array.isArray(allImages) && allImages.length > 0 ? (
+                  allImages.map((img) => (
                     <div
-                      key={item.image_id}
-                      className={`gallery-item-box ${item.category || ''}`}
+                      className={`gallery-item-box grid-item ${img.category_class || ''}`}
+                      key={img.image_id}
                     >
                       <figure className="image-anime">
-                        <Image
-                          src={item.image_url || '/images/placeholder.jpg'}
-                          alt={item.title || 'Gallery Image'}
-                          width={600}
-                          height={400}
-                          layout="responsive"
-                          objectFit="cover"
-                        />
+                        <a
+                          href={img.image_url}
+                          data-fancybox="gallery"
+                          data-caption={img.title}
+                        >
+                          <Image
+                            src={img.image_url}
+                            alt={img.title}
+                            width={400}
+                            height={300}
+                          />
+                        </a>
                       </figure>
-                      {/* Optional metadata if available */}
-                      {item.title && (
-                        <div className="gallery-meta" style={{ padding: '10px' }}>
-                          {item.uploaded_by && <p>Uploaded by: {item.uploaded_by}</p>}
-                        </div>
-                      )}
                     </div>
                   ))
                 ) : (
-                  <p style={{ textAlign: 'center' }}>No images found.</p>
+                  <p>No images available.</p>
                 )}
               </div>
             </div>
           </div>
         </div>
-      </div>
+        </div>
     </>
   );
 };

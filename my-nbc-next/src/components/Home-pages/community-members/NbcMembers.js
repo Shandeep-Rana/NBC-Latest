@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllSkilledPersons } from '@/Slice/skilledPerson';
 import { getAllVillages } from '@/Slice/master';
 import Loader from '@/common/Loader';
+import { numberToString } from '@/constants/utils';
+import { rewriteUrl } from '@/constants';
 
 const NbcMembers = () => {
 
@@ -81,7 +83,7 @@ const NbcMembers = () => {
                                             <span>Our</span> Members
                                         </h1>
                                         <nav className="wow fadeInUp">
-                                            <ol className="breadcrumb">
+                                            <ol className="breadcrumb"> 
                                                 <li className="breadcrumb-item">
                                                     <Link href="/">home</Link>
                                                 </li>
@@ -156,7 +158,7 @@ const NbcMembers = () => {
                                                 </div>
                                                 <div className="team-content text-start">
                                                     <h3>
-                                                        <Link href="/team-single.html">{member.name}</Link>
+                                                        <Link href={`/communitymembers/volunteers/detail-page/${rewriteUrl(member?.name)}-${numberToString(member?.volunteerId)}`}>{member.name}</Link>
                                                     </h3>
                                                     <p className="mb-2">
                                                         <i className="fas fa-map-marker-alt"></i> {member.village || 'N/A'}
@@ -167,7 +169,7 @@ const NbcMembers = () => {
                                                         </a>
                                                     </strong>
                                                     <div className="social-links">
-                                                        <Link className="cutm-con-link mt-4" href="/team-single.html">
+                                                        <Link className="cutm-con-link mt-4" href={`/communitymembers/volunteers/detail-page/${rewriteUrl(member?.name)}-${numberToString(member?.volunteerId)}`}>
                                                             View Details
                                                         </Link>
                                                     </div>
