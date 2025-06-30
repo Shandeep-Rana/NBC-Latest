@@ -78,7 +78,7 @@ const News = () => {
                         <div className="container">
                             <div className="row">
                                 {newsList?.length > 0 ? newsList.map((post, index) => {
-                                    const newsUrl = `/news/${rewriteUrl(post?.title || "")}-${numberToString(post?.news_id || 0)}`;
+                                    const newsUrl = `/media&events/news/detail-page/${rewriteUrl(post?.title || "")}-${numberToString(post?.news_id || 0)}`;
 
                                     return (
                                         <div className="col-lg-4 col-md-6" key={post.id || index}>
@@ -131,7 +131,15 @@ const News = () => {
                             {newsList.length < newsCount && (
                                 <div className="row">
                                     <div className="col-12 text-center mt-4">
-                                        <button className="btn btn-primary" onClick={handleViewMore}>
+                                        <button className="btn btn-primary" onClick={handleViewMore}
+                                            style={{
+                                                backgroundColor: '#f15b43',
+                                                color: '#fff',
+                                                border: 'none',
+                                                padding: '0.5rem 1rem',
+                                                borderRadius: '4px',
+                                                cursor: 'pointer'
+                                            }}>
                                             {localLoading ? 'Loading...' : 'View More'}
                                         </button>
                                     </div>

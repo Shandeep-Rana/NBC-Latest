@@ -156,7 +156,7 @@ const Events = () => {
                                 <i className="fas fa-angle-double-right"></i> Event Details
                               </Link>
                               <EventRegister
-                                eventId={event.id}
+                                eventId={event.eventId}
                                 isExpired={event.isExpired}
                                 categoryId={event.categoryId}
                                 onNotLoggedIn={handleRegisterClick}
@@ -175,6 +175,14 @@ const Events = () => {
                       className="ul-btn"
                       onClick={handleClick}
                       disabled={localLoading}
+                      style={{
+                        backgroundColor: '#f15b43',
+                        color: '#fff',
+                        border: 'none',
+                        padding: '0.5rem 1rem',
+                        borderRadius: '4px',
+                        cursor: 'pointer'
+                      }}
                     >
                       {localLoading ? "Loading..." : "Load More"}
                     </button>

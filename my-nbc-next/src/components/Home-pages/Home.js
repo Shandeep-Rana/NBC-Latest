@@ -29,7 +29,7 @@ const Home = () => {
             <HowItWorks />
             <Testimonials />
             <Gallery />
-            <BlogSection />
+            <BlogSection /> 
         </>
 
     )

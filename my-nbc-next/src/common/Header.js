@@ -84,7 +84,7 @@ const Header = () => {
                     <ul>
                       <li><Link href="/discoverus/whoweare" className="nav-link">Who We Are</Link></li>
                       <li><Link href="/discoverus/team" className="nav-link">Our Team</Link></li>
-                      <li><a className="nav-link" href="services.html">Services</a></li>
+                      {/* <li><a className="nav-link" href="services.html">Services</a></li> */}
                     </ul>
                   </li>
 

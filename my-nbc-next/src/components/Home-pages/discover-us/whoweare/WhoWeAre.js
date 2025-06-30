@@ -32,8 +32,8 @@ const WhoWeAre = () => {
         </div>
       </div>
       <About />
-      <HowWeHelpSection/>
-      <OurFeatures />
+      {/* <HowWeHelpSection/> */}
+      {/* <OurFeatures /> */}
     </>
   )
 }

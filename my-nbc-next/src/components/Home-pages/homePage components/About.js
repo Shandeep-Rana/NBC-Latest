@@ -71,9 +71,9 @@ const About = () => {
                   </div>
 
                   <div className="about-btn wow fadeInUp" data-wow-delay="0.6s">
-                    <a href="about.html" className="btn-default">
+                    {/* <a href="about.html" className="btn-default">
                       about us
-                    </a>
+                    </a> */}
                   </div>
                 </div>
 
