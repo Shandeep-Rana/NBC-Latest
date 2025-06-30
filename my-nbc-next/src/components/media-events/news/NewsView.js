@@ -106,7 +106,7 @@ const NewsView = () => {
                                                     src={imageUrls[0]}
                                                     alt={news?.title}
                                                     width={1200}
-                                                    height={675}
+                                                    height={600}
                                                     className="w-full h-auto"
                                                 />
                                             </figure>

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Dropdown } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';// Adjust to your redux path
+import { useDispatch } from 'react-redux';
 
 const AdminHeader = ({ handleShow }) => {
   const dispatch = useDispatch();
