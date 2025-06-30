@@ -65,7 +65,8 @@ class DonorServices {
                 .count('donor_id as count')
                 .leftJoin('users', 'donors.user_id', 'users.user_id')
                 .leftJoin('villages', 'users.village', 'villages.vill_id')
-                .where('donors.is_deleted', false);
+                .where('users.is_deleted', false)
+                .andWhere('donors.is_deleted', false);
 
             if (search) {
                 query = query.andWhere(builder => {

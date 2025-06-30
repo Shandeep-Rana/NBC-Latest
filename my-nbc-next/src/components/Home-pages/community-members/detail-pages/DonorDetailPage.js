@@ -1,24 +1,24 @@
 'use client';
 
 import { stringToNumber } from '@/constants/utils';
-import { getuser } from '@/Slice/volunteers';
+import { getdonor } from '@/Slice/bloodDonation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-const VolunteerDetailPage = () => {
+const DonorDetailPage = () => {
     const { name } = useParams();
     const lastIndex = name.lastIndexOf('-');
     const volunteerId = name.substring(lastIndex + 1);
     const intID = stringToNumber(volunteerId);
 
     const dispatch = useDispatch();
-    const { user, isLoading } = useSelector((state) => state.user);
+    const { donor, isLoading } = useSelector((state) => state.donor);
 
     useEffect(() => {
-        dispatch(getuser(intID));
+        dispatch(getdonor(intID));
     }, [dispatch, intID]);
 
     const handleGetInTouch = () => {
@@ -36,15 +36,15 @@ const VolunteerDetailPage = () => {
                         <div className="col-lg-12">
                             <div className="page-header-box">
                                 <h1 className="text-anime-style-2" data-cursor="-opaque">
-                                    <span>Volunteer</span> Detail page
+                                    <span>Donor</span> Detail page
                                 </h1>
                                 <nav className="wow fadeInUp">
                                     <ol className="breadcrumb">
                                         <li className="breadcrumb-item">
-                                            <Link href="/">Volunteers</Link>
+                                            <Link href="/">Donors</Link>
                                         </li>
                                         <li className="breadcrumb-item active" aria-current="page">
-                                            {user?.name}
+                                            {donor?.name}
                                         </li>
                                     </ol>
                                 </nav>
@@ -63,8 +63,8 @@ const VolunteerDetailPage = () => {
                                     <div className="team-member-image">
                                         <figure className="image-anime reveal">
                                             <Image
-                                                src={user?.userProfile}
-                                                alt={user?.name}
+                                                src={donor?.userProfile}
+                                                alt={donor?.name}
                                                 width={300}
                                                 height={300}
                                             />
@@ -75,10 +75,10 @@ const VolunteerDetailPage = () => {
                                         <div className="team-info-header">
                                             <div className="team-member-info">
                                                 <div className="section-title">
-                                                    <h2>{user?.name}</h2>
-                                                    <p><strong>{user?.email}</strong></p>
-                                                    <p><strong>Proffession:</strong> {user?.profession}</p>
-                                                    <p><strong>City/Village:</strong> {user?.village}</p>
+                                                    <h2>{donor?.name}</h2>
+                                                    <p><strong>{donor?.email}</strong></p>
+                                                    <p><strong>Proffession:</strong> {donor?.profession}</p>
+                                                    <p><strong>City/Village:</strong> {donor?.village}</p>
                                                     <button className="btn btn-primary mt-3" onClick={handleGetInTouch} style={{ backgroundColor: '#f15b43', border: 'none', color: '#fff' }}
                                                     >
                                                         Get In Touch
@@ -97,4 +97,4 @@ const VolunteerDetailPage = () => {
     );
 };
 
-export default VolunteerDetailPage;
+export default DonorDetailPage;

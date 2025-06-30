@@ -158,7 +158,7 @@ const NbcMembers = () => {
                                                 </div>
                                                 <div className="team-content text-start">
                                                     <h3>
-                                                        <Link href={`/communitymembers/volunteers/detail-page/${rewriteUrl(member?.name)}-${numberToString(member?.volunteerId)}`}>{member.name}</Link>
+                                                        <Link href={`/communitymembers/volunteers/detail-page/${rewriteUrl(member?.name)}-${numberToString(member?.skilledPersonId)}`}>{member.name}</Link>
                                                     </h3>
                                                     <p className="mb-2">
                                                         <i className="fas fa-map-marker-alt"></i> {member.village || 'N/A'}
@@ -169,7 +169,7 @@ const NbcMembers = () => {
                                                         </a>
                                                     </strong>
                                                     <div className="social-links">
-                                                        <Link className="cutm-con-link mt-4" href={`/communitymembers/volunteers/detail-page/${rewriteUrl(member?.name)}-${numberToString(member?.volunteerId)}`}>
+                                                        <Link className="cutm-con-link mt-4" href={`/communitymembers/nbc-members/detail-page/${rewriteUrl(member?.name)}-${numberToString(member?.skilledPersonId)}`}>
                                                             View Details
                                                         </Link>
                                                     </div>

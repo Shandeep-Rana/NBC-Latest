@@ -5,8 +5,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllDonors } from '../../../Slice/bloodDonation';
-import { BloodGroupOptions } from '@/constants';
+import { BloodGroupOptions, rewriteUrl } from '@/constants';
 import Loader from '../../../common/Loader';
+import { numberToString } from '@/constants/utils';
 
 const Donors = () => {
   const [localLoading, setLocalLoading] = useState(false);
@@ -21,19 +22,19 @@ const Donors = () => {
   });
 
   useEffect(() => {
-    setLocalLoading(true); 
-  
+    setLocalLoading(true);
+
     const delayDebounce = setTimeout(() => {
       dispatch(
         getAllDonors(state.search, state.page, state.pageSize, state.selectedBloodGroup)
       ).finally(() => {
-        setLocalLoading(false); 
+        setLocalLoading(false);
       });
-    }, 1000); 
-  
+    }, 1000);
+
     return () => {
       clearTimeout(delayDebounce);
-      setLocalLoading(false); 
+      setLocalLoading(false);
     };
   }, [dispatch, state.search, state.page, state.pageSize, state.selectedBloodGroup]);
 
@@ -49,7 +50,7 @@ const Donors = () => {
   const handleSearch = () => {
     setState((prev) => ({
       ...prev,
-      page: 1, 
+      page: 1,
     }));
   };
 
@@ -150,11 +151,11 @@ const Donors = () => {
                         </div>
                         <div className="team-content text-start">
                           <h3>
-                            <Link href="/team-single.html">{donor.name}</Link>
+                            <Link href={`/communitymembers/donors/detail-page/${rewriteUrl(donor?.name)}-${numberToString(donor?.volunteerId)}`}>{donor.name}</Link>
                           </h3>
                           <p className="mb-2">
                             <i className="fas fa-tint"></i> Blood Group:{' '}
-                            <strong>{donor.bloodType || 'N/A'}</strong>
+                            <strong>{donor?.bloodType || 'N/A'}</strong>
                           </p>
                           <p className="mb-2">
                             <i className="fas fa-map-marker-alt"></i> {donor.village || 'N/A'}
@@ -165,7 +166,7 @@ const Donors = () => {
                             </a>
                           </strong>
                           <div className="social-links">
-                            <Link className="cutm-con-link mt-4" href="/team-single.html">
+                            <Link className="cutm-con-link mt-4" href={`/communitymembers/donors/detail-page/${rewriteUrl(donor?.name)}-${numberToString(donor?.volunteerId)}`}>
                               View Details
                             </Link>
                           </div>

@@ -167,8 +167,8 @@ return (
                             <i className="fas fa-envelope"></i> {volunteer.email}
                           </a>
                         </strong>
-                        <div className="social-links">
-                          <Link className="cutm-con-link mt-4" href={`/communitymembers/volunteers/detail-page/${rewriteUrl(volunteer?.name)}-${numberToString(volunteer?.volunteerId)}`}>
+                        <div className="social-links">href={`/communitymembers/volunteers/detail-page/${rewriteUrl(volunteer?.name)}-${numberToString(volunteer?.volunteerId)}`}
+                          <Link className="cutm-con-link mt-4" >
                             View Details
                           </Link>
                         </div>

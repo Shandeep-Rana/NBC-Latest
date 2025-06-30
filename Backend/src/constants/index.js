@@ -11,7 +11,8 @@ const ROLES = {
 const DONOR_PASSWORD = "Donor2024";
 
 //Development
-// IMAGE_PATH = "/Work/NBC/NBC-Latest/Backend/src/public/uploads";
+// // IMAGE_PATH = "Work/NBC/Nangal-By-Cycle/Backend/src/public/uploads";
+// IMAGE_PATH = "/Work/NBC/Nangal-By-Cycle/Backend/src/public/uploads";
 // STATIC_FILES_PATH = "public";
 // IMAGE_URL = "http://localhost:5000/public/uploads";
 // WEBAPP_PATH = "http://localhost:3000";

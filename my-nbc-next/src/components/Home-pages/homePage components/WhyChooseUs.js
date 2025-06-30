@@ -1,9 +1,25 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCommunityStats } from '@/Slice/master';
 
 const WhyChooseUs = () => {
+    const dispatch = useDispatch();
+
+    const {
+        homeAllDonorsCount = 0,
+        homeAllVolunteersCount = 0,
+        homeAllEventsCount = 0,
+        homeAllHeroesCount = 0,
+        homeAllMembersCount = 0
+    } = useSelector((state) => state.masterSlice);
+
+    useEffect(() => {
+        dispatch(getCommunityStats());
+    }, [dispatch]);
+
     return (
         <div className="why-choose-us">
             <div className="container">
@@ -57,12 +73,24 @@ const WhyChooseUs = () => {
                                     <p>Years of experience</p>
                                 </div>
                                 <div className="why-choose-counter-item">
-                                    <h2><span className="counter">200</span>+</h2>
-                                    <p> volunteers</p>
+                                    <h2><span className="counter">{homeAllVolunteersCount}</span>+</h2>
+                                    <p>Volunteers</p>
                                 </div>
                                 <div className="why-choose-counter-item">
-                                    <h2><span className="counter">50</span>+</h2>
-                                    <p>Life Saving Events</p>
+                                    <h2><span className="counter">{homeAllEventsCount}</span>+</h2>
+                                    <p>Events Organized</p>
+                                </div>
+                                <div className="why-choose-counter-item">
+                                    <h2><span className="counter">{homeAllDonorsCount}</span>+</h2>
+                                    <p>Donors</p>
+                                </div>
+                                <div className="why-choose-counter-item">
+                                    <h2><span className="counter">{homeAllHeroesCount}</span>+</h2>
+                                    <p>Nangal Heroes</p>
+                                </div>
+                                <div className="why-choose-counter-item">
+                                    <h2><span className="counter">{homeAllMembersCount}</span>+</h2>
+                                    <p>Registered Members</p>
                                 </div>
                             </div>
                         </div>
