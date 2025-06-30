@@ -83,7 +83,7 @@ const NbcMembers = () => {
                                             <span>Our</span> Members
                                         </h1>
                                         <nav className="wow fadeInUp">
-                                            <ol className="breadcrumb"> 
+                                            <ol className="breadcrumb">
                                                 <li className="breadcrumb-item">
                                                     <Link href="/">home</Link>
                                                 </li>
@@ -185,7 +185,15 @@ const NbcMembers = () => {
 
                                 {skilledPersons?.length > 0 && skilledPersons.length < totalCount && (
                                     <div className="col-12 text-center mt-4">
-                                        <button className="btn btn-primary" onClick={handleViewMore}>
+                                        <button className="btn btn-primary" onClick={handleViewMore}
+                                            style={{
+                                                backgroundColor: '#f15b43',
+                                                color: '#fff',
+                                                border: 'none',
+                                                padding: '0.5rem 1rem',
+                                                borderRadius: '4px',
+                                                cursor: 'pointer'
+                                            }}>
                                             View More
                                         </button>
                                     </div>

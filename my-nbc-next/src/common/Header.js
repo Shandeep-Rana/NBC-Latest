@@ -23,6 +23,17 @@ const Header = () => {
     setUser(null);
   };
 
+  const updateProfileFromStorage = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    setUser(user);
+  };
+
+  useEffect(() => {
+    updateProfileFromStorage();
+    window.addEventListener('storage', updateProfileFromStorage);
+    return () => window.removeEventListener('storage', updateProfileFromStorage);
+  }, []);
+
   return (
     <header className="main-header">
       <div className="header-sticky">

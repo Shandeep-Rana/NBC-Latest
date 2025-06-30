@@ -77,7 +77,7 @@ const DonorDetailPage = () => {
                                                 <div className="section-title">
                                                     <h2>{donor?.name}</h2>
                                                     <p><strong>{donor?.email}</strong></p>
-                                                    <p><strong>Proffession:</strong> {donor?.profession}</p>
+                                                    <p><strong>Blood Group:</strong> {donor?.bloodType}</p>
                                                     <p><strong>City/Village:</strong> {donor?.village}</p>
                                                     <button className="btn btn-primary mt-3" onClick={handleGetInTouch} style={{ backgroundColor: '#f15b43', border: 'none', color: '#fff' }}
                                                     >

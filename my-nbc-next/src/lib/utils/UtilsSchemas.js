@@ -76,7 +76,7 @@ export const heroSchema = yup.object({
     recognition_date: yup.string(),
     photo_url: yup.mixed()
         .required("Photo is required")
-        .test("fileType", "Invalid file type", (value) => {
+        .test("fileType", "Invalid file type", (value) => { 
             if (!value) return true;
             return ["image/jpeg", "image/png", "image/jpg"].includes(value.type);
         }),

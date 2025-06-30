@@ -63,8 +63,8 @@ const VolunteerDetailPage = () => {
                                     <div className="team-member-image">
                                         <figure className="image-anime reveal">
                                             <Image
-                                                src={user?.userProfile}
-                                                alt={user?.name}
+                                                src={user?.userProfile || "/default-user.png"}
+                                                alt={user?.name || "NBC Member"}
                                                 width={300}
                                                 height={300}
                                             />

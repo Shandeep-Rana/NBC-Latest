@@ -102,7 +102,7 @@ const NangalHeros = () => {
                                         <div key={hero.hero_id} className="col-lg-3 col-md-6">
                                             <div className="team-item wow fadeInUp">
                                                 <div className="team-image">
-                                                    <Link href={`/hero/${hero.hero_id}`} data-cursor-text="View">
+                                                    <Link  href={`/communitymembers/nangal-heros/detail-page/${rewriteUrl(hero?.name)}-${numberToString(hero?.hero_id)}`} data-cursor-text="View">
                                                         <figure className="image-anime position-relative" style={{ height: '280px' }}>
                                                             <Image
                                                                 src={hero?.photo_url || '/default-user.png'}
@@ -116,11 +116,11 @@ const NangalHeros = () => {
                                                 </div>
                                                 <div className="team-content">
                                                     <h3>
-                                                        <Link href={`/hero/${hero.hero_id}`}>{hero.name}</Link>
+                                                        <Link  href={`/communitymembers/nangal-heros/detail-page/${rewriteUrl(hero?.name)}-${numberToString(hero?.hero_id)}`}>{hero.name}</Link>
                                                     </h3>
                                                     <p className="text-muted mb-4" style={{ padding: '0 48px' }}>{truncateText(hero?.recognition_title, 40)} </p>
 
-                                                    <Link href={`/nangal-hero/${rewriteUrl(hero?.name)}-${numberToString(hero.hero_id)}`} className="readmore-btn mt-3">Read More</Link>
+                                                    <Link  href={`/communitymembers/nangal-heros/detail-page/${rewriteUrl(hero?.name)}-${numberToString(hero?.hero_id)}`} className="readmore-btn mt-3">Read More</Link>
 
                                                 </div>
                                             </div>

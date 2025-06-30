@@ -135,14 +135,14 @@ const Donors = () => {
               <div className="row">
                 {donors?.length > 0 ? (
                   donors.map((donor) => (
-                    <div key={donor.id || donor.email} className="col-lg-4 col-md-6">
+                    <div key={donor?.donorId} className="col-lg-4 col-md-6">
                       <div className="team-item wow fadeInUp">
                         <div className="team-image">
-                          <Link href="/team-single.html" data-cursor-text="View">
+                          <Link href={`/communitymembers/donors/detail-page/${rewriteUrl(donor?.name)}-${numberToString(donor?.volunteerId)}`} data-cursor-text="View">
                             <figure className="image-anime">
                               <Image
-                                src={donor.userProfile || '/default-user.png'}
-                                alt={donor.name}
+                                src={donor?.userProfile || '/default-user.png'}
+                                alt={donor?.name}
                                 width={300}
                                 height={300}
                               />
@@ -166,7 +166,7 @@ const Donors = () => {
                             </a>
                           </strong>
                           <div className="social-links">
-                            <Link className="cutm-con-link mt-4" href={`/communitymembers/donors/detail-page/${rewriteUrl(donor?.name)}-${numberToString(donor?.volunteerId)}`}>
+                            <Link className="cutm-con-link mt-4" href={`/communitymembers/donors/detail-page/${rewriteUrl(donor?.name)}-${numberToString(donor?.donorId)}`}>
                               View Details
                             </Link>
                           </div>
@@ -182,7 +182,15 @@ const Donors = () => {
 
                 {donors?.length > 0 && donors.length < totalCount && (
                   <div className="col-12 text-center mt-4">
-                    <button className="btn btn-primary" onClick={handleViewMore}>
+                    <button className="btn btn-primary" onClick={handleViewMore}
+                      style={{
+                        backgroundColor: '#f15b43',
+                        color: '#fff',
+                        border: 'none',
+                        padding: '0.5rem 1rem',
+                        borderRadius: '4px',
+                        cursor: 'pointer'
+                      }}>
                       View More
                     </button>
                   </div>

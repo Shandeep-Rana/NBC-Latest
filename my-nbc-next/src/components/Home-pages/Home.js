@@ -19,7 +19,6 @@ const Home = () => {
         <>
             <OurHeros />
             <About />
-            {/* <MembersCountSection /> */}
             <WhatWeDo />
             <OurCausesSection />
             <WhyChooseUs />

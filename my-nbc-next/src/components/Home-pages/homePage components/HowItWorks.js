@@ -29,7 +29,7 @@ const HowItWorks = () => {
                                 <div className="how-it-work-image">
                                     <figure className="image-anime reveal">
                                         <Image
-                                            src="/images/how-it-work-img-1.jpg"
+                                            src="/images/b04f5214-22ca-4853-94e2-22b80315e90c.jpg"
                                             alt="Healthcare Support"
                                             width={295}
                                             height={255.47}
@@ -56,7 +56,7 @@ const HowItWorks = () => {
                                 <div className="how-it-work-image">
                                     <figure className="image-anime reveal">
                                         <Image
-                                            src="/images/how-it-work-img-2.jpg"
+                                            src="/images/how-it-work-img-4.jpg"
                                             alt="Plan and Design"
                                             width={295}
                                             height={255.47}
@@ -83,7 +83,7 @@ const HowItWorks = () => {
                                 <div className="how-it-work-image">
                                     <figure className="image-anime reveal">
                                         <Image
-                                            src="/images/how-it-work-img-3.jpg"
+                                            src="/images/program-2.png"
                                             alt="Implement Solutions"
                                             width={295}
                                             height={255.47}
@@ -110,7 +110,7 @@ const HowItWorks = () => {
                                 <div className="how-it-work-image">
                                     <figure className="image-anime reveal">
                                         <Image
-                                            src="/images/how-it-work-img-4.jpg"
+                                            src="/images/IMG_8163.JPG"
                                             alt="Report and Share"
                                             width={295}
                                             height={255.47}

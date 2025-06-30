@@ -182,7 +182,7 @@ function UpdateHero() {
                                                             )}
                                                         </>
                                                     )}
-                                                    defaultValue={file}
+                                                    defaultValue={heroDetails?.photo_url}
                                                 />
                                                 {errors?.photo_url && (
                                                     <div className={`text-left invalid_col`}>
@@ -195,12 +195,12 @@ function UpdateHero() {
                                                 <Controller
                                                     name="recognition_description"
                                                     control={control}
-                                                    defaultValue=""
                                                     render={({ field: { value, onChange } }) => (
                                                         <QuillEditor
                                                             value={value}
                                                             onChange={onChange} />
                                                     )}
+                                                    defaultValue={heroDetails?.recognition_description}
                                                 />
                                                 {errors?.recognition_description && <p style={{ color: "red" }}>{errors.recognition_description.message}</p>}
                                             </div>

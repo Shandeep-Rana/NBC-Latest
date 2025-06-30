@@ -26,7 +26,7 @@ const OurFeatures = () => {
                             <div className="our-features-item">
                                 <div className="our-features-image">
                                     <figure className="image-anime reveal">
-                                        <Image src="/images/our-features-img-1.jpg" alt="Sustainable Tourism" width={383.28} height={321.95} />
+                                        <Image src="/images/program-1.png" alt="Sustainable Tourism" width={383.28} height={321.95} />
                                     </figure>
                                 </div>
                                 <div className="our-features-content">
@@ -42,7 +42,7 @@ const OurFeatures = () => {
                             <div className="our-features-item">
                                 <div className="our-features-image">
                                     <figure className="image-anime reveal">
-                                        <Image src="/images/our-features-img-2.jpg" alt="Cultural Revival" width={383.28} height={321.95} />
+                                        <Image src="/images/program-3.jpg" alt="Cultural Revival" width={383.28} height={321.95} />
                                     </figure>
                                 </div>
 
@@ -59,7 +59,7 @@ const OurFeatures = () => {
                             <div className="our-features-item">
                                 <div className="our-features-image">
                                     <figure className="image-anime reveal">
-                                        <Image src="/images/our-features-img-3.jpg" alt="Local Empowerment" width={383.28} height={321.95} />
+                                        <Image src="/images/services-image-1.png" alt="Local Empowerment" width={383.28} height={321.95} />
                                     </figure>
                                 </div>
 

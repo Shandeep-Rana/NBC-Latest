@@ -12,13 +12,13 @@ const causesData = [
     },
     {
         title: 'Save the Environment',
-        image: '/images/causes-img-2.jpg',
+        image: '/images/program-2.png',
         description:
             'A greener tomorrow starts today. Nangal By Cycle environmental mission focuses on reforestation, clean-up initiatives, and spreading awareness about sustainable practices. Whether it\'s planting trees or teaching young people about conservation, we are dedicated to preserving our planet for future generations to live. Every small action contributes significantly to the creation of a healthier Earth.',
     },
     {
         title: 'Books for Education',
-        image: '/images/causes-img-3.jpg',
+        image: '/images/b04f5214-22ca-4853-94e2-22b80315e90c.jpg',
         description:
             'Education is the foundation for opportunity. Nangal By Cycle works to provide books, learning materials, and educational resources to children in underprivileged areas. We hope to close the learning gap and motivate the next generation of leaders by organizing donation drives and giving school materials. A child holding a book is a start toward his better future.',
     },

@@ -61,7 +61,7 @@ const BecomeVolunteer = () => {
                         </div>
 
                         <div className="mt-4 wow fadeInUp text-center" data-wow-delay="0.6s">
-                            <Link href="/register" className="text-white btn-default">
+                            <Link href="/auth/register" className="text-white btn-default">
                                 Register as a Volunteer
                             </Link>
                         </div>

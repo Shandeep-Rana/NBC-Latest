@@ -66,8 +66,8 @@ const NBCmemberDetailPage = () => {
                                     <div className="team-member-image">
                                         <figure className="image-anime reveal">
                                             <Image
-                                                src={SkilledPerson?.userProfile}
-                                                alt={SkilledPerson?.name}
+                                                src={SkilledPerson?.userProfile || "/default-user.png"}
+                                                alt={SkilledPerson?.name || "NBC Member"}
                                                 width={300}
                                                 height={300}
                                             />

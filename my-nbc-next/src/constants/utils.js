@@ -23,3 +23,11 @@ export function stringToNumber(str) {
     }
     return number;
 }
+
+export const stripHtmlTags = (html) => {
+  if (!html) return '';
+  let text = html.replace(/<[^>]+>/g, '');
+  text = text.replace(/&nbsp;/g, ' ');
+  text = text.replace(/&amp;/g, '&'); 
+  return text.trim();
+};
