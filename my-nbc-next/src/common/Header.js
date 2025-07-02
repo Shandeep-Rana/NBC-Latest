@@ -72,10 +72,10 @@ const Header = () => {
                   <li className="nav-item submenu">
                     <a className="nav-link">Media & Events</a>
                     <ul>
-                      <li><Link href="/media&events/events" className="nav-link">Events</Link></li>
-                      <li><Link href="/media&events/blogs" className="nav-link">Blogs</Link></li>
-                      <li><Link href="/media&events/news" className="nav-link">News</Link></li>
-                      <li><Link href="/media&events/gallery" className="nav-link">Gallery</Link></li>
+                      <li><Link href="/mediaevents/events" className="nav-link">Events</Link></li>
+                      <li><Link href="/mediaevents/blogs" className="nav-link">Blogs</Link></li>
+                      <li><Link href="/mediaevents/news" className="nav-link">News</Link></li>
+                      <li><Link href="/mediaevents/gallery" className="nav-link">Gallery</Link></li>
                     </ul>
                   </li>
 

@@ -11,7 +11,6 @@ import Wow from "@/common/Wow";
 import { Providers } from "../providers";
 import { Toaster } from "react-hot-toast";
 import FeedbackPopUp from "@/common/FeedBackPopUp";
-import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
 const onest = Onest({
   subsets: ['latin'],

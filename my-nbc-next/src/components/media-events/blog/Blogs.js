@@ -81,7 +81,7 @@ const Blogs = () => {
             <div className="container">
               <div className="row">
                 {blogsList?.length > 0 ? blogsList.map((post, index) => {
-                  const blogUrl = `/media&events/blog/${rewriteUrl(post?.title || "")}-${numberToString(post?.blog_id || 0)}`;
+                  const blogUrl = `/mediaevents/blog/${rewriteUrl(post?.title || "")}-${numberToString(post?.blog_id || 0)}`;
 
                   return (
                     <div className="col-lg-4 col-md-6" key={post.id || index}>
@@ -134,7 +134,14 @@ const Blogs = () => {
               {blogsList.length < blogsCount && (
                 <div className="row">
                   <div className="col-12 text-center mt-4">
-                    <button className="btn btn-primary" onClick={handleViewMore}>
+                    <button className="btn btn-primary" onClick={handleViewMore} style={{
+                      backgroundColor: '#f15b43',
+                      color: '#fff',
+                      border: 'none',
+                      padding: '0.5rem 1rem',
+                      borderRadius: '4px',
+                      cursor: 'pointer'
+                    }}>
                       {localLoading ? 'Loading...' : 'View More'}
                     </button>
                   </div>

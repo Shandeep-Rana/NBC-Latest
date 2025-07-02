@@ -93,11 +93,11 @@ const Footer = () => {
                   <div className="footer-links footer-service-links">
                     <h3>Services</h3>
                     <ul>
-                      <li><Link href="/media&events/events">Events</Link></li>
-                      <li><Link href="/media&events/blogs">Blogs</Link></li>
+                      <li><Link href="/mediaevents/events">Events</Link></li>
+                      <li><Link href="/mediaevents/blogs">Blogs</Link></li>
                       <li><Link href="/bloodrequirementform">Blood Request Portal</Link></li>
-                      <li><Link href="/media&events/gallery">gallery</Link></li>
-                      <li><Link href="/media&events/news">News</Link></li>
+                      <li><Link href="/mediaevents/gallery">gallery</Link></li>
+                      <li><Link href="/mediaevents/news">News</Link></li>
                     </ul>
                   </div>
 

@@ -90,9 +90,12 @@ const About = () => {
                   </div>
                   <div className="helped-fund-content">
                     <h3>
-                      <span className="counter">We&apos;re trusted</span>
-                    </h3><br/>
-                    <p>NBC – Trusted for 5+ years, leading life-saving projects like blood donation camps and tree plantations to create a healthier, greener tomorrow.</p>
+                      <span className="counter">We&#39;re trusted</span> 
+                    </h3>
+                    <br />
+                    <p>
+                      NBC – Trusted since 2024, leading impactful initiatives such as blood donation camps and cycling awareness events to promote an active lifestyle and spread anti-drug awareness.
+                    </p>
                   </div>
                 </div>
               </div>

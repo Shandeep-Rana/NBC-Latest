@@ -18,7 +18,7 @@ const Home = () => {
     return (
         <>
             <OurHeros />
-            <About />
+            <About />    
             <WhatWeDo />
             <OurCausesSection />
             <WhyChooseUs />

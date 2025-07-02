@@ -255,7 +255,11 @@ body {
 	overflow: hidden;
 }
 
-.image-anime:after {
+.image-anime:hover {
+	opacity: .7;	
+}
+
+/* .image-anime:after {
 	content: "";
 	position: absolute;
 	width: 200%;
@@ -271,7 +275,7 @@ body {
 	height: 250%;
 	transition: all 600ms linear;
 	background-color: transparent;
-}
+} */
 
 .reveal {
 	position: relative;

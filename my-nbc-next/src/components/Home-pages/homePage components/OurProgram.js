@@ -39,7 +39,7 @@ const OurProgram = () => {
                             <div className="col-lg-4 col-md-6" key={event.eventId}>
                                 <div className="program-item wow fadeInUp" data-wow-delay={`${index * 0.2}s`}>
                                     <div className="program-image">
-                                        <Link href={`/media&events/event/${rewriteUrl(event?.title)}-${numberToString(event?.eventId)}`}>
+                                        <Link href={`/mediaevents/event/${rewriteUrl(event?.title)}-${numberToString(event?.eventId)}`}>
                                             <figure className="image-anime">
                                                 <Image
                                                     src={event?.imageUrl}
@@ -59,7 +59,7 @@ const OurProgram = () => {
                                             </p>
                                         </div>
                                         <div className="program-button">
-                                            <Link href={`/media&events/event/${rewriteUrl(event?.title)}-${numberToString(event?.eventId)}`} className="readmore-btn">
+                                            <Link href={`/mediaevents/event/${rewriteUrl(event?.title)}-${numberToString(event?.eventId)}`} className="readmore-btn">
                                                 read more
                                             </Link>
                                         </div>

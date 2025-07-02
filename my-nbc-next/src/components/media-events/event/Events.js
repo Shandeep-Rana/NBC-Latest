@@ -150,7 +150,7 @@ const Events = () => {
                                 return <p>{truncateText(parsedText, 100)}</p>;
                               })()}
                               <Link
-                                href={`/media&events/event/${rewriteUrl(event?.title)}-${numberToString(event?.eventId)}`}
+                                href={`/mediaevents/event/${rewriteUrl(event?.title)}-${numberToString(event?.eventId)}`}
                                 className="ul-btn"
                               >
                                 <i className="fas fa-angle-double-right"></i> Event Details

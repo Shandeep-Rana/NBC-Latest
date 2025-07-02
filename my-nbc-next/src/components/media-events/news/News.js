@@ -78,7 +78,7 @@ const News = () => {
                         <div className="container">
                             <div className="row">
                                 {newsList?.length > 0 ? newsList.map((post, index) => {
-                                    const newsUrl = `/media&events/news/detail-page/${rewriteUrl(post?.title || "")}-${numberToString(post?.news_id || 0)}`;
+                                    const newsUrl = `/mediaevents/news/detail-page/${rewriteUrl(post?.title || "")}-${numberToString(post?.news_id || 0)}`;
 
                                     return (
                                         <div className="col-lg-4 col-md-6" key={post.id || index}>

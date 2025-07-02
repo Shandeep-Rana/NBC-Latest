@@ -58,7 +58,7 @@ const BlogSection = () => {
                                 Stories of impact and hope
                             </h2>
                             <p className="wow fadeInUp" data-wow-delay="0.2s">
-                                Explore inspiring stories and updates about our initiatives, successes, and the lives we've touched. See how your support is creating real, lasting change in communities worldwide.
+                                Explore inspiring stories and updates about our initiatives, successes, and the lives we&apos;ve touched. See how your support is creating real, lasting change in communities worldwide.
                             </p>
                         </div>
                     </div>
@@ -69,7 +69,7 @@ const BlogSection = () => {
                         <div className="col-12 text-center">Loading...</div>
                     ) : blogsList?.length > 0 ? (
                         blogsList.map((blog, index) => {
-                            const blogUrl = `/media&events/blog/${rewriteUrl(blog?.title || "")}-${numberToString(blog?.blog_id || 0)}`;
+                            const blogUrl = `/mediaevents/blog/${rewriteUrl(blog?.title || "")}-${numberToString(blog?.blog_id || 0)}`;
 
                             return (
                                 <div className="col-lg-4 col-md-6" key={blog.blog_id}>
