@@ -13,13 +13,15 @@ const Footer = () => {
               <div className="main-footer-box">
                 <div className="footer-about">
                   <div className="footer-logo">
-                    <Image
-                      src="/images/NBC-logo.png"
-                      alt="NBC Logo"
-                      width={180}
-                      height={87.3}
-                      priority
-                    />
+                    <Link href="/" className="navbar-brand">
+                      <Image
+                        src="/images/NBC-Logo.png"
+                        alt="Logo"
+                        width={180}
+                        height={87.31}
+                        priority
+                      />
+                    </Link>
                   </div>
 
                   <div className="footer-contact-detail">
@@ -86,7 +88,7 @@ const Footer = () => {
                       <li><Link href="/communitymembers/volunteers">Volunteers</Link></li>
                       <li><Link href="/communitymembers/donors">Blood Donors</Link></li>
                       <li><Link href="/communitymembers/nbc-members">NBC Member</Link></li>
-                       <li><Link href="/e-certificates">E-Certificates</Link></li>
+                      <li><Link href="/e-certificates">E-Certificates</Link></li>
                     </ul>
                   </div>
 

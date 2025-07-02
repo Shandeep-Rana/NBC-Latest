@@ -11,18 +11,19 @@ const ROLES = {
 const DONOR_PASSWORD = "Donor2024";
 
 //Development
-// IMAGE_PATH = "/Work/NBC/NBC-Latest/Backend/src/public/uploads";
-// STATIC_FILES_PATH = "public";
-// IMAGE_URL = "http://localhost:5000/public/uploads";
-// WEBAPP_PATH = "http://localhost:3000";
-// HTML_PATH = "helpers/html";
+// // IMAGE_PATH = "Work/NBC/Nangal-By-Cycle/Backend/src/public/uploads";
+IMAGE_PATH = "/Work/NBC Latest/NBC-Latest/Backend/src/public/uploads";
+STATIC_FILES_PATH = "public";
+IMAGE_URL = "http://localhost:5000/public/uploads";
+WEBAPP_PATH = "http://localhost:3000";
+HTML_PATH = "helpers/html";
 
 //Production     
-IMAGE_PATH = "src/public/uploads";
-STATIC_FILES_PATH = "src/public";
-IMAGE_URL = "https://api.nangalbycycle.com/src/public/uploads";
-WEBAPP_PATH = "https://nangalbycycle.com";
-HTML_PATH= "src/helpers/html";
+// IMAGE_PATH = "src/public/uploads";
+// STATIC_FILES_PATH = "src/public";
+// IMAGE_URL = "https://api.nangalbycycle.com/src/public/uploads";
+// WEBAPP_PATH = "https://nangalbycycle.com";
+// HTML_PATH= "src/helpers/html";
 
 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
