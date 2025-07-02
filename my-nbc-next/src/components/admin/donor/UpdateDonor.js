@@ -1,82 +1,107 @@
 "use client";
 
-import { BloodGroupOptions, StatesAndUnionTerritories } from '@/constants';
-import { donorSchema } from '@/lib/FormSchemas';
+import { BloodGroupOptions, pinCodergx, StatesAndUnionTerritories } from '@/constants';
 import { getdonor, updatedonor } from '@/Slice/bloodDonation';
 import { getAllVillages } from '@/Slice/master';
 import { yupResolver } from '@hookform/resolvers/yup';
-    import moment from 'moment';
-    import React, { useEffect, useState } from 'react'
-    import { Controller, useForm } from 'react-hook-form';
-    import { useDispatch, useSelector } from 'react-redux';
-    import ReactSelect from "react-select";
-    import { useParams } from 'next/navigation';
-    import Link from 'next/link';
-    import DatePicker from 'react-datepicker';
-    import PhoneInput from 'react-phone-input-2';
+import moment from 'moment';
+import React, { useEffect, useState } from 'react'
+import { Controller, useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import ReactSelect from "react-select";
+import { useParams } from 'next/navigation';
+import Link from 'next/link';
+import DatePicker from 'react-datepicker';
+import PhoneInput from 'react-phone-input-2';
+import { parseISO } from 'date-fns';
+import * as yup from "yup";
 
-    const UpdateDonor = () => {
-        const dispatch = useDispatch();
-        const { villages } = useSelector((state) => state.masterSlice);
-        const { donor, isLoading } = useSelector((state) => state.donor);
-        const { id } = useParams();
-        const [isDelay, setIsDelay] = useState(true);
+const schema = yup
+    .object({
+        fullName: yup.string().required("Name is required").trim(),
+        gender: yup.string().required("Gender is required").trim(),
+        email: yup.string().required("Email is required").trim(),
+        addressline1: yup.string().required("Address is required").trim(),
+        pincode: yup.string().required("Pin Code is required").matches(pinCodergx, "Pin Code must be 6 digits number").trim(),
+        stateOption: yup.string().required("State is required").trim(),
+        village: yup.string().required("Village/City is required").trim(),
+        modeofcontact: yup.string().required("Please select the Contact Preference").trim(),
+        dob: yup.date().required("date of birth is required")
+            .max(new Date(), "Date of Birth cannot be in the future")
+            .test('is-at-least-18', 'Age must be at least 18 years old', function (value) {
+                const eighteenYearsAgo = new Date();
+                eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
+                return value <= eighteenYearsAgo;
+            }),
+        contact: yup.string().required("Phone Number is required").max(12),
+        bloodType: yup.string().required("Blood Type is required"),
+        preferredContact: yup
+            .string()
+            .required("Please select the Contact Preference"),
+    });
 
-        useEffect(() => {
-            const reloadData = async () => {
-                dispatch(getdonor(id));
-            };
-            reloadData();
-        }, [dispatch, id]);
+const UpdateDonor = () => {
+    const dispatch = useDispatch();
+    const { villages } = useSelector((state) => state.masterSlice);
+    const { donor, isLoading } = useSelector((state) => state.donor);
+    const { id } = useParams();
+    const [isDelay, setIsDelay] = useState(true);
 
-        useEffect(() => {
-            const timer = setTimeout(() => {
-                setIsDelay(false);
-            }, 1000);
-
-            return () => clearTimeout(timer);
-        }, []);
-
-        const villageOptions = villages?.map((village) => ({
-            value: village.villageName,
-            label: village.villageName,
-        }));
-
-        const {
-            handleSubmit,
-            control,
-            formState: { errors },
-        } = useForm({
-            resolver: yupResolver(donorSchema),
-        });
-
-        const onSubmit = (data) => {
-            const formData = new FormData();
-            formData.append("fullName", data?.fullName);
-            formData.append("mobile", data?.contact);
-            formData.append("dob", formatDate(data?.dob));
-            formData.append("gender", data?.gender);
-            formData.append("contactMode", data?.modeofcontact);
-            formData.append("village", data?.village);
-            formData.append("addressLine1", data?.addressline1);
-            formData.append("addressLine2", data?.addressLine2);
-            formData.append("pincode", data?.pincode);
-            formData.append("state", data?.stateOption);
-            formData.append("bloodType", data?.bloodType);
-            formData.append("medicalHistory", data?.medicalHistory);
-            dispatch(updatedonor(id, formData));
+    useEffect(() => {
+        const reloadData = async () => {
+            dispatch(getdonor(id));
         };
+        reloadData();
+    }, [dispatch, id]);
 
-        useEffect(() => {
-            dispatch(getAllVillages());
-        }, [dispatch]);
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsDelay(false);
+        }, 1000);
 
-        const formatDate = (date) => {
-            return moment(date).format("YYYY-MM-DD");
-        };
-        const dateFormat = 'YYYY/MM/DD';
+        return () => clearTimeout(timer);
+    }, []);
 
-        return (
+    const villageOptions = villages?.map((village) => ({
+        value: village.villageName,
+        label: village.villageName,
+    }));
+
+    const {
+        handleSubmit,
+        control,
+        formState: { errors },
+    } = useForm({
+        resolver: yupResolver(schema),
+    });
+
+    const onSubmit = (data) => {
+        const formData = new FormData();
+        formData.append("fullName", data?.fullName);
+        formData.append("mobile", data?.contact);
+        formData.append("dob", formatDate(data?.dob));
+        formData.append("gender", data?.gender);
+        formData.append("contactMode", data?.modeofcontact);
+        formData.append("village", data?.village);
+        formData.append("addressLine1", data?.addressline1);
+        formData.append("addressLine2", data?.addressLine2);
+        formData.append("pincode", data?.pincode);
+        formData.append("state", data?.stateOption);
+        formData.append("bloodType", data?.bloodType);
+        formData.append("medicalHistory", data?.medicalHistory);
+        dispatch(updatedonor(id, formData));
+    };
+
+    useEffect(() => {
+        dispatch(getAllVillages());
+    }, [dispatch]);
+
+    const formatDate = (date) => {
+        return moment(date).format("YYYY-MM-DD");
+    };
+    const dateFormat = 'YYYY/MM/DD';
+
+    return (
         <>
             {!isLoading && donor !== null && !isDelay &&
                 (
@@ -137,7 +162,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
                                                             Date Of Birth <span style={{ fontSize: 12, color: '#9d9d9d' }}>(YYYY-MM-DD)</span><span style={{ color: '#F15B43' }}>  *</span>
                                                         </label>
                                                         <Controller
-                                                            name="donorDOB"
+                                                            name="dob"
                                                             control={control}
                                                             render={({ field: { value, onChange } }) => (
                                                                 <DatePicker
@@ -162,7 +187,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
                                                                     openToDate={value ? parseISO(value) : new Date('2000-01-01')}
                                                                 />
                                                             )}
-                                                            defaultValue=""
+                                                            defaultValue={formatDate(donor?.dob)}
                                                         />
                                                         {errors?.donorDOB && (
                                                             <div style={{ color: 'red' }} className="text-left">
@@ -184,7 +209,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
                                                                     style={{ border: errors?.contact ? '1px solid red' : "" }}
                                                                 />
                                                             )}
-                                                            defaultValue=""
+                                                            defaultValue={donor?.mobile}
                                                         />
                                                         {errors?.contact && (
                                                             <div style={{ color: "red" }} className="text-left">
@@ -332,9 +357,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
                                                                 </label>
                                                             </div>
                                                         </div>
-                                                        {errors?.donorGender && (
+                                                        {errors?.gender && (
                                                             <p style={{ color: "red", textAlign: 'left' }}>
-                                                                {errors?.donorGender?.message}
+                                                                {errors?.gender?.message}
                                                             </p>
                                                         )}
                                                     </div>
@@ -353,9 +378,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
                                                             )}
                                                             defaultValue={donor?.addressLine1}
                                                         />
-                                                        {errors?.addressLine1 && (
+                                                        {errors?.addressline1 && (
                                                             <p style={{ color: "red", textAlign: 'left' }}>
-                                                                {errors?.addressLine1?.message}
+                                                                {errors?.addressline1?.message}
                                                             </p>
                                                         )}
                                                     </div>
@@ -617,7 +642,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
                                                         )}
                                                     </div>
                                                     <div className="submit-area col-lg-12 col-12">
-                                                        <Link href="/admin/blooddonor/donorlis" className="button-round button-back">
+                                                        <Link href="/admin/blooddonor/donorlist" className="button-round button-back">
                                                             Back to List
                                                         </Link>
                                                         <button type="submit" className="button-round">

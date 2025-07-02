@@ -183,7 +183,7 @@ router.post('/approve-image', galleryController.approveImage);
 router.post('/disapprove-image', galleryController.disApproveImage);
 
 //adding both donor and volunteer
-router.post("/add-Both", combinedMulter.single("userProfile"), copyToDonorProfile, UserController.registerAsBoth);
+router.post("/add-Both", userMulter.single("userProfile"), UserController.registerAsBoth);
 
 //SOCIAL MEDIA CRUD
 router.get("/links", mediaController.getAllLinks);

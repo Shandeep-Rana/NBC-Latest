@@ -29,10 +29,8 @@ function RegisterDonor() {
   const { isLoading } = useSelector((state) => state.userRegister);
   const { villages } = useSelector((state) => state.masterSlice);
 
-  // State to manage the modal's visibility
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Function to toggle the modal
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -653,14 +651,13 @@ function RegisterDonor() {
                       accept=".png,.jpg,.jpeg"
                     />
                     {previewUrl && (
-                      <div className="preview-image-container" style={{ width: 310, height: 'auto', position: 'relative' }}>
+                      <div className="preview-image-container">
                         <Image
-                          src={previewUrl}
-                          alt="Preview"
-                          fill
                           className="preview-image"
-                          style={{ objectFit: 'contain' }}
-                          unoptimized // ⚠️ Required for blob/base64/image previews
+                          src={previewUrl}
+                          width={100}
+                          height={100}
+                          alt="Preview"
                         />
                       </div>
                     )}

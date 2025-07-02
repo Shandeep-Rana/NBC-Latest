@@ -857,14 +857,13 @@ const RegisterAsBoth = () => {
                       accept=".png,.jpg,.jpeg"
                     />
                     {previewUrl && (
-                      <div className="preview-image-container" style={{ width: 310, height: 'auto', position: 'relative' }}>
+                      <div className="preview-image-container">
                         <Image
-                          src={previewUrl}
-                          alt="Preview"
-                          fill
                           className="preview-image"
-                          style={{ objectFit: 'contain' }}
-                          unoptimized // ⚠️ Required for blob/base64/image previews
+                          src={previewUrl}
+                          width={100}
+                          height={100}
+                          alt="Preview"
                         />
                       </div>
                     )}

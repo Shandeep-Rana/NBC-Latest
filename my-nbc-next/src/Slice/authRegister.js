@@ -86,7 +86,7 @@ export const registerAsVolunteer =
         setPreviewUrl("");
         toast.success(response.data.message);
         dispatch(registerAsVolunteerSuccess());
-        router.push("/auth/login");
+        router.push("/auth/signin");
       } else {
         dispatch(registerAsVolunteerFailure());
       }

@@ -32,19 +32,19 @@ module.exports = {
         state,
         profession,
       } = req.body;
-  
+
       const existingUserResult = await userServices.getUserByEmailAsync(email);
-  
+
       // If the user already exists, handle it and return early
       if (existingUserResult.success) {
         const userRolesResult = await roleServices.getUserRolesByIdAsync(
-          existingUserResult.data.id
+          existingUserResult.data.user_id
         );
-  
+
         if (!userRolesResult.success) {
           return res.status(400).json({ message: userRolesResult.message, success: false });
         }
-  
+
         if (
           userRolesResult.data.includes(constants.ROLES.Volunteer) ||
           userRolesResult.data.includes(constants.ROLES.SkilledPerson) ||
@@ -52,7 +52,7 @@ module.exports = {
         ) {
           return res.status(400).json({ message: "User already exists with this email address", success: false });
         }
-  
+
         if (
           userRolesResult.data.length === 1 &&
           userRolesResult.data.includes(constants.ROLES.Donor)
@@ -67,22 +67,22 @@ module.exports = {
               await professionServices.addProfessionAsync(profession);
             professionId = addProfessionResult.data;
           }
-  
+
           const addVolunteerResult = await volunteerServices.addVolunteerAsync(
             userId,
-            { professionId, volUserId: existingUserResult.data.id}
+            { professionId, volUserId: existingUserResult.data.id }
           );
           if (!addVolunteerResult.success)
             return res.status(500).json({ message: addVolunteerResult.message, success: false });
-  
+
           const sentVerifyMailResult = await mailServices.sendVerifyOtpMail(
             existingUserResult.data.id,
-            email, 
+            email,
           );
 
           if (!sentVerifyMailResult.success)
             return res.status(500).json({ message: sentVerifyMailResult.message, success: false });
-  
+
           console.log(sentVerifyMailResult.message);
           return res.status(200).json({
             message:
@@ -91,7 +91,7 @@ module.exports = {
           });
         }
       }
-  
+
       // Village and profession handling
       let villageId;
       const existingVillResult = await villageServices.getVillageByNameAsync(village);
@@ -103,7 +103,7 @@ module.exports = {
           villageId = addVillageResult.data;
         }
       }
-  
+
       let professionId;
       let existingProfessionResult =
         await professionServices.getProfessionByNameAsync(profession);
@@ -115,7 +115,7 @@ module.exports = {
           professionId = addProfessionResult.data;
         }
       }
-  
+
       // Create new user
       const createUserResult = await userServices.createUserAsync(userId, {
         fullName,
@@ -135,9 +135,9 @@ module.exports = {
       if (!createUserResult.success) {
         return res.status(500).json({ message: createUserResult.message, success: false });
       }
-  
+
       const volUserId = createUserResult.data;
-  
+
       // Add volunteer
       const addVolunteerResult = await volunteerServices.addVolunteerAsync(
         userId,
@@ -146,7 +146,7 @@ module.exports = {
       if (!addVolunteerResult.success) {
         return res.status(500).json({ message: addVolunteerResult.message, success: false });
       }
-  
+
       // Assign role to user
       const addUserToRoleResult = await roleServices.addUserToRoleAsync(
         volUserId,
@@ -155,7 +155,7 @@ module.exports = {
       if (!addUserToRoleResult.success) {
         return res.status(500).json({ message: addUserToRoleResult.message, success: false });
       }
-  
+
       // Send OTP for email verification
       let id = "null"
       const sentVerifyMailResult = await mailServices.sendVerifyOtpMail(
@@ -166,7 +166,7 @@ module.exports = {
       if (!sentVerifyMailResult.success) {
         return res.status(500).json({ message: sentVerifyMailResult.message, success: false });
       }
-  
+
       // Return success response
       return res.status(200).json({
         message: "An OTP has been sent to your email.",
@@ -320,7 +320,7 @@ module.exports = {
 
       let existingProfessionResult =
         await professionServices.getProfessionByNameAsync(profession);
-      if (!existingProfessionResult.success)    
+      if (!existingProfessionResult.success)
         throw new Error(existingProfessionResult.message);
       let professionId = existingProfessionResult.data.profession_id;
       let existingInterestResult =
@@ -388,10 +388,10 @@ module.exports = {
       if (!delVolResult.success) throw new Error(delVolResult.message);
 
       if (roles.length === 1 && roles.includes(constants.ROLES.Volunteer)) {
-         await userServices.deleteUserAsync(userId, getVolResult.data.userId);
+        await userServices.deleteUserAsync(userId, getVolResult.data.userId);
       }
       await roleServices.deleteUserFromRoleAsync(getVolResult.data.userId, constants.ROLES.Volunteer);
-      
+
       res.status(200).json({ message: "Deleted Successfully" });
     } catch (error) {
       res.status(500).json({ message: error.message, success: false });

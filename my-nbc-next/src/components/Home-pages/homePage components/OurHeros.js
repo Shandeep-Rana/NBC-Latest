@@ -6,7 +6,7 @@ const OurHeros = () => {
     <div className="hero hero-video">
       <div className="hero-bg-video">
         <video autoPlay muted loop id="myVideo">
-          <source src="https://demo.awaikenthemes.com/assets/videos/lenity-video.mp4" type="video/mp4" />
+          <source src="/images/lv_0_20250702110823.mp4" type="video/mp4" />
         </video>
       </div>
       <div className="container">
@@ -17,7 +17,7 @@ const OurHeros = () => {
                 <h3 className="wow fadeInUp">Welcome to Nangal By Cycle (NBC) </h3>
                 <h1 className="text-anime-style-2" data-cursor="-opaque"><span>Empowering Communities</span>, Creating Change Together.</h1>
                 <p className="wow fadeInUp" data-wow-delay="0.2s">
-                  At NBC, we are building movement across 100+ villages to promote health, sports , active lifestyle, volunteerism, environmental awareness, and social unity. Whether you want to volunteer, register as a blood donor, share local stories through blogs, or access essential community services — NBC is your gateway to connect, contribute, and create lasting impact.
+                  At Nangal By Cycle, we are building movement across 100+ villages to promote health, sports , active lifestyle, volunteerism, environmental awareness, and social unity. Whether you want to volunteer, register as a blood donor, share local stories through blogs, or access essential community services — Nangal By Cycle is your gateway to connect, contribute, and create lasting impact.
                 </p>
               </div>
               <div className="hero-body wow fadeInUp" data-wow-delay="0.4s">

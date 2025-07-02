@@ -11,51 +11,82 @@ const interestsServices = require('../services/interestsServices');
 module.exports = {
   addSkilledPerson: async (req, res) => {
     try {
-      const encryptedUserId = req.headers["user-id"];
-      const userId = encryptedUserId ? commFunctions.decrypt(encryptedUserId) : null;
-
+      const ecryptedUserId = req.headers["user-id"];
+      const userId = ecryptedUserId
+        ? commFunctions.decrypt(ecryptedUserId)
+        : null;
       const userProfile = req.file ? req.file.filename : null;
       const {
-        fullName, email, password, mobile, dob, gender,
-        contactMode, village, addressLine1, addressLine2,
-        pincode, state, profession, id
+        fullName,
+        email,
+        password,
+        mobile,
+        dob,
+        gender,
+        contactMode,
+        village,
+        addressLine1,
+        addressLine2,
+        pincode,
+        state,
+        profession,
       } = req.body;
-
-      console.log(req.body);
-
-      // Treat `id` as `null` if it is not provided
-      const requestId = id || "null";
 
       const existingUserResult = await userServices.getUserByEmailAsync(email);
 
       if (existingUserResult.success) {
-        const userRolesResult = await rolesServices.getUserRolesByIdAsync(existingUserResult.data.id);
-        if (userRolesResult.data.includes(constants.ROLES.Volunteer) ||
-          userRolesResult.data.includes(constants.ROLES.SkilledPerson) ||
-          userRolesResult.data.includes(constants.ROLES.Admin)) {
-          throw new Error("User already exists with this email address");
+        const userRolesResult = await rolesServices.getUserRolesByIdAsync(
+          existingUserResult.data.user_id
+        );
+
+        if (!userRolesResult.success) {
+          return res.status(400).json({ message: userRolesResult.message, success: false });
         }
 
-        if (userRolesResult.data.length === 1 && userRolesResult.data.includes(constants.ROLES.Donor)) {
+        if (
+          userRolesResult.data.includes(constants.ROLES.Volunteer) ||
+          userRolesResult.data.includes(constants.ROLES.SkilledPerson) ||
+          userRolesResult.data.includes(constants.ROLES.Admin)
+        ) {
+          return res.status(400).json({ message: "User already exists with this email address", success: false });
+        }
+
+        if (
+          userRolesResult.data.length === 1 &&
+          userRolesResult.data.includes(constants.ROLES.Donor)
+        ) {
           let professionId;
-          let existingProfessionResult = await professionServices.getProfessionByNameAsync(profession);
-          if (existingProfessionResult.success) {
+          let existingProfessionResult =
+            await professionServices.getProfessionByNameAsync(profession);
+          if (existingProfessionResult.success)
             professionId = existingProfessionResult.data.profession_id;
-          } else {
-            const addProfessionResult = await professionServices.addProfessionAsync(profession);
-            if (addProfessionResult.success) {
-              professionId = addProfessionResult.data;
-            }
+          else {
+            const addProfessionResult =
+              await professionServices.addProfessionAsync(profession);
+            professionId = addProfessionResult.data;
           }
 
-          const addSkilledResult = await skilledPersonServices.addSkilledPersonAsync(userId, { professionId, skilledUserId: existingUserResult.data.id });
+          const addSkilledResult = await skilledPersonServices.addSkilledPersonAsync(userId, { professionId, skilledUserId: existingUserResult.data.user_id });
           if (!addSkilledResult.success) throw new Error(addSkilledResult.message);
 
-          const sentVerifyMailResult = await mailServices.sendVerifyOtpMail(existingUserResult.data.id, email, requestId);
-          if (!sentVerifyMailResult.success) throw new Error(sentVerifyMailResult.message);
+          const sentVerifyMailResult = await mailServices.sendVerifyOtpMail(
+            existingUserResult.data.user_id,
+            email,
+          );
+
+          if (!sentVerifyMailResult.success)
+            return res.status(500).json({ message: sentVerifyMailResult.message, success: false });
+
+          console.log(sentVerifyMailResult.message);
+          return res.status(200).json({
+            message:
+              "An email has been sent to your account. Please check your inbox and verify your account to proceed.",
+            success: true,
+          });
         }
       }
 
+      // Village and profession handling
       let villageId;
       const existingVillResult = await villageServices.getVillageByNameAsync(village);
       if (existingVillResult.success) {
@@ -68,7 +99,8 @@ module.exports = {
       }
 
       let professionId;
-      let existingProfessionResult = await professionServices.getProfessionByNameAsync(profession);
+      let existingProfessionResult =
+        await professionServices.getProfessionByNameAsync(profession);
       if (existingProfessionResult.success) {
         professionId = existingProfessionResult.data.profession_id;
       } else {
@@ -79,13 +111,24 @@ module.exports = {
       }
 
       const createUserResult = await userServices.createUserAsync(userId, {
-        fullName, email, password, mobile, dob, gender,
-        userProfile, contactMode, villageId, addressLine1,
-        addressLine2, pincode, state
+        fullName,
+        email,
+        password,
+        mobile,
+        dob,
+        gender,
+        userProfile,
+        contactMode,
+        villageId,
+        addressLine1,
+        addressLine2,
+        pincode,
+        state,
       });
       if (!createUserResult.success) {
-        throw new Error(createUserResult.message);
+        return res.status(500).json({ message: createUserResult.message, success: false });
       }
+
       const skilledUserId = createUserResult.data;
 
       const addSkilledResult = await skilledPersonServices.addSkilledPersonAsync(userId, { professionId, skilledUserId });
@@ -93,9 +136,13 @@ module.exports = {
         throw new Error(addSkilledResult.message);
       }
 
-      const addUserToRoleResult = await rolesServices.addUserToRoleAsync(skilledUserId, constants.ROLES.SkilledPerson);
+      // Assign role to user
+      const addUserToRoleResult = await rolesServices.addUserToRoleAsync(
+        skilledUserId,
+        constants.ROLES.SkilledPerson
+      );
       if (!addUserToRoleResult.success) {
-        throw new Error(addUserToRoleResult.message);
+        return res.status(500).json({ message: addUserToRoleResult.message, success: false });
       }
 
       const sentVerifyMailResult = await mailServices.sendVerifyOtpMail(skilledUserId, email, requestId);
@@ -123,7 +170,7 @@ module.exports = {
       } = req.body;
 
       const existingUserResult = await userServices.getUserByEmailAsync(email);
-      const userId = existingUserResult.data.id;
+      const userId = existingUserResult.data.user_id;
 
       await userServices.resetPasswordAsync(userId, password);
 
@@ -167,7 +214,7 @@ module.exports = {
       }
 
       const sentVerifyMailResult = await mailServices.sendVerifyOtpMail(
-        existingUserResult.data.id,
+        existingUserResult.data.user_id,
         email
       );
       if (!sentVerifyMailResult.success)

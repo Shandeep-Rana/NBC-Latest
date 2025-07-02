@@ -26,7 +26,6 @@ const Register = ({ role }) => {
         }
     }, [role, dispatch]);
 
-    // ✅ Return string path for image
     const renderHeaderImage = () => {
         switch (registerRoleCheck) {
             case RegisterRoles.Donor:
@@ -155,7 +154,7 @@ const Register = ({ role }) => {
 
                                     <p className="py-4">
                                         Already have an account?{' '}
-                                        <Link href="/auth/login" style={{ color: '#F15B43' }}>
+                                        <Link href="/auth/signin" style={{ color: '#F15B43' }}>
                                             Sign in
                                         </Link>
                                     </p>

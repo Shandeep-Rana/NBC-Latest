@@ -144,8 +144,8 @@ const UserController = {
   verifyOtp: async (req, res) => {
     try {
       const { otp, userId } = req.body;
-
-      var decryptedUserId = commonFunc.decrypt(userId);
+      const decodedUserId = decodeURIComponent(userId); 
+      const decryptedUserId = commonFunc.decrypt(decodedUserId);
 
       const otpRecordRes = await otpServices.getOtpByUserIdAsync(decryptedUserId);
 

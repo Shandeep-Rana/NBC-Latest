@@ -20,9 +20,9 @@ const villageServices = require("../services/villageServices");
 const interestsServices = require("../services/interestsServices");
 const MasterController = {
 
-  //adding user as donor and volunteer both
   AddBothUser: async (req, res) => {
     try {
+
       const userProfile = req.file ? req.file.filename : null;
 
       const {
@@ -133,7 +133,6 @@ const MasterController = {
 
       await donorModel.addDonor(newDonor);
 
-      // Retrieve default role IDs for donor and volunteer
       const donorRoleId = await knex("roles")
         .where({ RoleName: "donor" })
         .select("RoleId")
@@ -144,28 +143,24 @@ const MasterController = {
         .select("RoleId")
         .first();
 
-      // Add user roles for both donor and volunteer
       await knex("userRole").insert([
         { userId, roleId: donorRoleId.RoleId },
         { userId, roleId: volunteerRoleId.RoleId },
       ]);
 
-      // Create OTP
       const otpCode = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000);
       const otpExpiryDate = new Date(Date.now() + 15 * 60 * 1000);
       await otpModel.createPasswordOtp({
         userId, otp: otpCode, otpExpiryDate, isOtpUsed: false, isdeleted: false, isactivated: true, ActivatedAt: new Date()
       });
 
-      // Generate verification link
       const encryptedUserId = commonFunc.encrypt(userId);
       const verifyLink = `${constants.WEBAPP_PATH}/auth/verify-account/${encryptedUserId}`;
 
-      // Read and render email template
       const templatePath = path.join(constants.HTML_PATH, 'verify-otp.html');
       const data = await fs.promises.readFile(templatePath, 'utf8');
       const htmlContent = ejs.render(data, { otpCode, verifyLink });
-      // Send email
+      
       const mailOptions = {
         from: { name: "Nangal By Cycle", address: "info@nangalbycycle.com" },
         to: email,

@@ -66,7 +66,7 @@ const About = () => {
 
                     <div className="about-support-content">
                       <h3>Volunteer Opportunities</h3>
-                      <p>Join NBC as a volunteer and be a part of life-saving events that make a real difference in your community.</p>
+                      <p>Join Nangal By Cycle as a volunteer and be a part of life-saving events that make a real difference in your community.</p>
                     </div>
                   </div>
 
@@ -94,7 +94,7 @@ const About = () => {
                     </h3>
                     <br />
                     <p>
-                      NBC – Trusted since 2024, leading impactful initiatives such as blood donation camps and cycling awareness events to promote an active lifestyle and spread anti-drug awareness.
+                      Nangal By Cycle – Trusted since 2024, leading impactful initiatives such as blood donation camps and cycling awareness events to promote an active lifestyle and spread anti-drug awareness.
                     </p>
                   </div>
                 </div>

@@ -6,10 +6,10 @@ module.exports = {
   development: {
     client: 'mysql',
     connection: {
-      host: '185.199.53.75',
+      host: '147.93.29.95',
       database: 'nbc',
       user: 'nbc',
-      password: 'g3jJ1#1{1@4',
+      password: 'Kmnb34b21!',
       port: 3306,
     },
   },

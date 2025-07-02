@@ -1,6 +1,5 @@
 "use client";
 
-import { volunteerSchema } from '@/lib/FormSchemas';
 import { getAllIntrests, getAllProfessions, getAllVillages } from '@/Slice/master';
 import { getuser, updateVolunteer } from '@/Slice/volunteers';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -14,7 +13,37 @@ import ReactSelect from "react-select";
 import PhoneInput from 'react-phone-input-2';
 import DatePicker from 'react-datepicker';
 import Loader from '@/common/Loader';
-import { StatesAndUnionTerritories } from '@/constants';
+import { pinCodergx, StatesAndUnionTerritories } from '@/constants';
+import * as yup from "yup";
+import { parseISO } from 'date-fns';
+
+const schema = yup.object({
+    fullName: yup.string().required("Name is required").trim(),
+    email: yup.string().required("Email is required").trim(),
+    dob: yup
+        .date()
+        .typeError("Invalid Date")
+        .required("Date of Birth is required")
+        .max(new Date(), "Date of Birth cannot be in the future")
+        .test('is-at-least-18', 'Age must be at least 18 years old', function (value) {
+            const eighteenYearsAgo = new Date();
+            eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
+            return value <= eighteenYearsAgo;
+        }),
+    contact: yup.string().required("Phone Number is required"),
+    gender: yup.string().required("Gender is required").trim(),
+    profession: yup.string().required("Current Profession is required"),
+    interests: yup.string().required("Interests/Area of Expertise is required"),
+    addressLine1: yup.string().required("Field is required").trim(),
+    addressLine2: yup.string().nullable(),
+    state: yup.string().required("State is required"),
+    pincode: yup.string().required("Pin Code is required").matches(pinCodergx, "Pin Code must be 6 digits"),
+    village: yup.string().required("Village/City is required"),
+    availability: yup.string().nullable(),
+    preferredContact: yup
+        .string()
+        .required("Please select the Contact Preference"),
+});
 
 const UpdateVolunteer = () => {
     const { id } = useParams();
@@ -54,7 +83,7 @@ const UpdateVolunteer = () => {
         control,
         formState: { errors },
     } = useForm({
-        resolver: yupResolver(volunteerSchema),
+        resolver: yupResolver(schema),
     });
 
     const formatDate = (date) => {
@@ -146,13 +175,13 @@ const UpdateVolunteer = () => {
                                                                 Date Of Birth <span style={{ fontSize: 12, color: '#9d9d9d' }}>(YYYY-MM-DD)</span><span style={{ color: '#F15B43' }}>  *</span>
                                                             </label>
                                                             <Controller
-                                                                name="donorDOB"
+                                                                name="dob"
                                                                 control={control}
                                                                 render={({ field: { value, onChange } }) => (
                                                                     <DatePicker
                                                                         showIcon
                                                                         placeholderText="Date Of Birth"
-                                                                        className={`w-100 input_fixed_width ${errors?.donorDOB ? 'valid_error' : ''}`}
+                                                                        className={`w-100 input_fixed_width ${errors?.dob ? 'valid_error' : ''}`}
                                                                         selected={value ? parseISO(value) : null}
                                                                         style={{ height: 45, border: '1px solid #B8BDC9', borderRadius: '6px', overflow: 'hidden', lineHeight: '4px' }}
                                                                         onChange={(date) => {
@@ -171,11 +200,11 @@ const UpdateVolunteer = () => {
                                                                         openToDate={value ? parseISO(value) : new Date('2000-01-01')}
                                                                     />
                                                                 )}
-                                                                defaultValue=""
+                                                                defaultValue={formatDate(user?.dob)}
                                                             />
-                                                            {errors?.donorDOB && (
+                                                            {errors?.dob && (
                                                                 <div style={{ color: 'red' }} className="text-left">
-                                                                    {errors?.donorDOB.message}
+                                                                    {errors?.dob.message}
                                                                 </div>
                                                             )}
                                                         </div>
@@ -192,7 +221,7 @@ const UpdateVolunteer = () => {
                                                                         onChange={(phone) => onChange(phone)}
                                                                     />
                                                                 )}
-                                                                defaultValue=""
+                                                                defaultValue={user?.mobile}
                                                             />
                                                             {errors?.contact && (
                                                                 <div style={{ color: "red" }} className="text-left">
