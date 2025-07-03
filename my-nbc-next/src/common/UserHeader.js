@@ -30,7 +30,7 @@ const UserHeader = ({ mobiletoggleNav }) => {
     const [user, setUser] = useState("");
 
     useEffect(() => {
-        const userInfo = getUserInfoFromToken(); 
+        const userInfo = getUserInfoFromToken();
         if (userInfo) setUser(userInfo);
     }, []);
 
@@ -39,6 +39,17 @@ const UserHeader = ({ mobiletoggleNav }) => {
     const hasSkilledPersonRole = Array.isArray(role) ? role.includes('skilled person') : role === 'skilled person';
 
     const isActive = (path) => pathname === path ? 'current-menu-item' : '';
+
+    const updateProfileFromStorage = () => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        setUser(user);
+    };
+
+    useEffect(() => {
+        updateProfileFromStorage();
+        window.addEventListener('storage', updateProfileFromStorage);
+        return () => window.removeEventListener('storage', updateProfileFromStorage);
+    }, []);
 
     return (
         <>

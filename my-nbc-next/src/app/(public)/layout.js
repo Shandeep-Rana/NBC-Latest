@@ -11,6 +11,7 @@ import Wow from "@/common/Wow";
 import { Providers } from "../providers";
 import { Toaster } from "react-hot-toast";
 import FeedbackPopUp from "@/common/FeedBackPopUp";
+import StickySocialLinks from "@/common/StickySocialLinks";
 
 const onest = Onest({
   subsets: ['latin'],
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
         <CustomCursor />
         <Providers>
           <Header />
+          <StickySocialLinks />
           {children}
           <Toaster position="top-right" reverseOrder={false} />
         </Providers>

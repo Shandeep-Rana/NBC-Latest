@@ -6,7 +6,7 @@ const OurHeros = () => {
     <div className="hero hero-video">
       <div className="hero-bg-video">
         <video autoPlay muted loop id="myVideo">
-          <source src="/images/lv_0_20250702110823.mp4" type="video/mp4" />
+          <source src="/images/lv_0_20250702170949.mp4" type="video/mp4" />
         </video>
       </div>
       <div className="container">

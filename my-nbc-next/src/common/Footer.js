@@ -26,7 +26,6 @@ const Footer = () => {
 
                   <div className="footer-contact-detail">
                     <div className="footer-contact-item">
-                      <p className="mb-0">Need live support!</p>
                       <h3>
                         <a href="mailto:info@nangalbycycle.com">
                           info@nangalbycycle.com
@@ -43,11 +42,11 @@ const Footer = () => {
                           <i className="fab fa-youtube"></i>
                         </a>
                       </li>
-                      {/* <li>
-                        <a href="https://x.com/nangalbycycle" target="_blank" rel="noopener noreferrer">
+                      <li>
+                        <a href="https://x.com/nangalbycycle_" target="_blank" rel="noopener noreferrer">
                           <i className="fab fa-x-twitter"></i>
                         </a>
-                      </li> */}
+                      </li>
                       <li>
                         <a href="https://www.facebook.com/officialnangalbycycle" target="_blank" rel="noopener noreferrer">
                           <i className="fab fa-facebook-f"></i>
@@ -63,23 +62,23 @@ const Footer = () => {
                 </div>
 
                 <div className="footer-links-box">
-                  <div className="newsletter-form">
+                  {/* <div className="newsletter-form">
                     <form id="newsletterForm" action="#" method="POST">
-                      <div className="form-group">
-                        <input
+                      <div className="form-group"> */}
+                        {/* <input
                           type="email"
                           name="email"
                           className="form-control"
                           id="mail"
                           placeholder="Enter Your Email"
                           required
-                        />
-                        <button type="submit" className="newsletter-btn">
-                          <i className="far fa-paper-plane"></i> {/* Paper plane icon */}
-                        </button>
-                      </div>
+                        /> */}
+                        {/* <button type="submit" className="newsletter-btn">
+                          <i className="far fa-paper-plane"></i> 
+                        </button> */}
+                      {/* </div>
                     </form>
-                  </div>
+                  </div> */}
 
                   <div className="footer-links">
                     <h3>Quick link</h3>

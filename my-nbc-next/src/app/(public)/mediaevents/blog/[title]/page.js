@@ -1,4 +1,5 @@
-import BlogView from '@/components/media-events/blog/BlogView'
+
+import BlogView from '@/components/Home-pages/media-events/blog/BlogView'
 import React from 'react'
 
 const page = () => {

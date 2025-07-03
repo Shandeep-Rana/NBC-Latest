@@ -12,13 +12,14 @@ import HowItWorks from './homePage components/HowItWorks'
 import Testimonials from './homePage components/Testimonials'
 import Gallery from './homePage components/Gallery'
 import BlogSection from './homePage components/BlogSection'
+import StickySocialLinks from '@/common/StickySocialLinks'
 // import MembersCountSection from './homePage components/MembersCountSection'
 
 const Home = () => {
     return (
         <>
             <OurHeros />
-            <About />    
+            <About />
             <WhatWeDo />
             <OurCausesSection />
             <WhyChooseUs />
@@ -29,7 +30,7 @@ const Home = () => {
             <HowItWorks />
             <Testimonials />
             <Gallery />
-            <BlogSection /> 
+            <BlogSection />
         </>
 
     )
